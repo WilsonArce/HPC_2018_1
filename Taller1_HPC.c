@@ -12,6 +12,7 @@ int main(int argc, char const *argv[]){
 
     int size = atoi(argv[1]);
 
+    //reserva de memoria
     vec1 = (float *)malloc(size * sizeof(float));
     vec2 = (float *)malloc(size * sizeof(float));
     ans = (float *)malloc(size * sizeof(float));
