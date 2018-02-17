@@ -6,7 +6,7 @@ int main(int argc, char const *argv[]){
     FILE *f1, *f2, *f3;
     f1 = fopen("vec1.csv","w");
     f2 = fopen("vec2.csv","w");
-    f3 = fopen("ans.csv","w");
+    f3 = fopen("ansVec.csv","w");
 
     float *vec1, *vec2, *ans;
 
