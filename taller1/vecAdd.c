@@ -25,14 +25,20 @@ int main(int argc, char const *argv[]){
     for(int i = 0; i < size; i++){
         float num1 = (float)rand()/(float)(RAND_MAX)*100;
         vec1[i] = num1;
-        fprintf(f1, "%f,", vec1[i]);
+        fprintf(f1, "%.3f,", vec1[i]);
 
         float num2 = (float)rand()/(float)(RAND_MAX)*100;
         vec2[i] = num2;
-        fprintf(f2, "%f,", vec2[i]);
+        fprintf(f2, "%.3f,", vec2[i]);
 
         ans[i] = vec1[i] + vec2[i];
-        fprintf(f3, "%f,", ans[i]);
+        fprintf(f3, "%.3f,", ans[i]);
+
     }
+        fseek(f1, -1, SEEK_END); fprintf(f1, "\n");
+        fseek(f2, -1, SEEK_END); fprintf(f2, "\n");
+        fseek(f3, -1, SEEK_END); fprintf(f3, "\n");
+
+    return 0;
 
 }
