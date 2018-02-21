@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <omp.h>//gcc file.c -o file -fopenmp
 
 int main(int argc, char const *argv[]){
+
+	int nthreads, tid, i, chunk;
+
 	FILE *f1, *f2, *f3;
 	f1 = fopen("vec1.csv","w");
 	f2 = fopen("vec2.csv","w");
@@ -24,6 +28,8 @@ int main(int argc, char const *argv[]){
 		srand((unsigned) time(&t));
 
 		//Generacion de archivos
+
+		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk) private(id,tid)
 		for(int i = 0; i < size; i++){
 			float num1 = (float)rand()/(float)(RAND_MAX)*100;
 			vec1[i] = num1;
