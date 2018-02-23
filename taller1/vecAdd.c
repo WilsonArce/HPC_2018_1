@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]){
 		int	tid,nthreads,chunk,i;
 		//Generacion de archivos
 		clock_t start2 = clock();
-		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk) private(i) num_threads(4)
+		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk,size) private(i) num_threads(4)
 		{
 			nthreads = omp_get_num_threads();
 			chunk = size/nthreads;
