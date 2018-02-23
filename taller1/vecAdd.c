@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <time.h>
 #include <omp.h>//gcc file.c -o file -fopenmp
 
 int main(int argc, char const *argv[]){
 
 	int nthreads, tid, id, chunk;
+
+	struct timeval start1, end1, start2, end2;
+  double elapsedTime1, elapsedTime2;
 
 	FILE *f1, *f2, *f3;
 	f1 = fopen("vec1.csv","w");
@@ -27,8 +31,9 @@ int main(int argc, char const *argv[]){
 
 		srand((unsigned) time(&t));
 
-		//-----------------
-		clock_t start1 = clock();
+		//---
+
+		gettimeofday(&start1, NULL);//clock_t start1 = clock();
 		for(int i = 0; i < size; i++){
 				float num1 = (float)rand()/(float)(RAND_MAX)*100;
 				vec1[i] = num1;
@@ -41,14 +46,19 @@ int main(int argc, char const *argv[]){
 				ans[i] = vec1[i] + vec2[i];
 				//fprintf(f3, "%.3f,", ans[i]);
 			}
-		clock_t end1 = clock();
+		gettimeofday(&end1, NULL);//clock_t end1 = clock();
+		elapsedTime1 = (double) (end1.tv_usec - start1.tv_usec) / 1000000 + 
+			(double) (end1.tv_sec - start1.tv_sec);
+		printf("Secuential time: %f(s)\n",elapsedTime1);
+		/*clock_t end1 = clock();
 		float sec1 = (float)(end1 - start1) / CLOCKS_PER_SEC;
-		printf("Secuential time: %f seconds\n",sec1);
-		//------------------
-		int	tid,nthreads,chunk,i;
-		//Generacion de archivos
-		clock_t start2 = clock();
-		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk,size) private(i) num_threads(4)
+		printf("Secuential time: %f seconds\n",sec1);*/
+
+		//---
+		int i = 0;
+		gettimeofday(&start2, NULL);//clock_t start2 = clock();
+		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk,size)\
+			private(i) num_threads(4)
 		{
 			nthreads = omp_get_num_threads();
 			chunk = size/nthreads;
@@ -66,9 +76,13 @@ int main(int argc, char const *argv[]){
 				//fprintf(f3, "%.3f,", ans[i]);
 			}
 		}
-		clock_t end2 = clock();
+		gettimeofday(&end2, NULL);//clock_t end2 = clock();
+		elapsedTime2 = (double) (end2.tv_usec - start2.tv_usec) / 1000000 + 
+			(double) (end2.tv_sec - start2.tv_sec);
+		printf("Parallel time: %f(s) \n",elapsedTime2);
+		/*clock_t end2 = clock();
 		float sec2 = (float)(end2 - start2) / CLOCKS_PER_SEC;
-		printf("Parallel time: %f seconds\n",sec2);
+		printf("Parallel time: %f seconds\n",sec2);*/
 
 		fseek(f1, -1, SEEK_END); fprintf(f1, "\n");
 		fseek(f2, -1, SEEK_END); fprintf(f2, "\n");
