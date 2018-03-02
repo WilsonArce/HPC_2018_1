@@ -31,28 +31,27 @@ int main(int argc, char const *argv[]){
 
 		srand((unsigned) time(&t));
 
+		for(int i = 0; i < size; i++){
+			float num1 = (float)rand()/(float)(RAND_MAX)*100;
+			vec1[i] = num1;
+			//fprintf(f1, "%.3f,", vec1[i]);
+
+			float num2 = (float)rand()/(float)(RAND_MAX)*100;
+			vec2[i] = num2;
+			//fprintf(f2, "%.3f,", vec2[i]);
+		}
+
 		//---
 
 		gettimeofday(&start1, NULL);//clock_t start1 = clock();
 		for(int i = 0; i < size; i++){
-				float num1 = (float)rand()/(float)(RAND_MAX)*100;
-				vec1[i] = num1;
-				//fprintf(f1, "%.3f,", vec1[i]);
-
-				float num2 = (float)rand()/(float)(RAND_MAX)*100;
-				vec2[i] = num2;
-				//fprintf(f2, "%.3f,", vec2[i]);
-
-				ans[i] = vec1[i] + vec2[i];
-				//fprintf(f3, "%.3f,", ans[i]);
-			}
+			ans[i] = vec1[i] + vec2[i];
+			//fprintf(f3, "%.3f,", ans[i]);
+		}
 		gettimeofday(&end1, NULL);//clock_t end1 = clock();
 		elapsedTime1 = (double) (end1.tv_usec - start1.tv_usec) / 1000000 + 
 			(double) (end1.tv_sec - start1.tv_sec);
 		printf("Secuential time: %f(s)\n",elapsedTime1);
-		/*clock_t end1 = clock();
-		float sec1 = (float)(end1 - start1) / CLOCKS_PER_SEC;
-		printf("Secuential time: %f seconds\n",sec1);*/
 
 		//---
 		int i = 0;
@@ -64,14 +63,6 @@ int main(int argc, char const *argv[]){
 			chunk = size/nthreads;
 			#pragma omp for schedule(static,chunk)
 			for(i = 0; i < size; i++){
-				float num1 = (float)rand()/(float)(RAND_MAX)*100;
-				vec1[i] = num1;
-				//fprintf(f1, "%.3f,", vec1[i]);
-
-				float num2 = (float)rand()/(float)(RAND_MAX)*100;
-				vec2[i] = num2;
-				//fprintf(f2, "%.3f,", vec2[i]);
-
 				ans[i] = vec1[i] + vec2[i];
 				//fprintf(f3, "%.3f,", ans[i]);
 			}
@@ -80,9 +71,6 @@ int main(int argc, char const *argv[]){
 		elapsedTime2 = (double) (end2.tv_usec - start2.tv_usec) / 1000000 + 
 			(double) (end2.tv_sec - start2.tv_sec);
 		printf("Parallel time: %f(s) \n",elapsedTime2);
-		/*clock_t end2 = clock();
-		float sec2 = (float)(end2 - start2) / CLOCKS_PER_SEC;
-		printf("Parallel time: %f seconds\n",sec2);*/
 
 		fseek(f1, -1, SEEK_END); fprintf(f1, "\n");
 		fseek(f2, -1, SEEK_END); fprintf(f2, "\n");
