@@ -9,4 +9,4 @@
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-./vecAdd
+./vecAdd $1
