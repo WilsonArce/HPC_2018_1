@@ -10,9 +10,9 @@ int main(int argc, char const *argv[]){
   double elapsedTime1, elapsedTime2;
 
   FILE *f1, *f2, *f3;
-  f1 = fopen("mat1.csv","w");
-  f2 = fopen("mat2.csv","w");
-  f3 = fopen("ansMat.csv","w");
+  //f1 = fopen("mat1.csv","w");
+  //f2 = fopen("mat2.csv","w");
+  //f3 = fopen("ansMat.csv","w");
 
   float *mat1, *mat2, *ansMat;
 
@@ -38,10 +38,10 @@ int main(int argc, char const *argv[]){
         for(int j=0; j < m1Col; j++){
           float num1 = (float)rand()/(float)(RAND_MAX)*100;
           m1[i][j] = num1;
-          fprintf(f1, "%.3f,", m1[i][j]);
+          //fprintf(f1, "%.3f,", m1[i][j]);
         }
-        fseek(f1, -1, SEEK_END);
-        fprintf(f1, "\n");
+        //fseek(f1, -1, SEEK_END);
+        //fprintf(f1, "\n");
       }
 
       for(int i=0; i < m2Row; i++){
@@ -49,10 +49,10 @@ int main(int argc, char const *argv[]){
         for(int j=0; j < m2Col; j++){
           float num2 = (float)rand()/(float)(RAND_MAX)*100;
           m2[i][j] = num2;
-          fprintf(f2, "%.3f,", m2[i][j]);
+          //fprintf(f2, "%.3f,", m2[i][j]);
         }
-        fseek(f2, -1, SEEK_END);
-        fprintf(f2, "\n");
+        //fseek(f2, -1, SEEK_END);
+        //fprintf(f2, "\n");
       }
 
       float a, b;
@@ -66,10 +66,10 @@ int main(int argc, char const *argv[]){
             b = m2[k][j];
             sum += a * b;
           }
-          fprintf(f3, "%.3f,", sum);
+          //fprintf(f3, "%.3f,", sum);
         }
-        fseek(f3, -1, SEEK_END);
-        fprintf(f3, "\n");
+        //fseek(f3, -1, SEEK_END);
+        //fprintf(f3, "\n");
       }
       gettimeofday(&end1, NULL);
 		  elapsedTime1 = (double) (end1.tv_usec - start1.tv_usec) / 1000000 + 
@@ -78,12 +78,10 @@ int main(int argc, char const *argv[]){
 
       int	tid,nthreads,chunk,i,j,k,sum;
       gettimeofday(&start2, NULL);
-      #pragma omp parallel shared(m1,m2,nthreads,chunk) \
-			  private(i,j,k,tid,sum) \
-			  num_threads(4)
+      #pragma omp parallel shared(m1,m2,nthreads,chunk) private(i,j,k) num_threads(4)
       {
         nthreads = omp_get_num_threads();
-			  tid = omp_get_thread_num();
+			  //tid = omp_get_thread_num();
 			  chunk = m1Row / nthreads;
         #pragma omp for schedule(static,chunk)
         for (int i = 0; i < m1Row; i++) {
@@ -94,10 +92,10 @@ int main(int argc, char const *argv[]){
               b = m2[k][j];
               sum += a * b;
             }
-            fprintf(f3, "%.3f,", sum);
+            //fprintf(f3, "%.3f,", sum);
           }
-          fseek(f3, -1, SEEK_END);
-          fprintf(f3, "\n");
+          //fseek(f3, -1, SEEK_END);
+          //fprintf(f3, "\n");
         }
       }
       gettimeofday(&end2, NULL);//clock_t end2 = clock();
