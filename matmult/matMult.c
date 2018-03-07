@@ -14,8 +14,6 @@ int main(int argc, char const *argv[]){
   //f2 = fopen("mat2.csv","w");
   //f3 = fopen("ansMat.csv","w");
 
-  float *mat1, *mat2, *ansMat;
-
   if (argc == 5){
 
     int m1Row = atoi(argv[1]);
@@ -29,6 +27,9 @@ int main(int argc, char const *argv[]){
 
       float	**m2;
       m2 = (float **)malloc(m2Row * sizeof(float *));
+
+      float	**ansMat;
+      ansMat = (float **)malloc(m1Row * sizeof(float *));
 
       time_t t;
       srand((unsigned) time(&t));
@@ -55,6 +56,17 @@ int main(int argc, char const *argv[]){
         //fprintf(f2, "\n");
       }
 
+      for(int i=0; i < m1Row; i++){
+        ansMat[i] = (float *)malloc(m2Col * sizeof(float));
+        for(int j=0; j < m2Col; j++){
+          float num2 = 0.000;
+          ansMat[i][j] = num2;
+          //fprintf(f3, "%.3f,", ansMat[i][j]);
+        }
+        //fseek(f3, -1, SEEK_END);
+        //fprintf(f3, "\n");
+      }
+
       float a, b;
 
       gettimeofday(&start1, NULL);
@@ -64,9 +76,9 @@ int main(int argc, char const *argv[]){
           for (int k = 0; k < m1Col; k++) {
             a = m1[i][k];
             b = m2[k][j];
-            sum += a * b;
+            ansMat[i][j] += a * b;
           }
-          //fprintf(f3, "%.3f,", sum);
+          //fprintf(f3, "%.3f,", ansMat[i][j]);
         }
         //fseek(f3, -1, SEEK_END);
         //fprintf(f3, "\n");
@@ -78,7 +90,7 @@ int main(int argc, char const *argv[]){
 
       int	tid,nthreads,chunk,i,j,k,sum;
       gettimeofday(&start2, NULL);
-      #pragma omp parallel shared(m1,m2,nthreads,chunk) private(i,j,k) num_threads(4)
+      #pragma omp parallel shared(m1,m2,ansMat,nthreads,chunk) private(i,j,k) num_threads(4)
       {
         nthreads = omp_get_num_threads();
 			  //tid = omp_get_thread_num();
@@ -90,9 +102,9 @@ int main(int argc, char const *argv[]){
             for (int k = 0; k < m1Col; k++) {
               a = m1[i][k];
               b = m2[k][j];
-              sum += a * b;
+              ansMat[i][j] += a * b;
             }
-            //fprintf(f3, "%.3f,", sum);
+            //fprintf(f3, "%.3f,", ansMat[i][j]);
           }
           //fseek(f3, -1, SEEK_END);
           //fprintf(f3, "\n");
@@ -107,6 +119,6 @@ int main(int argc, char const *argv[]){
     }else{printf("Las matrices no son multiplicables!!\n");}
 
   }else{printf("Verifique la cantidad de parametros!!\n");}
-
+  
   return 0;
 }
