@@ -30,15 +30,24 @@ int main(int argc, char const *argv[]){
 		time_t t;
 
 		srand((unsigned) time(&t));
+		int j;
+		#pragma omp parallel shared(nthreads,chunk,size) private(j)
+		{
+			nthreads = omp_get_num_threads();
+			chunk = size/nthreads;
+			#pragma omp for schedule(static,chunk)
+			for(j = 0; j < size; j++){
+				float num1 = (float)rand()/(float)(RAND_MAX)*100;
+				vec1[j] = num1;
+				fprintf(f1, "%.3f,", vec1[j]);
 
-		for(int i = 0; i < size; i++){
-			float num1 = (float)rand()/(float)(RAND_MAX)*100;
-			vec1[i] = num1;
-			//fprintf(f1, "%.3f,", vec1[i]);
+				float num2 = (float)rand()/(float)(RAND_MAX)*100;
+				vec2[j] = num2;
+				fprintf(f2, "%.3f,", vec2[j]);
 
-			float num2 = (float)rand()/(float)(RAND_MAX)*100;
-			vec2[i] = num2;
-			//fprintf(f2, "%.3f,", vec2[i]);
+				//ans[j] = 0.000;
+
+			}
 		}
 
 		//---
@@ -53,18 +62,21 @@ int main(int argc, char const *argv[]){
 			(double) (end1.tv_sec - start1.tv_sec);
 		printf("Secuential time: %f(s)\n",elapsedTime1);
 
+		//free(ans);
+		//memset(ans, 0.000, size);
+
 		//---
 		int i = 0;
 		gettimeofday(&start2, NULL);//clock_t start2 = clock();
 		#pragma omp parallel shared(vec1,vec2,ans,nthreads,chunk,size)\
-			private(i) num_threads(4)
+			private(i)// num_threads(4)
 		{
 			nthreads = omp_get_num_threads();
 			chunk = size/nthreads;
 			#pragma omp for schedule(static,chunk)
 			for(i = 0; i < size; i++){
 				ans[i] = vec1[i] + vec2[i];
-				//fprintf(f3, "%.3f,", ans[i]);
+				fprintf(f3, "%.3f,", ans[i]);
 			}
 		}
 		gettimeofday(&end2, NULL);//clock_t end2 = clock();
