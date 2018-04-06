@@ -2,7 +2,6 @@
 #include <time.h>
 #define N 512
 
-/*
 void Matriz_CPU_Mult(int A[N][N], int B[N][N], int C[N][N]) {
 	int n,m;
 	for (int i = 0; i < N; i++) {
@@ -17,7 +16,6 @@ void Matriz_CPU_Mult(int A[N][N], int B[N][N], int C[N][N]) {
   	}
  	}
 }
-*/
 
 __global__ void Matriz_GPU_Mult(double *a, double *b, double *c) {
 	int k, sum = 0;
@@ -65,11 +63,9 @@ int main() {
   
   cudaMemcpy(C, d_c, bytes, cudaMemcpyDeviceToHost);
 	
-  /*
   clock_t startCPU = clock();
   Matriz_CPU_Mult(A, B, C);
 	timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
-  */
 
   cudaFree(d_a);
  	cudaFree(d_b);
@@ -77,7 +73,7 @@ int main() {
 
   // tiempos de ejecucion
   printf("tiempo GPU = %f s\n",timeGPU);
-	//printf("\ntiempo CPU = %f s\n",timeCPU);
+	printf("\ntiempo CPU = %f s\n",timeCPU);
   
   return 0;
 }
