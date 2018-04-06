@@ -3,7 +3,7 @@
 #define N 100
 
 __global__ vecAdd(int* d_in, int* d_out, n){
-
+    
 }
 
 int main(){
