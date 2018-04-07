@@ -2,8 +2,8 @@
 #include <time.h>
 #define N 10
 
-__global__ void gpuMatmult(int* m1, int* m2, int n){
-	printf("Goooood");
+__global__ void gpuMatmult(int* m1, int* m2, int* ans int n){
+	ans[0] = m1[0] + m2[0];
 }
 
 int main(){
@@ -32,6 +32,10 @@ int main(){
 	dim3 blockDim(32,32);
 	dim3 gridDim((int)ceil((float)N/blockDim.x), (int)ceil((float)N/blockDim.y));
 
-	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, N);
+	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
+
+	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
+
+	printf("%d",h_ans[0]);
 
 }
