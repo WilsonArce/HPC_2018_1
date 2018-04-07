@@ -2,8 +2,8 @@
 #include <time.h>
 #define N 10
 
-__global__ gpuMatmult(int* m1, int* m2, int n){
-	printf("%s\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+__global__ void gpuMatmult(int* m1, int* m2, int n){
+	printf("Goooood")
 }
 
 int main(){
