@@ -14,7 +14,7 @@ int main(){
 
 	for(int i = 0;i < N * N ;i++){
 		h_m1[i] = i;
-		h_m1[i] = i;
+		h_m2[i] = i;
 		h_ans[i] = 0;
 	}
 
