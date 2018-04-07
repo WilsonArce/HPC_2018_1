@@ -2,7 +2,7 @@
 #include <time.h>
 #define N 10
 
-__global__ void gpuMatmult(int* m1, int* m2, int* ans int n){
+__global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	ans[0] = m1[0] + m2[0];
 }
 
