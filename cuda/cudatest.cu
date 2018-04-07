@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <time.h>
-#define N 100
-
-__global__ vecAdd(int* d_in, int* d_out, n){
-    
-}
+#define N 10
 
 int main(){
-    int *h_a, *d_a, *h_ans;
-    h_a = (int *)malloc(N * sizeof(int));
-    h_ans = (int *)malloc(N * sizeof(int));
 
-    for(int i = 0;i < N;i++){
-        h_a[i] = i;
-        h_ans[i] = 0;
-    }
+	size_t bytes = N * N * sizeof(int);
 
-    size_t bytes = N * sizeof(int);
-    cudaMalloc((void **) &d_a, bytes);
+	int *h_m1, *h_m2, *h_ans, *d_m1, *d_m2, *d_ans;
 
+	h_m1 = (int *)malloc(bytes);
+	h_m2 = (int *)malloc(bytes);
+	h_ans = (int *)malloc(bytes);
+
+	for(int i = 0;i < N * N ;i++){
+		h_m1[i] = i;
+		h_m1[i] = i;
+		h_ans[i] = 0;
+	}
+
+	cudaMalloc((void **) &d_m1, bytes);
+	cudaMalloc((void **) &d_m2, bytes);
+	cudaMalloc((void **) &d_ans, bytes);
 
 }
