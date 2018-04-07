@@ -2,6 +2,10 @@
 #include <time.h>
 #define N 10
 
+__global__ gpuMatmult(int* m1, int* m2, int n){
+	printf("%s\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+}
+
 int main(){
 
 	size_t bytes = N * N * sizeof(int);
@@ -21,5 +25,13 @@ int main(){
 	cudaMalloc((void **) &d_m1, bytes);
 	cudaMalloc((void **) &d_m2, bytes);
 	cudaMalloc((void **) &d_ans, bytes);
+
+	cudaMemcpy(d_m1, h_m1, bytes, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_m2, h_m2, bytes, cudaMemcpyHostToDevice);
+
+	dim3 blockDim(32,32);
+	dim3 gridDim((int)ceil((float)N/blockDim.x), (int)ceil((float)N/blockDim.y));
+
+	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, N);
 
 }
