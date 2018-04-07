@@ -3,7 +3,7 @@
 #define N 10
 
 __global__ void gpuMatmult(int* m1, int* m2, int n){
-	printf("Goooood")
+	printf("Goooood");
 }
 
 int main(){
