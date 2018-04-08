@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#define N 4
+//#define N 4
 
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
@@ -15,8 +15,13 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 }
 
 int main(int argc, char const *argv[]){
+
+	int N = 0;
+
 	if(argc == 1){
-		int N = atoi(argv[1]);
+		N = atoi(argv[1]);
+	}else{
+		N = 4;
 	}
 
 	double timeGPU;
