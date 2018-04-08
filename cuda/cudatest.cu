@@ -3,7 +3,7 @@
 #define N 10
 
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
-	ans[0] = m1[0] + m2[0];
+	ans[1] = m1[1] + m2[2];
 }
 
 int main(){
@@ -36,6 +36,6 @@ int main(){
 
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 
-	printf("%d",h_ans[0]);
+	printf("%d",h_ans[1]);
 
 }
