@@ -18,10 +18,10 @@ int main(int argc, char const *argv[]){
 
 	int N = 0;
 
-	if(argc == 1){
-		N = atoi(argv[1]);
-	}else{
+	if(argc != 1){
 		printf("Please give a size!!");
+	}else{
+		N = atoi(argv[1]);
 	}
 
 	double timeGPU;
