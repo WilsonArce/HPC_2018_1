@@ -61,6 +61,8 @@ int main(int argc, char** argv ){
 	//> Data copy back D -> H
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;//> Ending timer
+
+	printf("Size m1 = %d x %d, m2 = %d x %d\n",N,N,N,N);
 	printf("GPU time = %.6f seconds\n",timeGPU);//> Print time (include data copy back)
 
 	//> Print result
