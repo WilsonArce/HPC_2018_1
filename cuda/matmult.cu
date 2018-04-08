@@ -56,12 +56,12 @@ int main(int argc, char** argv ){
 	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
 	printf("GPU time = %.6f seconds\n",timeGPU);
 
-	/*for(int m = 0;m < N;m++){
+	for(int m = 0;m < N;m++){
 		for(int n = 0;n < N;n++){
 			printf("%d,",h_ans[m * N + n]);
 		}
 			printf("\n");
-	}*/
+	}
 
 	free(h_m1); free(h_m2); free(h_ans);
 	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
