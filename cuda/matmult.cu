@@ -2,6 +2,7 @@
 #include <time.h>
 //#define N 4
 
+//> Kernel definition
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
@@ -15,47 +16,54 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 }
 
 int main(int argc, char** argv ){
-
+	//> Variables definition
 	int N = 0;
+	double timeGPU;
+	int *h_m1, *h_m2, *h_ans, *d_m1, *d_m2, *d_ans;
 
+	//> Arguments check
 	if(argc != 2){
 		N = 4;
 	}else{
-		N = atoi(argv[1]);
+		N = atoi(argv[1]);//> Set size
 	}
 
-	double timeGPU;
+	size_t bytes = N * N * sizeof(int);//> Set data size
 
-	size_t bytes = N * N * sizeof(int);
-
-	int *h_m1, *h_m2, *h_ans, *d_m1, *d_m2, *d_ans;
-
+	//> Host memory allocation
 	h_m1 = (int *)malloc(bytes);
 	h_m2 = (int *)malloc(bytes);
 	h_ans = (int *)malloc(bytes);
 
+	//> Inititializations
 	for(int i = 0;i < N * N ;i++){
 		h_m1[i] = i;
 		h_m2[i] = i;
 		h_ans[i] = 0;
 	}
 
+	//> Device memory allocation
 	cudaMalloc((void **) &d_m1, bytes);
 	cudaMalloc((void **) &d_m2, bytes);
 	cudaMalloc((void **) &d_ans, bytes);
 
+	//> Data copy H -> D
 	cudaMemcpy(d_m1, h_m1, bytes, cudaMemcpyHostToDevice);
 	cudaMemcpy(d_m2, h_m2, bytes, cudaMemcpyHostToDevice);
 
+	//> Struct defitinitions for kernel call
 	dim3 blockDim(32,32);
 	dim3 gridDim((int)ceil((float)N/blockDim.x), (int)ceil((float)N/blockDim.y));
 
-	clock_t startGPU  = clock();
+	clock_t startGPU  = clock();//> Starting timer
+	//> Kernel call
 	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
+	//> Data copy back D -> H
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
-	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-	printf("GPU time = %.6f seconds\n",timeGPU);
+	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;//> Ending timer
+	printf("GPU time = %.6f seconds\n",timeGPU);//> Print time (include data copy back)
 
+	//> Print result
 	for(int m = 0;m < N;m++){
 		for(int n = 0;n < N;n++){
 			printf("%d,",h_ans[m * N + n]);
@@ -63,6 +71,7 @@ int main(int argc, char** argv ){
 			printf("\n");
 	}
 
+	//> Free memory
 	free(h_m1); free(h_m2); free(h_ans);
 	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
 
