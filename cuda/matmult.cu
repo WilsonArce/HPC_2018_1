@@ -66,11 +66,13 @@ int main(int argc, char** argv ){
 	printf("GPU time = %.6f seconds\n",timeGPU);//> Print time (include data copy back)
 
 	//> Print result
-	for(int m = 0;m < N;m++){
-		for(int n = 0;n < N;n++){
-			printf("%d,",h_ans[m * N + n]);
+	if (N <= 4){
+		for(int m = 0;m < N;m++){
+			for(int n = 0;n < N;n++){
+				printf("%d,",h_ans[m * N + n]);
+			}
+				printf("\n");
 		}
-			printf("\n");
 	}
 
 	//> Free memory
