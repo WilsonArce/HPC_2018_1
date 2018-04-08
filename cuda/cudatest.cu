@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#define N 10
+#define N 4
 
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
