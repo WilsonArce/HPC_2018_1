@@ -14,7 +14,7 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
   }
 }
 
-int main(int argc, char** argv )
+int main(int argc, char** argv ){
 
 	int N = 0;
 
