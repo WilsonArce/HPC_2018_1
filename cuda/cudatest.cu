@@ -3,7 +3,15 @@
 #define N 10
 
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
-	ans[1] = m1[1] + m2[2];
+	int k, sum = 0;
+	int i = blockIdx.x * blockDim.x + threadIdx.x; 
+  int j = blockIdx.y * blockDim.y + threadIdx.y;
+  if (i < n && j < n) {
+    for (k = 0; k < n; k++) {
+      sum += m1[j * n + k] * m2[k * n + i];
+    }
+    ans[j * n + i] = sum;
+  }
 }
 
 int main(){
@@ -36,6 +44,6 @@ int main(){
 
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 
-	printf("%d",h_ans[1]);
+	printf("%d\n",h_ans[1]);
 
 }
