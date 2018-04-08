@@ -45,12 +45,12 @@ int main(int argc, char** argv ){
 
 	//> Device memory allocation
 	if (cudaSuccess != cudaMalloc((void **) &d_m1, bytes)) printf("Error allocating mem. for d_m1\n");
-	if (cudaSuccess != cudaMalloc((void **) &d_m2, bytes)){printf("Error allocating mem. for d_m2\n")};
-	if (cudaSuccess != cudaMalloc((void **) &d_ans, bytes)){printf("Error allocating mem. for d_ans\n")};
+	if (cudaSuccess != cudaMalloc((void **) &d_m2, bytes)) printf("Error allocating mem. for d_m2\n");
+	if (cudaSuccess != cudaMalloc((void **) &d_ans, bytes)) printf("Error allocating mem. for d_ans\n");
 
 	//> Data copy H -> D
-	if (cudaSuccess != cudaMemcpy(d_m1, h_m1, bytes, cudaMemcpyHostToDevice)){printf("Error copying data for d_m1\n")};
-	if (cudaSuccess != cudaMemcpy(d_m2, h_m2, bytes, cudaMemcpyHostToDevice)){printf("Error copying data for d_m2\n")};
+	if (cudaSuccess != cudaMemcpy(d_m1, h_m1, bytes, cudaMemcpyHostToDevice)) printf("Error copying data for d_m1\n");
+	if (cudaSuccess != cudaMemcpy(d_m2, h_m2, bytes, cudaMemcpyHostToDevice)) printf("Error copying data for d_m2\n");
 
 	//> Struct defitinitions for kernel call
 	dim3 blockDim(32,32);
@@ -59,10 +59,10 @@ int main(int argc, char** argv ){
 	clock_t startGPU  = clock();//> Starting timer
 	//> Kernel call
 	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
-	if (cudaSuccess != cudaGetLastError()) printf( "Error calling kernel\n" );
+	if (cudaSuccess != cudaGetLastError()) printf("Error calling kernel\n");
 
 	//> Data copy back D -> H
-	if (cudaSuccess != cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost)){printf("Error copying data for d_ans\n")};
+	if (cudaSuccess != cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost)) printf("Error copying data for d_ans\n");
 	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;//> Ending timer
 
 	printf("Size m1 = %d x %d, m2 = %d x %d\n",N,N,N,N);
