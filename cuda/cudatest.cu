@@ -16,7 +16,7 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 
 int main(int argc, char const *argv[]){
 	if(argc == 1){
-		N = argv[1];
+		int N = argv[1];
 	}
 
 	double timeGPU;
