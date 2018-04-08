@@ -14,12 +14,13 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
   }
 }
 
-int main(int argc, char const *argv[]){
+int main(int argc, char** argv )
 
 	int N = 0;
 
 	if(argc != 1){
 		printf("Please give a size!!");
+		return -1;
 	}else{
 		N = atoi(argv[1]);
 	}
@@ -66,4 +67,5 @@ int main(int argc, char const *argv[]){
 	free(h_m1); free(h_m2); free(h_ans);
 	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
 
+	return 0;
 }
