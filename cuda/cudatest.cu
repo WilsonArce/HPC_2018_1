@@ -46,4 +46,7 @@ int main(){
 
 	printf("%d\n",h_ans[1]);
 
+	free(h_m1); free(h_m2); free(h_ans);
+	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
+
 }
