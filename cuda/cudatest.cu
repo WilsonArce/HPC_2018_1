@@ -46,7 +46,7 @@ int main(){
 
 	for(int m = 0;m < N;m++){
 		for(int n = 0;n < N;n++){
-			printf("%d,",h_ans[n * N + m]);
+			printf("%d,",h_ans[m * N + n]);
 		}
 			printf("\n");
 	}
