@@ -44,7 +44,7 @@ int main(int argc, char** argv ){
 	}
 
 	//> Device memory allocation
-	if (cudaSuccess != cudaMalloc((void **) &d_m1, bytes)){printf("Error allocating mem. for d_m1\n")};
+	if (cudaSuccess != cudaMalloc((void **) &d_m1, bytes)) printf("Error allocating mem. for d_m1\n");
 	if (cudaSuccess != cudaMalloc((void **) &d_m2, bytes)){printf("Error allocating mem. for d_m2\n")};
 	if (cudaSuccess != cudaMalloc((void **) &d_ans, bytes)){printf("Error allocating mem. for d_ans\n")};
 
