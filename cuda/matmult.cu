@@ -1,79 +1,70 @@
 #include <stdio.h>
 #include <time.h>
-#define N 512
+//#define N 4
 
-void Matriz_CPU_Mult(int A[N][N], int B[N][N], int C[N][N]) {
-	int n,m;
-	for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-   		int sum = 0;
-      for (int k = 0; k < N; k++) {
-        m = A[i][k];
-        n = B[k][j];
-        sum += m * n;
-      }
-   	C[i][j] = sum;
-  	}
- 	}
-}
-
-__global__ void Matriz_GPU_Mult(double *a, double *b, double *c) {
+__global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
   int j = blockIdx.y * blockDim.y + threadIdx.y;
-  if (i < N && j < N) {
-    for (k = 0; k < N; k++) {
-      sum += a[j * N + k] * b[k * N + i];
+  if (i < n && j < n) {
+    for (k = 0; k < n; k++) {
+      sum += m1[j * n + k] * m2[k * n + i];
     }
-    c[j * N + i] = sum;
+    ans[j * n + i] = sum;
   }
 }
 
-int main() {
-  double timeGPU; //, timeCPU;
-	double A[N][N], B[N][N], C[N][N];
- 	double *d_a, *d_b, *d_c;
- 	int cont,i,j;
+int main(int argc, char** argv ){
 
-  //inicializacion
-	for (i = 0; i < N; i++) {
-  	cont = 0;
-  	for (j = 0; j < N; j++) {
-   		A[i][j] = cont;
-   		B[i][j] = cont;
-   		cont++;
-  	}
-  }
+	int N = 0;
 
-  size_t bytes = N * sizeof(double);
+	if(argc != 2){
+		N = 4;
+	}else{
+		N = atoi(argv[1]);
+	}
 
-	cudaMalloc((void **) &d_a, bytes);
- 	cudaMalloc((void **) &d_b, bytes);
- 	cudaMalloc((void **) &d_c, bytes);
+	double timeGPU;
 
-  cudaMemcpy(d_a, A, bytes, cudaMemcpyHostToDevice);
- 	cudaMemcpy(d_b, B, bytes, cudaMemcpyHostToDevice);
+	size_t bytes = N * N * sizeof(int);
 
-  dim3 threadsPerBlock(32, 32);
- 	dim3 numBlocks((int)ceil((float)N/threadsPerBlock.x), (int)ceil((float)N/threadsPerBlock.y));
-  
+	int *h_m1, *h_m2, *h_ans, *d_m1, *d_m2, *d_ans;
+
+	h_m1 = (int *)malloc(bytes);
+	h_m2 = (int *)malloc(bytes);
+	h_ans = (int *)malloc(bytes);
+
+	for(int i = 0;i < N * N ;i++){
+		h_m1[i] = i;
+		h_m2[i] = i;
+		h_ans[i] = 0;
+	}
+
+	cudaMalloc((void **) &d_m1, bytes);
+	cudaMalloc((void **) &d_m2, bytes);
+	cudaMalloc((void **) &d_ans, bytes);
+
+	cudaMemcpy(d_m1, h_m1, bytes, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_m2, h_m2, bytes, cudaMemcpyHostToDevice);
+
+	dim3 blockDim(32,32);
+	dim3 gridDim((int)ceil((float)N/blockDim.x), (int)ceil((float)N/blockDim.y));
+
 	clock_t startGPU  = clock();
-  Matriz_GPU_Mult<<<numBlocks, threadsPerBlock>>>(d_a, d_b, d_c);
+	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
+	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-  
-  cudaMemcpy(C, d_c, bytes, cudaMemcpyDeviceToHost);
-	
-  clock_t startCPU = clock();
-  Matriz_CPU_Mult(A, B, C);
-	timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
+	printf("GPU time = %.6f seconds\n",timeGPU);
 
-  cudaFree(d_a);
- 	cudaFree(d_b);
- 	cudaFree(d_c);
+	/*for(int m = 0;m < N;m++){
+		for(int n = 0;n < N;n++){
+			printf("%d,",h_ans[m * N + n]);
+		}
+			printf("\n");
+	}*/
 
-  // tiempos de ejecucion
-  printf("tiempo GPU = %f s\n",timeGPU);
-	printf("\ntiempo CPU = %f s\n",timeCPU);
-  
-  return 0;
+	free(h_m1); free(h_m2); free(h_ans);
+	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
+
+	return 0;
 }
