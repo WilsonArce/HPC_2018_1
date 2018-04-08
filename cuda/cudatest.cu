@@ -16,6 +16,8 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 
 int main(){
 
+	double timeGPU;
+
 	size_t bytes = N * N * sizeof(int);
 
 	int *h_m1, *h_m2, *h_ans, *d_m1, *d_m2, *d_ans;
@@ -40,9 +42,10 @@ int main(){
 	dim3 blockDim(32,32);
 	dim3 gridDim((int)ceil((float)N/blockDim.x), (int)ceil((float)N/blockDim.y));
 
+	clock_t startGPU  = clock();
 	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
-
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
+	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
 
 	for(int m = 0;m < N;m++){
 		for(int n = 0;n < N;n++){
