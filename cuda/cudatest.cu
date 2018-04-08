@@ -44,7 +44,12 @@ int main(){
 
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 
-	printf("%d\n",h_ans[1]);
+	for(int m = 0;m < N;m++){
+		for(int n = 0;n < N;n++){
+			printf("%d,",h_ans[n][m]);
+		}
+			printf("\n");
+	}
 
 	free(h_m1); free(h_m2); free(h_ans);
 	cudaFree(d_m1); cudaFree(d_m2); cudaFree(h_ans);
