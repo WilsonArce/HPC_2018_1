@@ -46,7 +46,7 @@ int main(){
 	gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, N);
 	cudaMemcpy(h_ans, d_ans, bytes, cudaMemcpyDeviceToHost);
 	timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-	printf("GPU time = %.4f \n",timeGPU);
+	printf("GPU time = %.6f seconds\n",timeGPU);
 
 	for(int m = 0;m < N;m++){
 		for(int n = 0;n < N;n++){
