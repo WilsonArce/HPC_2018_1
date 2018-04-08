@@ -21,9 +21,9 @@ int main(int argc, char** argv ){
 	if(argc != 1){
 		printf("Please give a size!!");
 		return -1;
-	}else{
-		N = atoi(argv[1]);
 	}
+	
+	N = atoi(argv[1]);
 
 	double timeGPU;
 
