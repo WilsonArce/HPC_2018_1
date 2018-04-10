@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 {
   int N = 0;
   double timeGPU;
-  int *h_v1, *h_v2, *h_ans, *d_v1, *d_v2, d_ans;
+  int *h_v1, *h_v2, *h_ans, *d_v1, *d_v2, *d_ans;
 
   if (argc != 2)
   {
