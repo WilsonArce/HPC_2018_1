@@ -11,7 +11,7 @@ __global__ void gpuVecadd(int* v1, int* v2, int* ans, int n){
   }
 }
 
-int int main(int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
   int N = 0;
   double timeGPU;
