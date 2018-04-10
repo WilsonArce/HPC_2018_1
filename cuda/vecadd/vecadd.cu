@@ -62,6 +62,7 @@ int main(int argc, char const *argv[])
 		for(int m = 0; m < N; m++){
       printf("%d,",h_ans[m]);
     }
+    printf("\n");
 	}
 
   free(h_v1); free(h_v2); free(h_ans);
