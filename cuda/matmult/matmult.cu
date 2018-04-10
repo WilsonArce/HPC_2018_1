@@ -37,7 +37,7 @@ int main(int argc, char** argv ){
 	h_ans = (int *)malloc(bytes);
 
 	//> Inititializations
-	for(int i = 0;i < N * N ;i++){
+	for(int i = 0; i < N * N ; i++){
 		h_m1[i] = i;
 		h_m2[i] = i;
 		h_ans[i] = 0;
@@ -70,8 +70,8 @@ int main(int argc, char** argv ){
 
 	//> Print result
 	if (N <= 4){
-		for(int m = 0;m < N;m++){
-			for(int n = 0;n < N;n++){
+		for(int m = 0; m < N; m++){
+			for(int n = 0; n < N; n++){
 				printf("%d,",h_ans[m * N + n]);
 			}
 				printf("\n");
