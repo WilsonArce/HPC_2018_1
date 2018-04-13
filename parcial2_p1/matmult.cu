@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
     //Creacion de archivos
     f1 = fopen(argv[1],"r");
     f2 = fopen(argv[2],"r");
-    f3 = fopen("answer.txt","w");
+    f3 = fopen("matres.txt","w");
 
     //Lectura de dimensiones de matrices 
     fscanf(f1, "%d", &m1Row); fscanf(f1, "%d", &m1Col);
