@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
       printf("Error copying data for d_ans\n");
 	  timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
 
-    printf("Size = m1 : %d x %d, m2 : %d x %d\n",m1Row,m1Col,m2Row,m2Col);
+    printf("m1 = %d x %d, m2 = %d x %d\n",m1Row,m1Col,m2Row,m2Col);
 	  printf("GPU time = %.6f seconds\n",timeGPU);
 
     for (int i = 0; i < m1Row; i++) {
