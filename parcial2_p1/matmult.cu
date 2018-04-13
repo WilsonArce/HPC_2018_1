@@ -73,7 +73,7 @@ int main(int argc, char const *argv[])
 	  dim3 gridDim((int)ceil((float)size/blockDim.x), (int)ceil((float)size/blockDim.y));
 
     clock_t startGPU  = clock();
-    gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, m1Row, m1Col, m2Row, m2Col);
+    gpuMatmult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, m1Row);
 	  if (cudaSuccess != cudaGetLastError())
       printf("Error calling kernel\n");
     
