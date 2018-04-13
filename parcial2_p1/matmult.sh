@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=cudaMatmult
 #SBATCH --output=ans_cudaMatmult
-#SBATCH --ntasks=3
+#SBATCH --ntasks=1
 #SBATCH --nodes=3
 #SBATCH --gres=gpu:1
 
