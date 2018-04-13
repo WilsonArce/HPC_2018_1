@@ -1,9 +1,8 @@
-//#include <cuda.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-//Definidcion del kernel
+//Definicion del kernel
 __global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
