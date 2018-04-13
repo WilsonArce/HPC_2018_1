@@ -9,7 +9,7 @@ __global__ void gpuMatmult(int* m1, int* m2, int* ans, int row1, int col1, int r
   int j = blockIdx.y * blockDim.y + threadIdx.y;
   if (i < col2 && j < row1) {
     for (k = 0; k < col1; k++) {
-      sum += m1[j * row1 + k] * m2[k * col2 + i];
+      sum += m1[j * col1 + k] * m2[k * col2 + i];
     }
     ans[j * col2 + i] = sum;
   }
