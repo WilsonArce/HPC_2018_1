@@ -3,15 +3,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-__global__ void gpuMatmult(int* m1, int* m2, int* ans, int row1, int col1, int row2, int col2){
+__global__ void gpuMatmult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
   int j = blockIdx.y * blockDim.y + threadIdx.y;
-  if (i < row1 && j < col2) {
-    for (k = 0; k < col1; k++) {
-      sum += m1[i * col1 + k] * m2[k * col1 + j];
+  if (i < n && j < n) {
+    for (k = 0; k < n; k++) {
+      sum += m1[j * n + k] * m2[k * n + i];
     }
-    ans[i * col1 + j] = sum;
+    ans[j * n + i] = sum;
   }
 }
 
