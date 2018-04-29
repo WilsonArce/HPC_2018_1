@@ -29,46 +29,42 @@ __global__ void gpuSobelFilter(unsigned char *imgGray, unsigned char *imgFiltere
   int sbCols, sbRows, sumx, sumy, x, y, ci, cj;
   sbCols = sbRows = 3;
 
-  //for(i = 0; i < rows; i++){
-	//	for(j = 0; j < cols; j++){
-    if((i < rows) && (j < cols)){
-			sumx = 0; sumy = 0; ci = i-2;
-			for(y = 0; y < sbRows; y++){
-				ci++;
-				cj = j-1;
-				for(x = 0; x < sbCols; x++){
-					if(ci < 0 || cj < 0){
-						sumx += 0;
-						sumy += 0;
-					}else{
-						sumx += imgGray[ci * cols + cj] * xFilter[y * sbCols + x];
-						sumy += imgGray[ci * cols + cj] * yFilter[y * sbCols + x];
-					}
-					cj++;
-				}
-			}
-			if(sumx > 255){
-				imgX[i * cols + j] = 255;
-			}else{
-				if(sumx < 0){
-					imgX[i * cols + j] = 0;
-				}else{
-					imgX[i * cols + j] = sumx;
-				}
-			}
-			if(sumy > 255){
-				imgY[i * cols + j] = 255;
-			}else{
-				if(sumy < 0){
-					imgY[i * cols + j] = 0;
-				}else{
-					imgY[i * cols + j] = sumy;
-				}
-			}
-			imgFiltered[i * cols + j] = sqrt(powf(imgX[i * cols + j],2) + powf(imgY[i * cols + j],2));
-		}
-	//}
-
+  if((i < rows) && (j < cols)){
+    sumx = 0; sumy = 0; ci = i-2;
+    for(y = 0; y < sbRows; y++){
+      ci++;
+      cj = j-1;
+      for(x = 0; x < sbCols; x++){
+        if(ci < 0 || cj < 0){
+          sumx += 0;
+          sumy += 0;
+        }else{
+          sumx += imgGray[ci * cols + cj] * xFilter[y * sbCols + x];
+          sumy += imgGray[ci * cols + cj] * yFilter[y * sbCols + x];
+        }
+        cj++;
+      }
+    }
+    if(sumx > 255){
+      imgX[i * cols + j] = 255;
+    }else{
+      if(sumx < 0){
+        imgX[i * cols + j] = 0;
+      }else{
+        imgX[i * cols + j] = sumx;
+      }
+    }
+    if(sumy > 255){
+      imgY[i * cols + j] = 255;
+    }else{
+      if(sumy < 0){
+        imgY[i * cols + j] = 0;
+      }else{
+        imgY[i * cols + j] = sumy;
+      }
+    }
+    imgFiltered[i * cols + j] = sqrt(powf(imgX[i * cols + j],2) + powf(imgY[i * cols + j],2));
+  }
 }
 
 
