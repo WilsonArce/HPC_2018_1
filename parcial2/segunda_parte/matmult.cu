@@ -3,7 +3,7 @@
 #include <time.h>
 //#define N 100
 
-int sec_matMult(int A[N][N], int B[N][N], int C[N][N]) {
+void sec_matMult(int A[N][N], int B[N][N], int C[N][N]) {
 	int n,m;
 	for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) {
@@ -48,7 +48,7 @@ int main(int argc, char** argv ){
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
   int *d_m1, *d_m2, *d_ans;
-  //int m1Row, m1Col, m1Row, m2Col; 
+  int m1Row, m1Col, m1Row, m2Col; 
 
   if (argc != 3){
     printf("Cantidad de parametros incorrecta!!\n");
