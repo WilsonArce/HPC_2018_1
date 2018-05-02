@@ -87,17 +87,17 @@ int main(int argc, char** argv ){
     }
 
     //Asignacion de memoria en el Device
-    if (cudaSuccess != cudaMalloc((void **) &d_m1, m1_size))
+    if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
       printf("Error asignando memoria para d_m1\n");
-    if (cudaSuccess != cudaMalloc((void **) &d_m2, m2_size))
+    if (cudaSuccess != cudaMalloc((void **) &d_m2, m2Size))
       printf("Error asignando memoria para d_m2\n");
-    if (cudaSuccess != cudaMalloc((void **) &d_ans, ans_size))
+    if (cudaSuccess != cudaMalloc((void **) &d_ans, ansSize))
       printf("Error asignando memoria para d_ans\n");
 
     //Copia de datos del Host al Device
-    if (cudaSuccess != cudaMemcpy(d_m1, h_m1, m1_size, cudaMemcpyHostToDevice))
+    if (cudaSuccess != cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice))
       printf("Error copiando datos a d_m1\n");
-	  if (cudaSuccess != cudaMemcpy(d_m2, h_m2, m2_size, cudaMemcpyHostToDevice))
+	  if (cudaSuccess != cudaMemcpy(d_m2, h_m2, m2Size, cudaMemcpyHostToDevice))
       printf("Error copiando datos a d_m2\n");
 
     int threads = m1Row;//Cantidad de hilos
@@ -113,7 +113,7 @@ int main(int argc, char** argv ){
       printf("Error en el llamado al kernel\n");
 
     //Copia de datos del Device al Host
-    if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ans_size, cudaMemcpyDeviceToHost))
+    if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
