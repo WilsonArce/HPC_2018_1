@@ -133,4 +133,6 @@ int main(int argc, char** argv ){
 
   }
 
+  printf("h_m1[2] = %d\n",h_m1[2]);
+
 }
