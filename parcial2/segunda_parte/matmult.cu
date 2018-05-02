@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-//#define N 100
+#define N 100
 
 void sec_matMult(int A[N][N], int B[N][N], int C[N][N]) {
 	int n,m;
@@ -48,7 +48,7 @@ int main(int argc, char** argv ){
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
   int *d_m1, *d_m2, *d_ans;
-  int m1Row, m1Col, m1Row, m2Col; 
+  int m1Row, m1Col, m2Row, m2Col; 
 
   if (argc != 3){
     printf("Cantidad de parametros incorrecta!!\n");
@@ -103,8 +103,8 @@ int main(int argc, char** argv ){
     int threads = m1Row;//Cantidad de hilos
 
     //Definicion de estructuras para cantidad de Hilos y Bloques
-    dim3 = blockDim(32, 32);
-    dim3 = gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
+    dim3 blockDim(32,32);
+	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
     clock_t startGlobalTime = clock();
     //Llamado al Kernel
