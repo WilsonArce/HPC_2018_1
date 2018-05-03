@@ -119,13 +119,13 @@ int main(int argc, char** argv ){
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
 
     //Copia del resultado en el archivo de respuesta
-    for (int i = 0; i < m1Row; i++) {
+    /*for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
       }
       fseek(f3, -1, SEEK_END);
       fprintf(f3, "\n");
-    }
+    }*/
     
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
