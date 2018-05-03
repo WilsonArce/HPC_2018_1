@@ -56,7 +56,7 @@ int main(int argc, char** argv ){
     //Creación de archivos
     f1 = fopen(argv[1],"r");
     f2 = fopen(argv[2],"r");
-    f3 = fopen("ans.txt","r");
+    f3 = fopen("ans.txt","w");
     //Lectura de dimensiones de las matrices
     fscanf(f1, "%d", &m1Row); fscanf(f1, "%d", &m1Col);
     fscanf(f2, "%d", &m2Row); fscanf(f2, "%d", &m2Col);
@@ -119,13 +119,13 @@ int main(int argc, char** argv ){
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
 
     //Copia del resultado en el archivo de respuesta
-    /*for (int i = 0; i < m1Row; i++) {
+    for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
       }
       fseek(f3, -1, SEEK_END);
       fprintf(f3, "\n");
-    }*/
+    }
 
     printf("h_m1[2] = %d\n",h_m1[2]);
 
