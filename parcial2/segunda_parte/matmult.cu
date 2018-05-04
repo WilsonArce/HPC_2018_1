@@ -84,6 +84,14 @@ int main(int argc, char** argv ){
       }
     }
 
+    //Llamado a la multiplicacion secuencial
+    clock_t startSecTime = clock();
+    sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
+    secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
+    printf("Tiempo secuencial = %.6fs\n",secTime);
+
+    printf("h_ans[2] = %d\n",h_ans[2]);
+
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
       printf("Error asignando memoria para d_m1\n");
@@ -104,7 +112,7 @@ int main(int argc, char** argv ){
     dim3 blockDim(32,32);
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
-    /*clock_t startGlobalTime = clock();
+    clock_t startGlobalTime = clock();
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
@@ -115,12 +123,7 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
-    */
-   
-    clock_t startSecTime = clock();
-    sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
-    secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
-    printf("Tiempo secuencial = %.6fs\n",secTime);
+    
 
     //Copia del resultado en el archivo de respuesta
     for (int i = 0; i < m1Row; i++) {
