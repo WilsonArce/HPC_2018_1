@@ -10,7 +10,7 @@ void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int C){
       for (int k = 0; k < aCol; k++) {
         sum += A[j * aCol + k] * B[k * aCol + i];
       }
-   	  C[j * aCol + i] = sum;
+   	  *C[j * aCol + i] = sum;
   	}
  	}
 }
