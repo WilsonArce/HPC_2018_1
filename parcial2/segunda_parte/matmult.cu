@@ -130,8 +130,8 @@ int main(int argc, char** argv ){
 
     //Copia del resultado en el archivo de respuesta
     printf("Creando archivo de la solucion...\n");
-    fprintf(f3, "%d," ,m1Row);
-    fprintf(f3, "%d," ,m2Col);
+    fprintf(f3, "%d\n" ,m1Row);
+    fprintf(f3, "%d\n" ,m2Col);
     for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
