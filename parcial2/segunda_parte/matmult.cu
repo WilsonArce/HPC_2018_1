@@ -28,17 +28,18 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
   }
 }
 
-__global__ void sdmem_matMult(double *a, double *b, double *c) {
+__global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
   int j = blockIdx.y * blockDim.y + threadIdx.y;
-  if (i < N && j < N) {
-    for (k = 0; k < N; k++) {
-      sum += a[j * N + k] * b[k * N + i];
+  if (i < n && j < n) {
+    for (k = 0; k < n; k++) {
+      sum += m1[j * n + k] * m2[k * n + i];
     }
-    c[j * N + i] = sum;
+    ans[j * n + i] = sum;
   }
 }
+
 
 int main(int argc, char** argv ){
 
