@@ -3,9 +3,10 @@
 #include <time.h>
 #define N 100
 
-printf("Im here");
+
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* *C){
 	for (int i = 0; i < aRow; i++) {
+    printf("Im here");
     for (int j = 0; j < bCol; j++) {
    		int sum = 0;
       for (int k = 0; k < aCol; k++) {
