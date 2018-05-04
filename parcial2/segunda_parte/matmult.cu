@@ -4,8 +4,8 @@
 #define N 100
 
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* *C){
+  printf("Im here");
 	for (int i = 0; i < aRow; i++) {
-    printf("Im here");
     for (int j = 0; j < bCol; j++) {
    		int sum = 0;
       for (int k = 0; k < aCol; k++) {
