@@ -125,7 +125,7 @@ int main(int argc, char** argv ){
     printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Copia del resultado en el archivo de respuesta
-    printf("Creando archivo de la solucion...");
+    printf("Creando archivo de la solucion...\n");
     for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
