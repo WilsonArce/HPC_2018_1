@@ -3,6 +3,7 @@
 #include <time.h>
 #define N 100
 
+printf("Im here");
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* *C){
 	for (int i = 0; i < aRow; i++) {
     for (int j = 0; j < bCol; j++) {
@@ -115,7 +116,7 @@ int main(int argc, char** argv ){
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
     */
-    printf("Im here");
+   
     clock_t startSecTime = clock();
     sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, &h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
