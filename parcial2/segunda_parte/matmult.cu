@@ -89,7 +89,6 @@ int main(int argc, char** argv ){
     sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     printf("Tiempo secuencial = %.6fs\n",secTime);
-
     printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Asignacion de memoria en el Device
@@ -123,9 +122,10 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo memoria global = %.6fs\n",globalTime);
-    
+    printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Copia del resultado en el archivo de respuesta
+    printf("Creando archivo de la solucion...");
     for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
@@ -133,8 +133,7 @@ int main(int argc, char** argv ){
       fseek(f3, -1, SEEK_END);
       fprintf(f3, "\n");
     }
-
-    printf("h_ans[2] = %d\n",h_ans[2]);
+    printf("Hecho");
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
