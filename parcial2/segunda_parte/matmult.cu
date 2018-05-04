@@ -1,19 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define N 100
+//#define N 100
 
-void sec_matMult(int A[N][N], int B[N][N], int C[N][N]) {
-	int n,m;
-	for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
+void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int *C){
+	for (int i = 0; i < aRow; i++) {
+    for (int j = 0; j < bCol; j++) {
    		int sum = 0;
-      for (int k = 0; k < N; k++) {
-        m = A[i][k];
-        n = B[k][j];
-        sum += m * n;
+      for (int k = 0; k < aCol; k++) {
+        sum += A[j * aCol + k] * B[k * aCol + i];
       }
-   	C[i][j] = sum;
+   	  C[j * aCol + i] = sum;
   	}
  	}
 }
@@ -106,7 +103,7 @@ int main(int argc, char** argv ){
     dim3 blockDim(32,32);
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
-    clock_t startGlobalTime = clock();
+    /*clock_t startGlobalTime = clock();
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
@@ -117,6 +114,11 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo con memoria global = %.6fs\n",globalTime);
+    */
+    clock_t startSecTime = clock();
+    sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, &h_ans);
+    secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
+    printf("Tiempo secuencial = %.6fs\n",secTime);
 
     //Copia del resultado en el archivo de respuesta
     for (int i = 0; i < m1Row; i++) {
@@ -127,7 +129,7 @@ int main(int argc, char** argv ){
       fprintf(f3, "\n");
     }
 
-    printf("h_m1[2] = %d\n",h_m1[2]);
+    printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
