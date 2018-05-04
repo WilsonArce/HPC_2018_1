@@ -4,8 +4,17 @@
 #define N 100
 
 
-void sec_matMult(int* C){
-	C[2] = 12345;
+void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C){
+	for (int i = 0; i < aRow; i++) {
+    printf("Im here");
+    for (int j = 0; j < bCol; j++) {
+   		int sum = 0;
+      for (int k = 0; k < aCol; k++) {
+        sum += A[j * aCol + k] * B[k * aCol + i];
+      }
+   	  C[j * aCol + i] = sum;
+  	}
+ 	}
 }
 
 __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
@@ -110,7 +119,7 @@ int main(int argc, char** argv ){
     */
    
     clock_t startSecTime = clock();
-    sec_matMult(h_ans);
+    sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     printf("Tiempo secuencial = %.6fs\n",secTime);
 
