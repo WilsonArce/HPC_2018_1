@@ -4,8 +4,8 @@
 #define N 100
 
 
-void sec_matMult(int* *C){
-	*C[2] = 12345;
+void sec_matMult(int* C){
+	C[2] = 12345;
 }
 
 __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
