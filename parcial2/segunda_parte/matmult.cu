@@ -3,7 +3,7 @@
 #include <time.h>
 #define N 100
 
-
+//Multiplicacion secuencial
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C){
 	for (int i = 0; i < aRow; i++) {
     for (int j = 0; j < bCol; j++) {
@@ -16,6 +16,7 @@ void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C)
  	}
 }
 
+//Multiplicacion memoria global
 __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
@@ -28,6 +29,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
   }
 }
 
+//Multiplicacion memoria compartida
 __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
@@ -43,6 +45,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
 
 int main(int argc, char** argv ){
 
+  //Definicion de variables
   FILE *f1, *f2, *f3;
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
@@ -127,6 +130,8 @@ int main(int argc, char** argv ){
 
     //Copia del resultado en el archivo de respuesta
     printf("Creando archivo de la solucion...\n");
+    fprintf(f3, "%d," ,m1Row);
+    fprintf(f3, "%d," ,m2Col);
     for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
         fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
