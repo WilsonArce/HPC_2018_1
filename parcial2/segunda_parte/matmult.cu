@@ -110,7 +110,7 @@ int main(int argc, char** argv ){
     */
    
     clock_t startSecTime = clock();
-    sec_matMult(&h_ans);
+    sec_matMult(h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     printf("Tiempo secuencial = %.6fs\n",secTime);
 
