@@ -133,7 +133,7 @@ int main(int argc, char** argv ){
       fseek(f3, -1, SEEK_END);
       fprintf(f3, "\n");
     }
-    printf("Hecho");
+    printf("Hecho\n");
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
