@@ -122,7 +122,7 @@ int main(int argc, char** argv ){
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
-    printf("Tiempo con memoria global = %.6fs\n",globalTime);
+    printf("Tiempo memoria global = %.6fs\n",globalTime);
     
 
     //Copia del resultado en el archivo de respuesta
