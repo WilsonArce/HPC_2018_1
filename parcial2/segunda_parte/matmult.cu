@@ -117,7 +117,7 @@ int main(int argc, char** argv ){
       printf("Error copiando d_m2\n");
     printf("OK!!!\n");
 
-    printf("Tiempo:\n");
+    printf("Tiempo de ejecucion:\n");
 
     //Llamado a la multiplicacion secuencial
     clock_t startSecTime = clock();
@@ -137,6 +137,8 @@ int main(int argc, char** argv ){
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
     //Multiplicacion paralela con memoria global
+    free(h_ans);
+    h_ans = (int *)malloc(ansSize);
     clock_t startGlobalTime = clock();
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansG, threads);
