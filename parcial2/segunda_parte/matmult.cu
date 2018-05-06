@@ -27,12 +27,13 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
     for (k = 0; k < n; k++) {
       sum += m1[j * n + k] * m2[k * n + i];
     }
-    ans[j * n + i] = sum + 1;
+    ans[j * n + i] = sum;
   }
 }
 
 //Multiplicacion memoria compartida
 __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
+
   __shared__ int m1_s[tile][tile];
   __shared__ int m2_s[tile][tile];
 
@@ -92,13 +93,14 @@ int main(int argc, char** argv ){
     h_m2 = (int *)malloc(m2Size);
     h_ans = (int *)malloc(ansSize);
 
+    readAllocFile(f1, h_m1, m1Row, m1Col);
     //Lectura de archivos y almacenamiento en el Host
-    for (int i = 0; i < m1Row; i++){
-      for (int j = 0; j < m1Col; j++){
-        fscanf(f1, "%d", &h_m1[i * m1Row + j]);
-        getc(f1);//saltar las comas (,)
-      }
-    }
+    // for (int i = 0; i < m1Row; i++){
+    //   for (int j = 0; j < m1Col; j++){
+    //     fscanf(f1, "%d", &h_m1[i * m1Row + j]);
+    //     getc(f1);//saltar las comas (,)
+    //   }
+    // }
 
     for (int k = 0; k < m2Row; k++){
       for (int l = 0; l < m2Col; l++){

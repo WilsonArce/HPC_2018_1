@@ -57,3 +57,12 @@ void setAnsFile(const char* ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
     }
     printf("Hecho!!!\n\n");
 }
+
+void readAllocFile(FILE* f, int* h_mat, int row, int col){
+	for (int i = 0; i < row; i++){
+		for (int j = 0; j < col; j++){
+			fscanf(f, "%d", &h_mat[i * row + j]);
+			getc(f);//saltar las comas (,)
+		}
+	}
+}
