@@ -44,7 +44,7 @@ void matGen(int size){
 	printf("Hecho!!\n");
 }
 
-void setAnsFile(char ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
+void setAnsFile(const char* ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
 	printf("Creando archivo de la solucion %s...\n", ansType);
     fprintf(f, "%d\n" ,m1Row);
     fprintf(f, "%d\n" ,m2Col);
