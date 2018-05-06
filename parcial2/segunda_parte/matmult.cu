@@ -95,7 +95,7 @@ int main(int argc, char** argv ){
     sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     printf("Tiempo secuencial = %.6fs\n",secTime);
-    printf("h_ans[2] = %d\n",h_ans[2]);
+    //printf("h_ans[2] = %d\n",h_ans[2]);
 
     printf("Creando archivo de la solucion secuencial...\n");
     fprintf(f3, "%d\n" ,m1Row);
@@ -140,7 +140,7 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo memoria global = %.6fs\n",globalTime);
-    printf("h_ans[2] = %d\n",h_ans[2]);
+    //printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Copia del resultado en el archivo de respuesta
     printf("Creando archivo de la solucion CUDA-global-mem...\n");
