@@ -100,7 +100,7 @@ int main(int argc, char** argv ){
     readAllocFile(f2, h_m2, m2Row, m2Col);
 
     //Asignacion de memoria en el Device
-    printf("- Asignacion de memoria en el Device...");
+    printf("- Asignacion de memoria en el Device...\n");
     // if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
     //   printf("Error asignando para d_m1\n");
       printf(" cudaMalloc -> d_m1: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
