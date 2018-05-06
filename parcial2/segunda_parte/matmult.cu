@@ -106,7 +106,7 @@ int main(int argc, char** argv ){
     err = cudaMalloc((void **) &d_m1, m1Size);
     if(err != cudaSuccess) printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err));
     err = cudaMalloc((void **) &d_m2, m1Size);
-    if("no error" != err) printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err));
+    if(err != cudaSuccess) printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err));
     // printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
     // printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m2, m2Size)));
     printf(" -cudaMalloc d_ansG: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_ansG, ansSize)));
