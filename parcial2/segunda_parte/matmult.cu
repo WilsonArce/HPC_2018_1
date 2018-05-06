@@ -100,17 +100,16 @@ int main(int argc, char** argv ){
     readAllocFile(f2, h_m2, m2Row, m2Col);
 
     //Asignacion de memoria en el Device
-    printf("- Asignacion de memoria en el Device... ");
+    printf("- Asignacion de memoria en el Device...");
     // if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
     //   printf("Error asignando para d_m1\n");
-      printf("%s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
+      printf(" cudaMalloc -> d_m1: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
     if (cudaSuccess != cudaMalloc((void **) &d_m2, m2Size))
       printf("Error asignando para d_m2\n");
     if (cudaSuccess != cudaMalloc((void **) &d_ansG, ansSize))
       printf("Error asignando para d_ansG\n");
     if (cudaSuccess != cudaMalloc((void **) &d_ansS, ansSize))
       printf("Error asignando para d_ansS\n");
-    printf("OK!!!\n");
 
     //Copia de datos del Host al Device
     printf("- Copia de datos H -> D... ");
