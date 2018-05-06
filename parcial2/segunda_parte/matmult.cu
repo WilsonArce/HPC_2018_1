@@ -151,6 +151,7 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ansG a h_ansG (global-mem)\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
+    cudaDeviceSynchronize();
 
     //setAnsFile("global-mem", m1Row, m2Col, h_ansG, f4);
 
