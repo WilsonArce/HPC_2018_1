@@ -177,7 +177,7 @@ int main(int argc, char** argv ){
     //Copia de datos del Device al Host
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
       printf("Error copiando datos desde d_ans a h_ans\n");
-    globalTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
+    sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
     //printf("h_ans[2] = %d\n",h_ans[2]);
 
