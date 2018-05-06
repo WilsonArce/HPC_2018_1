@@ -14,7 +14,7 @@ void matGen(int size){
 	f2 = fopen("mat2.txt","w");
 
 	//Generacion de matrices 
-	printf("Creacion de archivos...");
+	printf("Creacion de archivos...\n");
 
 		//Copia de dimensiones de la matriz como primeros valores en el archivo
 	fprintf(f1, "%d\n", size);
@@ -42,7 +42,7 @@ void matGen(int size){
 	//Cierre de archivos
 	fclose(f1); fclose(f2);
 	fseek(f2, -1, SEEK_END);
-	printf("\bOK!!!");
+	printf("OK!!!");
 }
 
 void setAnsFile(const char* ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
