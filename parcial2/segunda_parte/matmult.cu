@@ -156,7 +156,8 @@ int main(int argc, char** argv ){
     ///////////////////////////////////////
 
     //Multiplicacion paralela con memoria compartida
-
+    free(h_ans);
+    h_ans = (int *)malloc(ansSize);
     clock_t startSharedTime = clock();
     //Llamado al Kernel
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansS, threads);
