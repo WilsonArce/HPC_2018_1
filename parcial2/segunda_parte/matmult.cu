@@ -146,6 +146,7 @@ int main(int argc, char** argv ){
       printf("Error en el llamado al kernel (global-mem)\n");
 
     //Copia de datos del Device al Host
+    
     if (cudaSuccess != cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost))
       printf("Error copiando datos desde d_ansG a h_ansG (global-mem)\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
@@ -163,8 +164,9 @@ int main(int argc, char** argv ){
       printf("Error en el llamado al kernel (shared-mem)\n");
 
     //Copia de datos del Device al Host
-    if (cudaSuccess != cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ansS a h_ansS (shared-mem)\n");
+    cudaError_t e = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
+    if (cudaSuccess != e)
+      printf("Error copiando datos desde d_ansS a h_ansS (shared-mem)\n %s",cudaGetErrorStrin(e));
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
