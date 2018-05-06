@@ -111,6 +111,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess) printf(" -cudaMalloc d_ansG: %s\n",cudaGetErrorString(err));
     err = cudaMalloc((void **) &d_ansS, ansSize);
     if(err != cudaSuccess) printf(" -cudaMalloc d_ansS: %s\n",cudaGetErrorString(err));
+    printf("ok!!!\n");
 
     //Copia de datos del Host al Device
     printf("> Copia de datos H -> D...\n");
