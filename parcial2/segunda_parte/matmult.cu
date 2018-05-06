@@ -104,7 +104,7 @@ int main(int argc, char** argv ){
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
     err = cudaMalloc((void **) &d_m1, m1Size);
-    err != cudaSuccess ? printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err)) && return 0;
+    err != cudaSuccess ? printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err)) && return 0 : continue;
     if(err != cudaSuccess) ;
     err = cudaMalloc((void **) &d_m2, m2Size);
     if(err != cudaSuccess) printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err));
