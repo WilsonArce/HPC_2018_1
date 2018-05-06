@@ -93,21 +93,9 @@ int main(int argc, char** argv ){
     h_m2 = (int *)malloc(m2Size);
     h_ans = (int *)malloc(ansSize);
 
-    readAllocFile(f1, h_m1, m1Row, m1Col);
     //Lectura de archivos y almacenamiento en el Host
-    // for (int i = 0; i < m1Row; i++){
-    //   for (int j = 0; j < m1Col; j++){
-    //     fscanf(f1, "%d", &h_m1[i * m1Row + j]);
-    //     getc(f1);//saltar las comas (,)
-    //   }
-    // }
-
-    for (int k = 0; k < m2Row; k++){
-      for (int l = 0; l < m2Col; l++){
-        fscanf(f2, "%d", &h_m2[k * m2Row + l]);
-        getc(f2);//saltar las comas (,)
-      }
-    }
+    readAllocFile(f1, h_m1, m1Row, m1Col);
+    readAllocFile(f2, h_m2, m2Row, m2Col);
 
     //Llamado a la multiplicacion secuencial
     clock_t startSecTime = clock();
