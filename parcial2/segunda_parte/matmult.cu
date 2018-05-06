@@ -112,21 +112,9 @@ int main(int argc, char** argv ){
     sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     printf("Tiempo secuencial = %.6fs\n",secTime);
-    //printf("h_ans[2] = %d\n",h_ans[2]);
 
+    //Generacion de archivo respuesta
     setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
-
-    // printf("Creando archivo de la solucion secuencial...\n");
-    // fprintf(f3, "%d\n" ,m1Row);
-    // fprintf(f3, "%d\n" ,m2Col);
-    // for (int i = 0; i < m1Row; i++) {
-    //   for (int j = 0; j < m2Col; j++) {
-    //     fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
-    //   }
-    //   fseek(f3, -1, SEEK_END);
-    //   fprintf(f3, "\n");
-    // }
-    // printf("Hecho!!!\n");
 
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
@@ -161,18 +149,7 @@ int main(int argc, char** argv ){
     printf("Tiempo memoria global = %.6fs\n",globalTime);
     //printf("h_ans[2] = %d\n",h_ans[2]);
 
-    //Copia del resultado en el archivo de respuesta
-    printf("Creando archivo de la solucion CUDA-global-mem...\n");
-    fprintf(f4, "%d\n" ,m1Row);
-    fprintf(f4, "%d\n" ,m2Col);
-    for (int i = 0; i < m1Row; i++) {
-      for (int j = 0; j < m2Col; j++) {
-        fprintf(f4, "%d," ,h_ans[i * m2Col + j]);
-      }
-      fseek(f4, -1, SEEK_END);
-      fprintf(f4, "\n");
-    }
-    printf("Hecho!!!\n");
+    setAnsFile("global-mem", m1Row, m2Col, h_ans, f4);
 
     // clock_t startSharedTime = clock();
     // //Llamado al Kernel
@@ -187,18 +164,7 @@ int main(int argc, char** argv ){
     // printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
     // //printf("h_ans[2] = %d\n",h_ans[2]);
 
-    // //Copia del resultado en el archivo de respuesta
-    // printf("Creando archivo de la solucion CUDA-shared-mem...\n");
-    // fprintf(f5, "%d\n" ,m1Row);
-    // fprintf(f5, "%d\n" ,m2Col);
-    // for (int i = 0; i < m1Row; i++) {
-    //   for (int j = 0; j < m2Col; j++) {
-    //     fprintf(f5, "%d," ,h_ans[i * m2Col + j]);
-    //   }
-    //   fseek(f5, -1, SEEK_END);
-    //   fprintf(f5, "\n");
-    // }
-    // printf("Hecho!!!\n");
+    //setAnsFile("shared-mem", m1Row, m2Col, h_ans, f4);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
