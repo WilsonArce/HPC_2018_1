@@ -115,9 +115,9 @@ int main(int argc, char** argv ){
 
     //Copia de datos del Host al Device
     printf("> Copia de datos H -> D...");
-    err = cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice)
+    err = cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_m1 -> d_m1: %s\n",cudaGetErrorString(err)); return 0;}
-    err = cudaMemcpy(d_m2, h_m2, m1Size, cudaMemcpyHostToDevice)
+    err = cudaMemcpy(d_m2, h_m2, m1Size, cudaMemcpyHostToDevice);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_m2 -> d_m2: %s\n",cudaGetErrorString(err)); return 0;}
     printf("ok!!!\n");
 
