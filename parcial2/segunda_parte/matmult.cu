@@ -67,7 +67,7 @@ int main(int argc, char** argv ){
   int *d_m1, *d_m2, *d_ansG, *d_ansS;
   int m1Row, m1Col, m2Row, m2Col; 
 
-  const char* err;
+  char err;
 
   if (argc != 2){
     printf("Cantidad de parametros incorrecta!!\n");
