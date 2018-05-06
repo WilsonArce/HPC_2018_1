@@ -121,6 +121,7 @@ int main(int argc, char** argv ){
       fprintf(f3, "\n");
     }
     printf("Hecho!!!\n");
+    free(h_ans);
 
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
