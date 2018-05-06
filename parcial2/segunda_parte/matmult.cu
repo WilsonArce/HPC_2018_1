@@ -155,7 +155,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
 
-    setAnsFile("shared-mem", m1Row, m2Col, h_ans, f4);
+    setAnsFile("shared-mem", m1Row, m2Col, h_ans, f5);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
