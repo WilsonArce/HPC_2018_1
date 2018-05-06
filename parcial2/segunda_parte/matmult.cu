@@ -126,6 +126,7 @@ int main(int argc, char** argv ){
     dim3 blockDim(tile,tile);
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
+    //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
@@ -137,24 +138,24 @@ int main(int argc, char** argv ){
       printf("Error copiando datos desde d_ans a h_ans\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("Tiempo memoria global = %.6fs\n",globalTime);
-    //printf("h_ans[2] = %d\n",h_ans[2]);
 
     setAnsFile("global-mem", m1Row, m2Col, h_ans, f4);
 
-    // clock_t startSharedTime = clock();
-    // //Llamado al Kernel
-    // sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
-    // if(cudaSuccess != cudaGetLastError())
-    //   printf("Error en el llamado al kernel\n");
 
-    // //Copia de datos del Device al Host
-    // if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-    //   printf("Error copiando datos desde d_ans a h_ans\n");
-    // sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
-    // printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
-    // //printf("h_ans[2] = %d\n",h_ans[2]);
+    //Multiplicacion paralela con memoria compartida
+    clock_t startSharedTime = clock();
+    //Llamado al Kernel
+    sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
+    if(cudaSuccess != cudaGetLastError())
+      printf("Error en el llamado al kernel\n");
 
-    //setAnsFile("shared-mem", m1Row, m2Col, h_ans, f4);
+    //Copia de datos del Device al Host
+    if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
+      printf("Error copiando datos desde d_ans a h_ans\n");
+    sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
+    printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
+
+    setAnsFile("shared-mem", m1Row, m2Col, h_ans, f4);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
