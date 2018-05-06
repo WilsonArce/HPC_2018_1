@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(int argc, char const *argv[])
-{
+//int main(int argc, char const *argv[])
+//{
   /*if(argc != 2){
 		printf("Cantidad de parametros incorrecta!!\n");
 	}else{*/
@@ -63,5 +63,5 @@ int main(int argc, char const *argv[])
 			printf("Hecho!!\n");
 		}
 	//}
-	return 0;
-}
+	//return 0;
+//}
