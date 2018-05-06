@@ -114,17 +114,19 @@ int main(int argc, char** argv ){
     printf("Tiempo secuencial = %.6fs\n",secTime);
     //printf("h_ans[2] = %d\n",h_ans[2]);
 
-    printf("Creando archivo de la solucion secuencial...\n");
-    fprintf(f3, "%d\n" ,m1Row);
-    fprintf(f3, "%d\n" ,m2Col);
-    for (int i = 0; i < m1Row; i++) {
-      for (int j = 0; j < m2Col; j++) {
-        fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
-      }
-      fseek(f3, -1, SEEK_END);
-      fprintf(f3, "\n");
-    }
-    printf("Hecho!!!\n");
+    setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
+
+    // printf("Creando archivo de la solucion secuencial...\n");
+    // fprintf(f3, "%d\n" ,m1Row);
+    // fprintf(f3, "%d\n" ,m2Col);
+    // for (int i = 0; i < m1Row; i++) {
+    //   for (int j = 0; j < m2Col; j++) {
+    //     fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
+    //   }
+    //   fseek(f3, -1, SEEK_END);
+    //   fprintf(f3, "\n");
+    // }
+    // printf("Hecho!!!\n");
 
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))

@@ -2,66 +2,58 @@
 #include <stdlib.h>
 #include <time.h>
 
-//int main(int argc, char const *argv[])
-//{
-  /*if(argc != 2){
-		printf("Cantidad de parametros incorrecta!!\n");
-	}else{*/
-	
-		//int size = atoi(argv[1]);
+void matGen(int size){
+	//Semilla para secuencia de numeros pseudo-aleatorios
+	srand((unsigned) time(NULL));
 
-		// int row1 = atoi(argv[1]);
-		// int col1 = atoi(argv[2]);
-		// int row2 = atoi(argv[3]);
-		// int col2 = atoi(argv[4]);
+	//Definicion de variables
+	FILE *f1, *f2;
 
-		// if(col1 != row2){
-		// 	printf("Las matrices no se pueden multiplicar!!\n(El numero de columnas de A debe ser igual al numero de filas de B)\n");
-		// }else{
+	//Creacion de archivos
+	f1 = fopen("mat1.txt","w");
+	f2 = fopen("mat2.txt","w");
 
-			
-			//time_t t;
-		void matGen(int size){
-			//Semilla para secuencia de numeros pseudo-aleatorios
-			srand((unsigned) time(NULL));
+	//Generacion de matrices 
+	printf("Generando matrices...\n");
 
-			//Definicion de variables
-			FILE *f1, *f2;
-
-			//Creacion de archivos
-			f1 = fopen("mat1.txt","w");
-			f2 = fopen("mat2.txt","w");
-
-			//Generacion de matrices 
-			printf("Generando matrices...\n");
-
-				//Copia de dimensiones de la matriz como primeros valores en el archivo
-			fprintf(f1, "%d\n", size);
-			fprintf(f1, "%d\n", size);
-				//Generacion pseudo-aleatoria de valores
-			for (int i = 0; i < size; i++) {
-				for (int j = 0; j < size; j++) {
-					fprintf(f1, "%d,", rand() % 100);
-				}
-				fseek(f1, -1, SEEK_END);
-				fprintf(f1, "\n");
-			}
-
-			fprintf(f2, "%d\n", size);
-			fprintf(f2, "%d\n", size);
-
-			for (int i = 0; i < size; i++) {
-				for (int j = 0; j < size; j++) {
-					fprintf(f2, "%d,", rand() % 100);
-				}
-				fseek(f2, -1, SEEK_END);
-				fprintf(f2, "\n");
-			}
-
-			//Cierre de archivos
-			fclose(f1); fclose(f2);
-			printf("Hecho!!\n");
+		//Copia de dimensiones de la matriz como primeros valores en el archivo
+	fprintf(f1, "%d\n", size);
+	fprintf(f1, "%d\n", size);
+		//Generacion pseudo-aleatoria de valores
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			fprintf(f1, "%d,", rand() % 100);
 		}
-	//}
-	//return 0;
-//}
+		fseek(f1, -1, SEEK_END);
+		fprintf(f1, "\n");
+	}
+
+	fprintf(f2, "%d\n", size);
+	fprintf(f2, "%d\n", size);
+
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			fprintf(f2, "%d,", rand() % 100);
+		}
+		fseek(f2, -1, SEEK_END);
+		fprintf(f2, "\n");
+	}
+
+	//Cierre de archivos
+	fclose(f1); fclose(f2);
+	printf("Hecho!!\n");
+}
+
+void setAnsFile(char ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
+	printf("Creando archivo de la solucion %s...\n", ansType);
+    fprintf(f, "%d\n" ,m1Row);
+    fprintf(f, "%d\n" ,m2Col);
+    for (int i = 0; i < m1Row; i++) {
+      for (int j = 0; j < m2Col; j++) {
+        fprintf(f, "%d," ,h_ans[i * m2Col + j]);
+      }
+      fseek(f, -1, SEEK_END);
+      fprintf(f, "\n");
+    }
+    printf("Hecho!!!\n\n");
+}
