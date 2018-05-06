@@ -19,7 +19,7 @@ void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C)
 }
 
 //Multiplicacion memoria global
-__global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
+__global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 	int k, sum = 0;
 	int i = blockIdx.x * blockDim.x + threadIdx.x; 
   int j = blockIdx.y * blockDim.y + threadIdx.y;
@@ -27,12 +27,12 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
     for (k = 0; k < n; k++) {
       sum += m1[j * n + k] * m2[k * n + i];
     }
-    ans[j * n + i] = sum;
+    ansG[j * n + i] = sum;
   }
 }
 
 //Multiplicacion memoria compartida
-__global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
+__global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 
   __shared__ int m1_s[tile][tile];
   __shared__ int m2_s[tile][tile];
@@ -54,7 +54,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
     }
     __syncthreads();
   }
-  ans[row * n + col] = sum;
+  ansS[row * n + col] = sum;
 }
 
 
