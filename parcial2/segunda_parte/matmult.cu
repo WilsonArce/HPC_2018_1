@@ -105,12 +105,12 @@ int main(int argc, char** argv ){
     printf("> Asignacion de memoria en el Device...\n");
     err = cudaMalloc((void **) &d_m1, m1Size);
     if(err != cudaSuccess) printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err));
-    err = cudaMalloc((void **) &d_m2, m1Size);
+    err = cudaMalloc((void **) &d_m2, m2Size);
     if(err != cudaSuccess) printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err));
-    // printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
-    // printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m2, m2Size)));
-    printf(" -cudaMalloc d_ansG: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_ansG, ansSize)));
-    printf(" -cudaMalloc d_ansS: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_ansS, ansSize)));
+    err = cudaMalloc((void **) &d_ansG, ansSize);
+    if(err != cudaSuccess) printf(" -cudaMalloc d_ansG: %s\n",cudaGetErrorString(err));
+    err = cudaMalloc((void **) &d_ansS, ansSize);
+    if(err != cudaSuccess) printf(" -cudaMalloc d_ansS: %s\n",cudaGetErrorString(err));
 
     //Copia de datos del Host al Device
     printf("> Copia de datos H -> D...\n");
