@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #define N 100
+#define tile 32
 
 //Multiplicacion secuencial
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C){
@@ -31,15 +32,27 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
 
 //Multiplicacion memoria compartida
 __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
-	int k, sum = 0;
-	int i = blockIdx.x * blockDim.x + threadIdx.x; 
-  int j = blockIdx.y * blockDim.y + threadIdx.y;
-  if (i < n && j < n) {
-    for (k = 0; k < n; k++) {
-      sum += m1[j * n + k] * m2[k * n + i];
+  __shared__ int m1_s[tile][tile];
+  __shared__ int m2_s[tile][tile];
+
+  int bx = blockIdx.x; int by = blockIdx.y;
+  int tx = threadIdx.x; int ty = threadIdx.y;
+
+  int row = by * tile + ty;
+  int col = bx * tile + tx;
+
+	int sum = 0;
+	for(int m = 0; m < n/tile; ++m){
+    m1_s[ty][tx] = m1[row * n + m * tile + tx];
+    m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
+    __syncthreads();
+
+    for (int k = 0; k < tile; ++k) {
+      sum += m1_s[ty][k] * m2_s[k][tx];
     }
-    ans[j * n + i] = sum;
+    __syncthreads();
   }
+  ans[row * n + col] = sum;
 }
 
 
@@ -126,7 +139,7 @@ int main(int argc, char** argv ){
     int threads = m1Row;//Cantidad de hilos
 
     //Definicion de estructuras para cantidad de Hilos y Bloques
-    dim3 blockDim(32,32);
+    dim3 blockDim(tile,tile);
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
 
     clock_t startGlobalTime = clock();
@@ -152,6 +165,32 @@ int main(int argc, char** argv ){
       }
       fseek(f4, -1, SEEK_END);
       fprintf(f4, "\n");
+    }
+    printf("Hecho!!!\n");
+
+    clock_t startSharedTime = clock();
+    //Llamado al Kernel
+    sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
+    if(cudaSuccess != cudaGetLastError())
+      printf("Error en el llamado al kernel\n");
+
+    //Copia de datos del Device al Host
+    if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
+      printf("Error copiando datos desde d_ans a h_ans\n");
+    globalTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
+    printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
+    //printf("h_ans[2] = %d\n",h_ans[2]);
+
+    //Copia del resultado en el archivo de respuesta
+    printf("Creando archivo de la solucion CUDA-shared-mem...\n");
+    fprintf(f5, "%d\n" ,m1Row);
+    fprintf(f5, "%d\n" ,m2Col);
+    for (int i = 0; i < m1Row; i++) {
+      for (int j = 0; j < m2Col; j++) {
+        fprintf(f5, "%d," ,h_ans[i * m2Col + j]);
+      }
+      fseek(f5, -1, SEEK_END);
+      fprintf(f5, "\n");
     }
     printf("Hecho!!!\n");
 
