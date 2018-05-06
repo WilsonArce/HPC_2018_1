@@ -4,11 +4,11 @@
 
 int main(int argc, char const *argv[])
 {
-  if(argc != 2){
+  /*if(argc != 2){
 		printf("Cantidad de parametros incorrecta!!\n");
-	}else{
-
-		int size = atoi(argv[1]);
+	}else{*/
+	
+		//int size = atoi(argv[1]);
 
 		// int row1 = atoi(argv[1]);
 		// int col1 = atoi(argv[2]);
@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 
 			
 			//time_t t;
-
+		matGen(int size){
 			//Semilla para secuencia de numeros pseudo-aleatorios
 			srand((unsigned) time(NULL));
 

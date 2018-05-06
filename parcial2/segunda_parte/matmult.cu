@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "matmult.h"
 #define N 100
 #define tile 32
 
@@ -65,12 +66,15 @@ int main(int argc, char** argv ){
   int *d_m1, *d_m2, *d_ans;
   int m1Row, m1Col, m2Row, m2Col; 
 
-  if (argc != 3){
+  if (argc != 2){
     printf("Cantidad de parametros incorrecta!!\n");
   }else{
     //Creación de archivos
-    f1 = fopen(argv[1],"r");
-    f2 = fopen(argv[2],"r");
+    matGen(argv[1]);
+    //f1 = fopen(argv[1],"r");
+    //f2 = fopen(argv[2],"r");
+    f1 = fopen("mat1.txt","r");
+    f2 = fopen("mat2.txt","r");
     f3 = fopen("sec_ans.txt","w");
     f4 = fopen("glo_ans.txt","w");
     f5 = fopen("sha_ans.txt","w");
@@ -121,7 +125,6 @@ int main(int argc, char** argv ){
       fprintf(f3, "\n");
     }
     printf("Hecho!!!\n");
-    //free(h_ans);
 
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
@@ -169,31 +172,31 @@ int main(int argc, char** argv ){
     }
     printf("Hecho!!!\n");
 
-    clock_t startSharedTime = clock();
-    //Llamado al Kernel
-    sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
-    if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel\n");
+    // clock_t startSharedTime = clock();
+    // //Llamado al Kernel
+    // sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
+    // if(cudaSuccess != cudaGetLastError())
+    //   printf("Error en el llamado al kernel\n");
 
-    //Copia de datos del Device al Host
-    if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ans a h_ans\n");
-    sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
-    printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
-    //printf("h_ans[2] = %d\n",h_ans[2]);
+    // //Copia de datos del Device al Host
+    // if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
+    //   printf("Error copiando datos desde d_ans a h_ans\n");
+    // sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
+    // printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
+    // //printf("h_ans[2] = %d\n",h_ans[2]);
 
-    //Copia del resultado en el archivo de respuesta
-    printf("Creando archivo de la solucion CUDA-shared-mem...\n");
-    fprintf(f5, "%d\n" ,m1Row);
-    fprintf(f5, "%d\n" ,m2Col);
-    for (int i = 0; i < m1Row; i++) {
-      for (int j = 0; j < m2Col; j++) {
-        fprintf(f5, "%d," ,h_ans[i * m2Col + j]);
-      }
-      fseek(f5, -1, SEEK_END);
-      fprintf(f5, "\n");
-    }
-    printf("Hecho!!!\n");
+    // //Copia del resultado en el archivo de respuesta
+    // printf("Creando archivo de la solucion CUDA-shared-mem...\n");
+    // fprintf(f5, "%d\n" ,m1Row);
+    // fprintf(f5, "%d\n" ,m2Col);
+    // for (int i = 0; i < m1Row; i++) {
+    //   for (int j = 0; j < m2Col; j++) {
+    //     fprintf(f5, "%d," ,h_ans[i * m2Col + j]);
+    //   }
+    //   fseek(f5, -1, SEEK_END);
+    //   fprintf(f5, "\n");
+    // }
+    // printf("Hecho!!!\n");
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
