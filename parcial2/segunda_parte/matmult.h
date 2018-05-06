@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 
 			
 			//time_t t;
-		matGen(int size){
+		void matGen(int size){
 			//Semilla para secuencia de numeros pseudo-aleatorios
 			srand((unsigned) time(NULL));
 
