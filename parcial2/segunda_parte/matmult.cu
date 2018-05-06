@@ -97,28 +97,36 @@ int main(int argc, char** argv ){
     readAllocFile(f1, h_m1, m1Row, m1Col);
     readAllocFile(f2, h_m2, m2Row, m2Col);
 
+    //Asignacion de memoria en el Device
+    printf("Asignacion de memoria en el Device... ");
+    if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
+      printf("Error asignando para d_m1\n");
+    if (cudaSuccess != cudaMalloc((void **) &d_m2, m2Size))
+      printf("Error asignando para d_m2\n");
+    if (cudaSuccess != cudaMalloc((void **) &d_ans, ansSize))
+      printf("Error asignando para d_ans\n");
+    printf("OK!!!\n");
+
+    //Copia de datos del Host al Device
+    printf("Copiando datos H > D... ");
+    if (cudaSuccess != cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice))
+      printf("Error copiando d_m1\n");
+	  if (cudaSuccess != cudaMemcpy(d_m2, h_m2, m2Size, cudaMemcpyHostToDevice))
+      printf("Error copiando d_m2\n");
+    printf("OK!!!\n");
+
+    printf("Tiempo:\n");
+
     //Llamado a la multiplicacion secuencial
     clock_t startSecTime = clock();
     sec_matMult(h_m1, m1Col, m1Row, h_m2, m2Col, m2Row, h_ans);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
-    printf("Tiempo secuencial = %.6fs\n",secTime);
+    printf("> Secuencial = %.6fs\n",secTime);
 
     //Generacion de archivo respuesta
     //setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
 
-    //Asignacion de memoria en el Device
-    if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
-      printf("Error asignando memoria para d_m1\n");
-    if (cudaSuccess != cudaMalloc((void **) &d_m2, m2Size))
-      printf("Error asignando memoria para d_m2\n");
-    if (cudaSuccess != cudaMalloc((void **) &d_ans, ansSize))
-      printf("Error asignando memoria para d_ans\n");
-
-    //Copia de datos del Host al Device
-    if (cudaSuccess != cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice))
-      printf("Error copiando datos a d_m1\n");
-	  if (cudaSuccess != cudaMemcpy(d_m2, h_m2, m2Size, cudaMemcpyHostToDevice))
-      printf("Error copiando datos a d_m2\n");
+    /////////////////////////////////////
 
     int threads = m1Row;//Cantidad de hilos
 
@@ -131,29 +139,30 @@ int main(int argc, char** argv ){
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel\n");
+      printf("Error en el llamado al kernel (gMem)\n");
 
     //Copia de datos del Device al Host
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ans a h_ans\n");
+      printf("Error copiando datos desde d_ans a h_ans (gMem)\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
-    printf("Tiempo memoria global = %.6fs\n",globalTime);
+    printf("> Memoria global (cuda) = %.6fs\n",globalTime);
 
     //setAnsFile("global-mem", m1Row, m2Col, h_ans, f4);
 
+    ///////////////////////////////////////
 
     //Multiplicacion paralela con memoria compartida
     clock_t startSharedTime = clock();
     //Llamado al Kernel
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel\n");
+      printf("Error en el llamado al kernel (sMem)\n");
 
     //Copia de datos del Device al Host
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ans a h_ans\n");
+      printf("Error copiando datos desde d_ans a h_ans (sMem)\n");
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
-    printf("Tiempo memoria compartida = %.6fs\n",sharedTime);
+    printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
     //setAnsFile("shared-mem", m1Row, m2Col, h_ans, f5);
 
