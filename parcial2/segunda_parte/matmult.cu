@@ -67,8 +67,7 @@ int main(int argc, char** argv ){
   int *d_m1, *d_m2, *d_ansG, *d_ansS;
   int m1Row, m1Col, m2Row, m2Col; 
 
-  const char *err;
-  const char *status = cudaGetErrorString();
+  cudaError_t err = cudaSuccess;
 
   if (argc != 2){
     printf("Cantidad de parametros incorrecta!!\n");
@@ -104,8 +103,8 @@ int main(int argc, char** argv ){
 
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...\n");
-    err = cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size));
-    if(err != status) printf(" -cudaMalloc d_m1: %s\n",err);
+    err = cudaMalloc((void **) &d_m1, m1Size);
+    if(err != cudaSuccess) printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err));
     err = cudaGetErrorString(cudaMalloc((void **) &d_m2, m1Size));
     if("no error" != err) printf(" -cudaMalloc d_m2: %s\n",err);
     // printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
