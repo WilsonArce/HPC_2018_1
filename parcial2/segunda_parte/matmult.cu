@@ -104,14 +104,14 @@ int main(int argc, char** argv ){
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
     err = cudaMalloc((void **) &d_m1, m1Size);
-    err != cudaSuccess ? (printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err))  return 0) : continue;
-    if(err != cudaSuccess) ;
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err)); return 0;}
     err = cudaMalloc((void **) &d_m2, m2Size);
     if(err != cudaSuccess) printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err));
     err = cudaMalloc((void **) &d_ansG, ansSize);
     if(err != cudaSuccess) printf(" -cudaMalloc d_ansG: %s\n",cudaGetErrorString(err));
     err = cudaMalloc((void **) &d_ansS, ansSize);
     if(err != cudaSuccess) printf(" -cudaMalloc d_ansS: %s\n",cudaGetErrorString(err));
+    printf("ok!!!\n");
 
     //Copia de datos del Host al Device
     printf("> Copia de datos H -> D...\n");
