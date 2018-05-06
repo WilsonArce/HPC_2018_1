@@ -27,7 +27,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ans, int n){
     for (k = 0; k < n; k++) {
       sum += m1[j * n + k] * m2[k * n + i];
     }
-    ans[j * n + i] = sum;
+    ans[j * n + i] = sum + 1;
   }
 }
 
