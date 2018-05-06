@@ -14,7 +14,7 @@ void matGen(int size){
 	f2 = fopen("mat2.txt","w");
 
 	//Generacion de matrices 
-	printf("Creacion de archivos...");
+	printf("Creacion de archivos...\r");
 
 		//Copia de dimensiones de la matriz como primeros valores en el archivo
 	fprintf(f1, "%d\n", size);
