@@ -70,7 +70,7 @@ int main(int argc, char** argv ){
     printf("Cantidad de parametros incorrecta!!\n");
   }else{
     //Creación de archivos
-    matGen(argv[1]);
+    matGen(atoi(argv[1]));
     //f1 = fopen(argv[1],"r");
     //f2 = fopen(argv[2],"r");
     f1 = fopen("mat1.txt","r");
