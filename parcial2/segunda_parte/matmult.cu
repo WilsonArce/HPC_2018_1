@@ -101,8 +101,9 @@ int main(int argc, char** argv ){
 
     //Asignacion de memoria en el Device
     printf("- Asignacion de memoria en el Device... ");
-    if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
-      printf("Error asignando para d_m1\n");
+    // if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
+    //   printf("Error asignando para d_m1\n");
+      printf("%s\n",cudaGetErrorString(cudaMalloc((void **) &d_m1, m1Size)));
     if (cudaSuccess != cudaMalloc((void **) &d_m2, m2Size))
       printf("Error asignando para d_m2\n");
     if (cudaSuccess != cudaMalloc((void **) &d_ansG, ansSize))
@@ -140,13 +141,11 @@ int main(int argc, char** argv ){
 
     //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
-    //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansG, threads);
     if(cudaSuccess != cudaGetLastError())
       printf("Error en el llamado al kernel (global-mem)\n");
 
     //Copia de datos del Device al Host
-    
     if (cudaSuccess != cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost))
       printf("Error copiando datos desde d_ansG a h_ansG (global-mem)\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
@@ -159,7 +158,6 @@ int main(int argc, char** argv ){
 
     //Multiplicacion paralela con memoria compartida
     clock_t startSharedTime = clock();
-    //Llamado al Kernel
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansS, threads);
     if(cudaSuccess != cudaGetLastError())
       printf("Error en el llamado al kernel (shared-mem)\n");
