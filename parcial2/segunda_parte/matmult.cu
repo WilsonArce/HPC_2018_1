@@ -46,7 +46,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ans, int n){
 int main(int argc, char** argv ){
 
   //Definicion de variables
-  FILE *f1, *f2, *f3;
+  FILE *f1, *f2, *f3, *f4, *f5;
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
   int *d_m1, *d_m2, *d_ans;
@@ -58,7 +58,9 @@ int main(int argc, char** argv ){
     //Creación de archivos
     f1 = fopen(argv[1],"r");
     f2 = fopen(argv[2],"r");
-    f3 = fopen("ans.txt","w");
+    f3 = fopen("sec_ans.txt","w");
+    f4 = fopen("glo_ans.txt","w");
+    f5 = fopen("sha_ans.txt","w");
     //Lectura de dimensiones de las matrices
     fscanf(f1, "%d", &m1Row); fscanf(f1, "%d", &m1Col);
     fscanf(f2, "%d", &m2Row); fscanf(f2, "%d", &m2Col);
@@ -95,6 +97,18 @@ int main(int argc, char** argv ){
     printf("Tiempo secuencial = %.6fs\n",secTime);
     printf("h_ans[2] = %d\n",h_ans[2]);
 
+    printf("Creando archivo de la solucion secuencial...\n");
+    fprintf(f3, "%d\n" ,m1Row);
+    fprintf(f3, "%d\n" ,m2Col);
+    for (int i = 0; i < m1Row; i++) {
+      for (int j = 0; j < m2Col; j++) {
+        fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
+      }
+      fseek(f3, -1, SEEK_END);
+      fprintf(f3, "\n");
+    }
+    printf("Hecho!!!\n");
+
     //Asignacion de memoria en el Device
     if (cudaSuccess != cudaMalloc((void **) &d_m1, m1Size))
       printf("Error asignando memoria para d_m1\n");
@@ -129,15 +143,15 @@ int main(int argc, char** argv ){
     printf("h_ans[2] = %d\n",h_ans[2]);
 
     //Copia del resultado en el archivo de respuesta
-    printf("Creando archivo de la solucion...\n");
-    fprintf(f3, "%d\n" ,m1Row);
-    fprintf(f3, "%d\n" ,m2Col);
+    printf("Creando archivo de la solucion CUDA-global-mem...\n");
+    fprintf(f4, "%d\n" ,m1Row);
+    fprintf(f4, "%d\n" ,m2Col);
     for (int i = 0; i < m1Row; i++) {
       for (int j = 0; j < m2Col; j++) {
-        fprintf(f3, "%d," ,h_ans[i * m2Col + j]);
+        fprintf(f4, "%d," ,h_ans[i * m2Col + j]);
       }
-      fseek(f3, -1, SEEK_END);
-      fprintf(f3, "\n");
+      fseek(f4, -1, SEEK_END);
+      fprintf(f4, "\n");
     }
     printf("Hecho!!!\n");
 
