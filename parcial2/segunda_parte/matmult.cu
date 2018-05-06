@@ -63,7 +63,7 @@ int main(int argc, char** argv ){
   //Definicion de variables
   FILE *f1, *f2, *f3, *f4, *f5;
   double secTime, globalTime, sharedTime;
-  int *h_m1, *h_m2, *h_ans, *h_ansG, h_ansS;
+  int *h_m1, *h_m2, *h_ans, *h_ansG, *h_ansS;
   int *d_m1, *d_m2, *d_ansG, *d_ansS;
   int m1Row, m1Col, m2Row, m2Col; 
 
