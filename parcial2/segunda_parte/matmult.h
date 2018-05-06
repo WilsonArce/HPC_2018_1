@@ -41,7 +41,8 @@ void matGen(int size){
 
 	//Cierre de archivos
 	fclose(f1); fclose(f2);
-	printf("\rOK!!!\n");
+	fseek(f2, -1, SEEK_END);
+	printf("OK!!!\n");
 }
 
 void setAnsFile(const char* ansType, int m1Row, int m2Col, int* h_ans, FILE* f){
