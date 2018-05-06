@@ -139,11 +139,11 @@ int main(int argc, char** argv ){
     //Llamado al Kernel
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel (gMem)\n");
+      printf("Error en el llamado al kernel (global-mem)\n");
 
     //Copia de datos del Device al Host
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ans a h_ans (gMem)\n");
+      printf("Error copiando datos desde d_ans a h_ans (global-mem)\n");
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
 
@@ -156,11 +156,11 @@ int main(int argc, char** argv ){
     //Llamado al Kernel
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
     if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel (sMem)\n");
+      printf("Error en el llamado al kernel (shared-mem)\n");
 
     //Copia de datos del Device al Host
     if (cudaSuccess != cudaMemcpy(h_ans, d_ans, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ans a h_ans (sMem)\n");
+      printf("Error copiando datos desde d_ans a h_ans (shared-mem)\n");
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
