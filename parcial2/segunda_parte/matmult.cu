@@ -152,6 +152,10 @@ int main(int argc, char** argv ){
     ///////////////////////////////////////
 
     //Multiplicacion paralela con memoria compartida
+    cudaFree(d_ans);
+    if (cudaSuccess != cudaMalloc((void **) &d_ans, ansSize))
+      printf("Error asignando para d_ans\n");
+
     clock_t startSharedTime = clock();
     //Llamado al Kernel
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
