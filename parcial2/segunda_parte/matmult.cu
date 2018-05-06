@@ -107,13 +107,9 @@ int main(int argc, char** argv ){
     printf(" -cudaMalloc d_ansS: %s\n",cudaGetErrorString(cudaMalloc((void **) &d_ansS, ansSize)));
 
     //Copia de datos del Host al Device
-    printf("> Copia de datos H -> D... ");
+    printf("> Copia de datos H -> D...\n");
     printf(" -cudaMemcpy h_m1 -> d_m1: %s\n",cudaGetErrorString(cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice)));
-    // if (cudaSuccess != cudaMemcpy(d_m1, h_m1, m1Size, cudaMemcpyHostToDevice))
-    //   printf("Error copiando d_m1\n");
-	  if (cudaSuccess != cudaMemcpy(d_m2, h_m2, m2Size, cudaMemcpyHostToDevice))
-      printf("Error copiando d_m2\n");
-    printf("OK!!!\n");
+    printf(" -cudaMemcpy h_m2 -> d_m2: %s\n",cudaGetErrorString(cudaMemcpy(d_m2, h_m2, m1Size, cudaMemcpyHostToDevice)));
 
     printf("Tiempo de ejecucion:\n");
 
