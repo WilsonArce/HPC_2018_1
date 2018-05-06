@@ -171,7 +171,7 @@ int main(int argc, char** argv ){
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
-	  cudaFree(d_m1); cudaFree(d_m2); cudaFree(d_ansG); cudaFree(d_ansS):
+	  cudaFree(d_m1); cudaFree(d_m2); cudaFree(d_ansG); cudaFree(d_ansS);
 
   }
 
