@@ -121,7 +121,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_m2 -> d_m2: %s\n",cudaGetErrorString(err)); return 0;}
     printf("ok!!!\n");
 
-    printf("Tiempo de ejecucion:\n");
+    printf("Tiempos de ejecucion:\n");
 
     //Llamado a la multiplicacion secuencial
     clock_t startSecTime = clock();
@@ -143,12 +143,11 @@ int main(int argc, char** argv ){
     //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansG, threads);
-    if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel (global-mem)\n");
+    if(cudaSuccess != cudaGetLastError()){printf("Error en el llamado al kernel (global-mem)\n"); return 0;}
 
     //Copia de datos del Device al Host
-    if (cudaSuccess != cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost))
-      printf("Error copiando datos desde d_ansG a h_ansG (global-mem)\n");
+    err = cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy d_ansG -> h_ansG: %s\n",cudaGetErrorString(err)); return 0;}
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
     cudaDeviceSynchronize();
@@ -160,13 +159,11 @@ int main(int argc, char** argv ){
     //Multiplicacion paralela con memoria compartida
     clock_t startSharedTime = clock();
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansS, threads);
-    if(cudaSuccess != cudaGetLastError())
-      printf("Error en el llamado al kernel (shared-mem)\n");
+    if(cudaSuccess != cudaGetLastError()){printf("Error en el llamado al kernel (shared-mem)\n"); return 0;}
 
-    //Copia de datos del Device al Host
-    cudaError_t e = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
-    if (cudaSuccess != e)
-      printf("Error copiando datos desde d_ansS a h_ansS (shared-mem)\n (%s)\n",cudaGetErrorString(e));
+    //Copia de datos del Device al Hosterr = cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost);
+    err = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy d_ansS -> h_ansS: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
