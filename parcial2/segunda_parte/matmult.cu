@@ -150,7 +150,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
     cudaDeviceSynchronize();
 
-    setAnsFile("global-mem", m1Row, m2Col, h_ansG, f4);
+    if(m1Row <= 4) setAnsFile("global-mem", m1Row, m2Col, h_ansG, f4);
 
     ///////////////////////////////////////
 
@@ -165,7 +165,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
-    setAnsFile("shared-mem", m1Row, m2Col, h_ansS, f5);
+    if(m1Row <= 4) setAnsFile("shared-mem", m1Row, m2Col, h_ansS, f5);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
