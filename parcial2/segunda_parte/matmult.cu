@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "matmult.h"
-#define N 100
-#define tile 32
+#define tile 2
 
 //Multiplicacion secuencial
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C){
@@ -130,12 +129,11 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Generacion de archivo respuesta
-    //setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
+    setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
 
     /////////////////////////////////////
 
     int threads = m1Row;//Cantidad de hilos
-
     //Definicion de estructuras para cantidad de Hilos y Bloques
     dim3 blockDim(tile,tile);
 	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
@@ -152,7 +150,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
     cudaDeviceSynchronize();
 
-    //setAnsFile("global-mem", m1Row, m2Col, h_ansG, f4);
+    setAnsFile("global-mem", m1Row, m2Col, h_ansG, f4);
 
     ///////////////////////////////////////
 
@@ -167,7 +165,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
-    //setAnsFile("shared-mem", m1Row, m2Col, h_ansS, f5);
+    setAnsFile("shared-mem", m1Row, m2Col, h_ansS, f5);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
