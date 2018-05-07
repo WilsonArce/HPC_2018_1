@@ -129,7 +129,7 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Generacion de archivo respuesta
-    m1Row < 4 ? setAnsFile("secuencial", m1Row, m2Col, h_ans, f3);
+    m1Row < 4 ? setAnsFile("secuencial", m1Row, m2Col, h_ans, f3) : ;
 
     /////////////////////////////////////
 
