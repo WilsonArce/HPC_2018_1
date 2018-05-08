@@ -85,7 +85,7 @@ int main(int argc, char** argv ){
     int threads = m1Row;//Cantidad de hilos
     //Definicion de estructuras para cantidad de Hilos y Bloques
     dim3 blockDim(tile,tile);
-	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
+	  dim3 gridDim(ceil(threads/float(blockDim.x)), ceil(threads/float(blockDim.y)));
 
      clock_t startSharedTime = clock();
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ans, threads);
