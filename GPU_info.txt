@@ -103,8 +103,7 @@ NODE 04
 	Kernel driver in use: nvidia
 	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
 
-
-Mon May  7 20:08:59 2018       
+	Mon May  7 20:08:59 2018       
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
 |-------------------------------+----------------------+----------------------+
