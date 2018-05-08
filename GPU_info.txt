@@ -11,6 +11,24 @@ NODE 01
 	Kernel driver in use: nvidia
 	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
 
+	Mon May  7 19:59:06 2018       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 980     Off  | 00000000:01:00.0  On |                  N/A |
+| 30%   30C    P8    13W / 180W |     88MiB /  4040MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0      1223      G   /usr/lib/xorg/Xorg                            86MiB |
++-----------------------------------------------------------------------------+
+
 NODE 03
 01:00.0 VGA compatible controller: NVIDIA Corporation GM204 [GeForce GTX 980] (rev a1) (prog-if 00 [VGA controller])
 	Subsystem: ZOTAC International (MCO) Ltd. GM204 [GeForce GTX 980]
@@ -35,6 +53,30 @@ NODE 03
 	Capabilities: <access denied>
 	Kernel driver in use: nvidia
 	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+	Mon May  7 20:02:20 2018       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 980     Off  | 00000000:01:00.0  On |                  N/A |
+| 30%   32C    P8    13W / 180W |    370MiB /  4040MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce GTX 780     Off  | 00000000:02:00.0 N/A |                  N/A |
+| 26%   34C    P8    N/A /  N/A |      1MiB /  3022MiB |     N/A      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0       618      G   /usr/lib/xorg/Xorg                            86MiB |
+|    0      1297      G   /usr/lib/xorg/Xorg                           116MiB |
+|    0     16155      G   ...-token=5F99BB2580405B3AFA386C530BED85AD    81MiB |
+|    1                    Not Supported                                       |
++-----------------------------------------------------------------------------+
 
 NODE 04
 01:00.0 VGA compatible controller: NVIDIA Corporation GM204 [GeForce GTX 980] (rev a1) (prog-if 00 [VGA controller])
@@ -61,43 +103,4 @@ NODE 04
 	Kernel driver in use: nvidia
 	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
 
-Mon May  7 19:59:06 2018       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|===============================+======================+======================|
-|   0  GeForce GTX 980     Off  | 00000000:01:00.0  On |                  N/A |
-| 30%   30C    P8    13W / 180W |     88MiB /  4040MiB |      0%      Default |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory |
-|  GPU       PID   Type   Process name                             Usage      |
-|=============================================================================|
-|    0      1223      G   /usr/lib/xorg/Xorg                            86MiB |
-+-----------------------------------------------------------------------------+
-Mon May  7 20:02:20 2018       
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|===============================+======================+======================|
-|   0  GeForce GTX 980     Off  | 00000000:01:00.0  On |                  N/A |
-| 30%   32C    P8    13W / 180W |    370MiB /  4040MiB |      0%      Default |
-+-------------------------------+----------------------+----------------------+
-|   1  GeForce GTX 780     Off  | 00000000:02:00.0 N/A |                  N/A |
-| 26%   34C    P8    N/A /  N/A |      1MiB /  3022MiB |     N/A      Default |
-+-------------------------------+----------------------+----------------------+
-                                                                               
-+-----------------------------------------------------------------------------+
-| Processes:                                                       GPU Memory |
-|  GPU       PID   Type   Process name                             Usage      |
-|=============================================================================|
-|    0       618      G   /usr/lib/xorg/Xorg                            86MiB |
-|    0      1297      G   /usr/lib/xorg/Xorg                           116MiB |
-|    0     16155      G   ...-token=5F99BB2580405B3AFA386C530BED85AD    81MiB |
-|    1                    Not Supported                                       |
-+-----------------------------------------------------------------------------+
+
