@@ -1,0 +1,80 @@
+NODE 01
+01:00.0 VGA compatible controller: NVIDIA Corporation GM204 [GeForce GTX 980] (rev a1) (prog-if 00 [VGA controller])
+	Subsystem: ZOTAC International (MCO) Ltd. GM204 [GeForce GTX 980]
+	Flags: bus master, fast devsel, latency 0, IRQ 141
+	Memory at de000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at c0000000 (64-bit, prefetchable) [size=256M]
+	Memory at d0000000 (64-bit, prefetchable) [size=32M]
+	I/O ports at e000 [size=128]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+NODE 03
+01:00.0 VGA compatible controller: NVIDIA Corporation GM204 [GeForce GTX 980] (rev a1) (prog-if 00 [VGA controller])
+	Subsystem: ZOTAC International (MCO) Ltd. GM204 [GeForce GTX 980]
+	Flags: bus master, fast devsel, latency 0, IRQ 141
+	Memory at de000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at b0000000 (64-bit, prefetchable) [size=256M]
+	Memory at c0000000 (64-bit, prefetchable) [size=32M]
+	I/O ports at e000 [size=128]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+02:00.0 VGA compatible controller: NVIDIA Corporation GK110 [GeForce GTX 780] (rev a1) (prog-if 00 [VGA controller])
+	Subsystem: NVIDIA Corporation GK110 [GeForce GTX 780]
+	Flags: bus master, fast devsel, latency 0, IRQ 142
+	Memory at dc000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at c8000000 (64-bit, prefetchable) [size=128M]
+	Memory at d0000000 (64-bit, prefetchable) [size=32M]
+	I/O ports at d000 [size=128]
+	[virtual] Expansion ROM at dd000000 [disabled] [size=512K]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+NODE 04
+01:00.0 VGA compatible controller: NVIDIA Corporation GM204 [GeForce GTX 980] (rev a1) (prog-if 00 [VGA controller])
+	Subsystem: ZOTAC International (MCO) Ltd. GM204 [GeForce GTX 980]
+	Flags: bus master, fast devsel, latency 0, IRQ 141
+	Memory at de000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at b0000000 (64-bit, prefetchable) [size=256M]
+	Memory at c0000000 (64-bit, prefetchable) [size=32M]
+	I/O ports at e000 [size=128]
+	[virtual] Expansion ROM at 000c0000 [disabled] [size=128K]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+02:00.0 VGA compatible controller: NVIDIA Corporation GK110 [GeForce GTX 780] (rev a1) (prog-if 00 [VGA controller])
+	Subsystem: NVIDIA Corporation GK110 [GeForce GTX 780]
+	Flags: bus master, fast devsel, latency 0, IRQ 142
+	Memory at dc000000 (32-bit, non-prefetchable) [size=16M]
+	Memory at c8000000 (64-bit, prefetchable) [size=128M]
+	Memory at d0000000 (64-bit, prefetchable) [size=32M]
+	I/O ports at d000 [size=128]
+	[virtual] Expansion ROM at dd000000 [disabled] [size=512K]
+	Capabilities: <access denied>
+	Kernel driver in use: nvidia
+	Kernel modules: nvidiafb, nouveau, nvidia_drm, nvidia
+
+Mon May  7 19:59:06 2018       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 390.25                 Driver Version: 390.25                    |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 980     Off  | 00000000:01:00.0  On |                  N/A |
+| 30%   30C    P8    13W / 180W |     88MiB /  4040MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0      1223      G   /usr/lib/xorg/Xorg                            86MiB |
++-----------------------------------------------------------------------------+

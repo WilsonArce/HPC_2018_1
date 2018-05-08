@@ -1,0 +1,8 @@
+Creacion de archivos...
+ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 1.866312s
+> Memoria global (cuda) = 0.009343s
+ -cudaMemcpy d_ansS -> h_ansS: an illegal memory access was encountered
