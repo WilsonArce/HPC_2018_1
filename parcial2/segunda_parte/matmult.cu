@@ -167,6 +167,8 @@ int main(int argc, char** argv ){
 
     if(m1Row <= 4) setAnsFile("shared-mem", m1Row, m2Col, h_ansS, f5);
 
+    fclose(f1); fclose(f2); fclose(f3); fclose(f4); fclose(f5);
+
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
 	  cudaFree(d_m1); cudaFree(d_m2); cudaFree(d_ansG); cudaFree(d_ansS);
