@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "matmult.h"
-#define tile 16
+#define tile 32
 
 //Multiplicacion secuencial
 void sec_matMult(int* A, int aCol, int aRow, int* B, int bCol, int bRow, int* C){
