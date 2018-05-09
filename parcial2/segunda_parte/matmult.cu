@@ -160,7 +160,8 @@ int main(int argc, char** argv ){
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansS, threads);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call (shared-mem): %s\n",cudaGetErrorString(err)); return 0;}
-    //Copia de datos del Device al Hosterr = cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost);
+    
+    //Copia de datos del Device al Host
     err = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy d_ansS -> h_ansS: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
