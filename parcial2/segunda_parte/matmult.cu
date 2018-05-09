@@ -103,6 +103,8 @@ int main(int argc, char** argv ){
     readAllocFile(f1, h_m1, m1Row, m1Col);
     readAllocFile(f2, h_m2, m2Row, m2Col);
 
+    printf("m1 size: ",sizeof(h_m1));
+
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
     err = cudaMalloc((void **) &d_m1, m1Size);
