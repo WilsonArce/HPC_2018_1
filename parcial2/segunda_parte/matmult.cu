@@ -45,14 +45,14 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 	int sum = 0;
 	for(int m = 0; m < n/tile; ++m){
 
-    printf("test %d",row * n + m * tile + tx);
+    //printf("test %d",row * n + m * tile + tx);
 
-    //m1_s[ty][tx] = m1[row * n + m * tile + tx];
-    //m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
+    m1_s[ty][tx] = m1[row * n + m * tile + tx];
+    m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
     __syncthreads();
 
     for (int k = 0; k < tile; ++k) {
-      //sum += m1_s[ty][k] * m2_s[k][tx];
+      sum += m1_s[ty][k] * m2_s[k][tx];
     }
     __syncthreads();
   }
