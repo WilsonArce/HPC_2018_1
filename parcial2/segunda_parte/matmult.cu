@@ -172,7 +172,7 @@ int main(int argc, char** argv ){
     fclose(f1); fclose(f2); fclose(f3); fclose(f4); fclose(f5);
 
     //Liberacion de memoria
-    free(h_m1); free(h_m2); free(h_ans);
+    free(h_m1); free(h_m2); free(h_ans); free(h_ansG); free(h_ansS);
 	  cudaFree(d_m1); cudaFree(d_m2); cudaFree(d_ansG); cudaFree(d_ansS);
 
   }
