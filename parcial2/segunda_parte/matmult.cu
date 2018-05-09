@@ -44,12 +44,15 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 
 	int sum = 0;
 	for(int m = 0; m < n/tile; ++m){
-    m1_s[ty][tx] = m1[row * n + m * tile + tx];
-    m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
+
+    printf("test %d",row * n + m * tile + tx);
+
+    //m1_s[ty][tx] = m1[row * n + m * tile + tx];
+    //m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
     __syncthreads();
 
     for (int k = 0; k < tile; ++k) {
-      sum += m1_s[ty][k] * m2_s[k][tx];
+      //sum += m1_s[ty][k] * m2_s[k][tx];
     }
     __syncthreads();
   }
@@ -136,7 +139,7 @@ int main(int argc, char** argv ){
     int threads = m1Row;//Cantidad de hilos
     //Definicion de estructuras para cantidad de Hilos y Bloques
     dim3 blockDim(tile,tile);
-	  dim3 gridDim((int)ceil((float)threads/blockDim.x), (int)ceil((float)threads/blockDim.y));
+	  dim3 gridDim(ceil((float)threads/32.0, ceil((float)threads/32.0));
 
     //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
