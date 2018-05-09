@@ -141,7 +141,8 @@ int main(int argc, char** argv ){
     //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
     gbmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansG, threads);
-    if(cudaSuccess != cudaGetLastError()){printf("Error en el llamado al kernel (global-mem)\n"); return 0;}
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call (global-mem): %s\n",cudaGetErrorString(err)); return 0;}
 
     //Copia de datos del Device al Host
     err = cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost);
@@ -157,8 +158,8 @@ int main(int argc, char** argv ){
     //Multiplicacion paralela con memoria compartida
     clock_t startSharedTime = clock();
     sdmem_matMult<<<gridDim, blockDim>>>(d_m1, d_m2, d_ansS, threads);
-    if(cudaSuccess != cudaGetLastError()){printf("Error en el llamado al kernel (shared-mem)\n"); return 0;}
-
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call (shared-mem): %s\n",cudaGetErrorString(err)); return 0;}
     //Copia de datos del Device al Hosterr = cudaMemcpy(h_ansG, d_ansG, ansSize, cudaMemcpyDeviceToHost);
     err = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy d_ansS -> h_ansS: %s\n",cudaGetErrorString(err)); return 0;}
