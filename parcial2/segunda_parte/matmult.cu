@@ -139,7 +139,7 @@ int main(int argc, char** argv ){
     int threads = m1Row;//Cantidad de hilos
     //Definicion de estructuras para cantidad de Hilos y Bloques
     dim3 blockDim(tile,tile);
-	  dim3 gridDim(ceil((float)threads/32.0, ceil((float)threads/32.0));
+	  dim3 gridDim(ceil((float)threads/32.0), ceil((float)threads/32.0));
 
     //Multiplicacion paralela con memoria global
     clock_t startGlobalTime = clock();
