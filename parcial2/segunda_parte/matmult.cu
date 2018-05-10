@@ -66,7 +66,7 @@ void showMat(FILE* file, int n, int* ans){
 			//printf("%d ",ans[i * n + j]);
       fprintf(file, "%d," ,ans[i * n + j]);
 		}
-    fprintf(f, "\n");
+    fprintf(file, "\n");
 	}
 }
 
