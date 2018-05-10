@@ -156,7 +156,7 @@ int main(int argc, char** argv ){
     err = cudaMemcpy(h_ans, d_ans, dataSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -(gMem) cudaMemcpy d_ans -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
-    printf("> Memoria global (cuda) = %.6fs\n",globalTime);
+    printf("> Memoria global (cuda) = %.6fs = %dx\n",globalTime,secTime/globalTime);
     cudaDeviceSynchronize();
 
     if(matSize <= 4) showMat(matSize, h_ans);
