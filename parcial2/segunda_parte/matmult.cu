@@ -108,7 +108,7 @@ int main(int argc, char** argv ){
     printf("> Inicialización de matrices...");
     iniMat(h_m1, matSize);
     iniMat(h_m2, matSize);
-    if(matSize <= 4){ showMat(matSize, h_m1); showMat(matSize, h_m2)}
+    if(matSize <= 4){ showMat(matSize, h_m1); showMat(matSize, h_m2);}
     printf("ok!!!\n");
 
     //Asignacion de memoria en el Device
