@@ -142,7 +142,7 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Imprime respuesta
-    if(matSize <= 4) showMat(f, matSize, h_ans);
+    if(matSize <= 6) showMat(f, matSize, h_ans);
 
     /////////////////////////////////////
 
@@ -164,7 +164,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs => %dx\n",globalTime,int(secTime/globalTime));
     cudaDeviceSynchronize();
 
-    if(matSize <= 4) showMat(f, matSize, h_ans);
+    if(matSize <= 6) showMat(f, matSize, h_ans);
 
     ///////////////////////////////////////
 
@@ -180,7 +180,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
 
-    if(matSize <= 4) showMat(f, matSize, h_ans);
+    if(matSize <= 6) showMat(f, matSize, h_ans);
 
     fclose(f);
 
