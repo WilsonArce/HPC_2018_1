@@ -44,9 +44,6 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 
 	int sum = 0;
 	for(int m = 0; m < n/tile; ++m){
-
-    //printf("test %d",row * n + m * tile + tx);
-
     m1_s[ty][tx] = m1[row * n + m * tile + tx];
     m2_s[ty][tx] = m2[(m * tile + ty) * n + col];
     __syncthreads();
@@ -112,7 +109,7 @@ int main(int argc, char** argv ){
     printf("> Inicialización de matrices...");
     iniMat(h_m1, matSize);
     iniMat(h_m2, matSize);
-    if(matSize <= 4){ printf("\n"); showMat(f, matSize, h_m1); showMat(f, matSize, h_m2);}
+    if(matSize <= 6){ printf("\n"); showMat(f, matSize, h_m1); showMat(f, matSize, h_m2);}
     printf("ok!!!\n");
 
     //Asignacion de memoria en el Device
