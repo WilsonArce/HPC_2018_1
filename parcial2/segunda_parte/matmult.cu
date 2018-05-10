@@ -106,7 +106,7 @@ int main(int argc, char** argv ){
 
     //Inicializacion de matrices
     iniMat(h_m1, matSize);
-    iniMat(h_m2); matSize);
+    iniMat(h_m2, matSize);
 
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
