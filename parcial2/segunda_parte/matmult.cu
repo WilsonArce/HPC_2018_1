@@ -69,7 +69,7 @@ void showAns(const char* type, int n, int* ans){
 	}
 }
 
-int iniMat(int* mat, int n){
+int* iniMat(int* mat, int n){
   srand((unsigned) time(NULL));
 
   for (int i = 0; i < n; i++){
