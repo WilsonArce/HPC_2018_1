@@ -70,8 +70,6 @@ void showMat(int n, int* ans){
 }
 
 int* iniMat(int* mat, int n){
-  srand((unsigned) time(NULL));
-
   for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
 			mat[i * n + j] = rand() % 100;
@@ -82,6 +80,7 @@ int* iniMat(int* mat, int n){
 
 int main(int argc, char** argv ){
 
+  srand((unsigned) time(NULL));
   //Definicion de variables
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
