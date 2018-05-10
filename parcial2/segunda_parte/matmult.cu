@@ -60,7 +60,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 }
 
 void showMat(FILE* file, int n, int* ans){
-  printf("%d x %d\n",n,n);
+  fprintf(file, "%d x %d\n" ,n ,n);
   for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
 			//printf("%d ",ans[i * n + j]);
