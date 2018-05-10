@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "matmult.h"
-#define tile 32
+#define tile 2
 
 //Multiplicacion secuencial
 void sec_matMult(int* A, int* B, int* C, int size){
@@ -126,8 +126,6 @@ int main(int argc, char** argv ){
     /////////////////////////////////////
 
     //Definicion de estructuras para cantidad de Hilos y Bloques
-    if (2 < matSize < 6) tile = 2;
-    else tile = 32;
 
     dim3 blockDim(tile,tile);
 	  dim3 gridDim(ceil((float)matSize/blockDim.x), ceil((float)matSize/blockDim.y));
