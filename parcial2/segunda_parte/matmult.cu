@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "matmult.h"
-#define tile 32
+#define tile 2
 
 //Multiplicacion secuencial
 void sec_matMult(int* A, int* B, int* C, int size){
@@ -26,7 +26,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
     for (k = 0; k < n; k++) {
       sum += m1[j * n + k] * m2[k * n + i];
     }
-    ansG[j * n + i] = sum + 1;
+    ansG[j * n + i] = sum;
   }
 }
 
@@ -56,7 +56,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
     }
     __syncthreads();
   }
-  ansS[row * n + col] = sum + 2;
+  ansS[row * n + col] = sum;
 }
 
 void showMat(FILE* file, int n, int* ans){
