@@ -16,7 +16,7 @@ export CUDA_VISIBLE_DEVICES=0
 # size=512
 # n=10
 
-data=$(./matmult $1)
+data=$(./matmult 256)
 echo -n $data
 # for ((i = 128; i <= size; i*2));
 # do
