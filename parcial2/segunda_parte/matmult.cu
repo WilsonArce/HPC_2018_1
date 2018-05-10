@@ -64,7 +64,7 @@ void showMat(FILE* file, int n, int* ans){
   for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
 			//printf("%d ",ans[i * n + j]);
-      fprintf(f, "%d," ,ans[i * n + j]);
+      fprintf(file, "%d," ,ans[i * n + j]);
 		}
     printf("\n");
 	}
@@ -180,6 +180,8 @@ int main(int argc, char** argv ){
     printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
 
     if(matSize <= 4) showMat(f, matSize, h_ans);
+
+    fclose(f);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
