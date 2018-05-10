@@ -84,7 +84,7 @@ int main(int argc, char** argv ){
     printf("Cantidad de parametros incorrecta!!\n");
   }else{
     //Tamaño de las matrices
-    matSize = atoi(argv[1]));
+    matSize = atoi(argv[1]);
 
     //Definición de tamaño para asignar memoria
     size_t dataSize = matSize * matSize * sizeof(int);
@@ -121,7 +121,7 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Imprime respuesta
-    if(matSize <= 4) showAns("secuencial", size, h_ans);
+    if(matSize <= 4) showAns("secuencial", matSize, h_ans);
 
     /////////////////////////////////////
 
@@ -143,7 +143,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
     cudaDeviceSynchronize();
 
-    if(matSize <= 4) showAns("global-mem", size, h_ans);
+    if(matSize <= 4) showAns("global-mem", matSize, h_ans);
 
     ///////////////////////////////////////
 
@@ -159,7 +159,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
-    if(matSize <= 4) showAns("shared-mem", size, h_ans);
+    if(matSize <= 4) showAns("shared-mem", matSize, h_ans);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
