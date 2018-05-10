@@ -59,11 +59,12 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
   ansS[row * n + col] = sum + 2;
 }
 
-void showMat(int n, int* ans){
+void showMat(FILE* file, int n, int* ans){
   printf("%d x %d\n",n,n);
   for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
-			printf("%d ",ans[i * n + j]);
+			//printf("%d ",ans[i * n + j]);
+      fprintf(f, "%d," ,ans[i * n + j]);
 		}
     printf("\n");
 	}
@@ -82,10 +83,13 @@ int main(int argc, char** argv ){
 
   srand((unsigned) time(NULL));
   //Definicion de variables
+  FILE *f;
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
   int *d_m1, *d_m2, *d_ans;
   int matSize; 
+
+  f = fopen("ans.txt","w");
 
   cudaError_t err = cudaSuccess;
 
@@ -137,7 +141,7 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Imprime respuesta
-    if(matSize <= 4) showMat(matSize, h_ans);
+    if(matSize <= 4) showMat(f, matSize, h_ans);
 
     /////////////////////////////////////
 
@@ -159,7 +163,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs => %dx\n",globalTime,int(secTime/globalTime));
     cudaDeviceSynchronize();
 
-    if(matSize <= 4) showMat(matSize, h_ans);
+    if(matSize <= 4) showMat(f, matSize, h_ans);
 
     ///////////////////////////////////////
 
@@ -175,7 +179,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
 
-    if(matSize <= 4) showMat(matSize, h_ans);
+    if(matSize <= 4) showMat(f, matSize, h_ans);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
