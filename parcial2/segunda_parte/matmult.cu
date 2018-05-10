@@ -156,7 +156,7 @@ int main(int argc, char** argv ){
     err = cudaMemcpy(h_ans, d_ans, dataSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -(gMem) cudaMemcpy d_ans -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
-    printf("> Memoria global (cuda) = %.6fs = %dx\n",globalTime,int(secTime/globalTime));
+    printf("> Memoria global (cuda) = %.6fs => %dx\n",globalTime,int(secTime/globalTime));
     cudaDeviceSynchronize();
 
     if(matSize <= 4) showMat(matSize, h_ans);
@@ -173,7 +173,7 @@ int main(int argc, char** argv ){
     err = cudaMemcpy(h_ans, d_ans, dataSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -(sMem) cudaMemcpy d_ansS -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
-    printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
+    printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
 
     if(matSize <= 4) showMat(matSize, h_ans);
 
