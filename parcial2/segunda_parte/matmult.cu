@@ -154,7 +154,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess){ printf(" -Kernel call (shared-mem): %s\n",cudaGetErrorString(err)); return 0;}
     
     //Copia de datos del Device al Host
-    err = cudaMemcpy(h_ansS, d_ansS, ansSize, cudaMemcpyDeviceToHost);
+    err = cudaMemcpy(h_ans, d_ans, dataSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -(sMem) cudaMemcpy d_ansS -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
