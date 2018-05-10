@@ -26,7 +26,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
     for (k = 0; k < n; k++) {
       sum += m1[j * n + k] * m2[k * n + i];
     }
-    ansG[j * n + i] = sum;
+    ansG[j * n + i] = sum + 1;
   }
 }
 
@@ -56,7 +56,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
     }
     __syncthreads();
   }
-  ansS[row * n + col] = sum;
+  ansS[row * n + col] = sum + 2;
 }
 
 void showMat(int n, int* ans){
