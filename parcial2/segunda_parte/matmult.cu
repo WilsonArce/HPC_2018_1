@@ -127,7 +127,11 @@ int main(int argc, char** argv ){
 
     int matSize;//Cantidad de hilos
     //Definicion de estructuras para cantidad de Hilos y Bloques
-    dim3 blockDim(tile,tile);
+    if(2 > matSize < 6){
+      dim3 blockDim(2,2);
+    }else{
+      dim3 blockDim(tile,tile);
+    }
 	  dim3 gridDim(ceil((float)matSize/blockDim.x), ceil((float)matSize/blockDim.y));
 
     //Multiplicacion paralela con memoria global
