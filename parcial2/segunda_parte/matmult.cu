@@ -138,7 +138,7 @@ int main(int argc, char** argv ){
     sec_matMult(h_m1, h_m2, h_ans, matSize);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
     //printf("> Secuencial = %.6fs\n",secTime);
-    fprintf(f2, "[%.6f,", secTime);
+    fprintf(f2, "[%d,%.6f,",matSize, secTime);
 
     //Imprime respuesta
     if(matSize <= 6) showMat(f1, matSize, h_ans);
@@ -179,7 +179,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess){ printf(" -(sMem) cudaMemcpy d_ansS -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     //printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
-    fprintf(f2, "%.6f]", sharedTime);
+    fprintf(f2, "%.6f]\n", sharedTime);
 
     if(matSize <= 6) showMat(f1, matSize, h_ans);
 
