@@ -76,7 +76,7 @@ int main(int argc, char** argv ){
   double secTime, globalTime, sharedTime;
   int *h_m1, *h_m2, *h_ans;
   int *d_m1, *d_m2, *d_ans;
-  int matSize; 
+  int matSize = 6; 
 
   cudaError_t err = cudaSuccess;
 
@@ -126,7 +126,7 @@ int main(int argc, char** argv ){
     /////////////////////////////////////
 
     //Definicion de estructuras para cantidad de Hilos y Bloques
-    tile = (matSize < 6) ? 2 : 32;
+    tile = (2 < matSize < 6 ? 2 : 32;
 
     dim3 blockDim(tile,tile);
 	  dim3 gridDim(ceil((float)matSize/blockDim.x), ceil((float)matSize/blockDim.y));
