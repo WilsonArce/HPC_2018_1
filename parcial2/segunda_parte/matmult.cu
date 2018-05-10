@@ -69,6 +69,16 @@ void showAns(const char* type, int n, int* ans){
 	}
 }
 
+int iniMat(int* mat, int n){
+  srand((unsigned) time(NULL));
+
+  for (int i = 0; i < n; i++){
+		for (int j = 0; j < n; j++){
+			mat[i * n + j] = rand() % 100;
+		}
+	}
+  return mat;
+}
 
 int main(int argc, char** argv ){
 
@@ -93,6 +103,10 @@ int main(int argc, char** argv ){
     h_m1 = (int *)malloc(dataSize);
     h_m2 = (int *)malloc(dataSize);
     h_ans = (int *)malloc(dataSize);
+
+    //Inicializacion de matrices
+    iniMat(h_m1, matSize);
+    iniMat(h_m2); matSize);
 
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
