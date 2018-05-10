@@ -59,7 +59,7 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
   ansS[row * n + col] = sum;
 }
 
-void showAns(const char* type, int n, int* ans){
+void showMat(int n, int* ans){
   printf("%d x %d\n",n,n);
   for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
@@ -105,8 +105,11 @@ int main(int argc, char** argv ){
     h_ans = (int *)malloc(dataSize);
 
     //Inicializacion de matrices
+    printf("> Inicialización de matrices...");
     iniMat(h_m1, matSize);
     iniMat(h_m2, matSize);
+    if(matSize <= 4){ showMat(matSize, h_m1); showMat(matSize, h_m2)}
+    printf("ok!!!\n");
 
     //Asignacion de memoria en el Device
     printf("> Asignacion de memoria en el Device...");
@@ -135,7 +138,7 @@ int main(int argc, char** argv ){
     printf("> Secuencial = %.6fs\n",secTime);
 
     //Imprime respuesta
-    if(matSize <= 4) showAns("secuencial", matSize, h_ans);
+    if(matSize <= 4) showMat(matSize, h_ans);
 
     /////////////////////////////////////
 
@@ -157,7 +160,7 @@ int main(int argc, char** argv ){
     printf("> Memoria global (cuda) = %.6fs\n",globalTime);
     cudaDeviceSynchronize();
 
-    if(matSize <= 4) showAns("global-mem", matSize, h_ans);
+    if(matSize <= 4) showMat(matSize, h_ans);
 
     ///////////////////////////////////////
 
@@ -173,7 +176,7 @@ int main(int argc, char** argv ){
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     printf("> Memoria compartida (cuda) = %.6fs\n",sharedTime);
 
-    if(matSize <= 4) showAns("shared-mem", matSize, h_ans);
+    if(matSize <= 4) showMat(matSize, h_ans);
 
     //Liberacion de memoria
     free(h_m1); free(h_m2); free(h_ans);
