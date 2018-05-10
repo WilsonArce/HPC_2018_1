@@ -65,7 +65,7 @@ void showAns(const char* type, int n, int* ans){
 		for (int j = 0; j < n; j++){
 			printf("%d ",ans[i * n + j]);
 		}
-    printf("\n")
+    printf("\n");
 	}
 }
 
