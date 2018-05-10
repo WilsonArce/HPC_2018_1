@@ -12,9 +12,9 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRAR
 export CUDA_VISIBLE_DEVICES=0
 
 #./matmult $1
-file = ansTime.txt
-size = 1024
-n = 10
+file="ansTime.txt"
+size=1024
+n=10
 
 for ((i = 64; i <= size; i*2));
 do
