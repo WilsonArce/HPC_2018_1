@@ -23,6 +23,6 @@ do
   for ((j = 0; j < n; j++));
   do
     ans=($(./matmult $i))
-    echo -n $ans
+    echo $ans 
   done
 done
