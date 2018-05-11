@@ -26,6 +26,7 @@ fig1 = plt.gcf()
 secExeTime = [ans64[1], ans128[1], ans256[1], ans512[1], ans1024[1]]
 print secExeTime
 plt.axis([0.000000, 5, 64, 1024])
+plt.grid(True)
 plt.title('Secuential algorithm')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Matrix size (n x n)')
@@ -37,6 +38,7 @@ fig2 = plt.gcf()
 globalExeTime = [ans64[2], ans128[2], ans256[2], ans512[2], ans1024[2]]
 print globalExeTime
 plt.axis([0.000, 0.020, 64, 1024])
+plt.grid(True)
 plt.title('Global memory algorithm')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Matrix size (n x n)')
@@ -47,7 +49,8 @@ fig2.savefig('images/global.png', format="png")
 fig3 = plt.gcf()
 sharedExeTime = [ans64[3], ans128[3], ans256[3], ans512[3], ans1024[3]]
 print sharedExeTime
-plt.axis([0.000, 0.005, 64, 1024])
+plt.axis([0.000, 0.009, 64, 1024])
+plt.grid(True)
 plt.title('Shared memory algorithm')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Matrix size (n x n)')
