@@ -88,7 +88,7 @@ int main(int argc, char** argv ){
   int matSize; 
 
   f1 = fopen("ansMat.txt","w");
-  f2 = fopen("ansTime.txt","a+");
+  f2 = fopen("ansTime.txt","r+");
 
   cudaError_t err = cudaSuccess;
 
