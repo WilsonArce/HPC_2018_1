@@ -13,7 +13,7 @@ export CUDA_VISIBLE_DEVICES=0
 
 #./matmult $1
 # file="ansTime.txt"
-size=(128,256,512,1024)
+size=(128 256 512 1024)
 n=10
 
 # data=($(./matmult 256))
