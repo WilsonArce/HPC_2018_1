@@ -4,6 +4,14 @@
 ```{r, fig.width=6, fig.height=2.5}
 dygraph(nhtemp, main = "New Haven Temperatures", ylab = "Temp (F)") 
 ```
-**Aceleración básica**
+**Secuencial (sin aceleración)**
 
-![](images/plot1.png)
+![](images/secuential.png)
+
+**Usando memoria global**
+
+![](images/global.png)
+
+**Utilizando memoria compartida y global**
+
+![](images/shared.png)
