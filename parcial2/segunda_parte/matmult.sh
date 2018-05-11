@@ -24,6 +24,6 @@ do
   for ((j = 0; j < n; j++));
   do
     ANS=($(./matmult $i))
-    echo $ans 
+    echo ${ANS[@]}
   done
 done
