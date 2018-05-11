@@ -17,7 +17,7 @@ declare -a OUT
 declare -a ANS
 
 size=(128 256 512 1024)
-n=10
+n=4
 
 # data=($(./matmult 256))
 # echo "${data[0]}"
@@ -38,4 +38,5 @@ do
   ANS[3]=${ANS[3]}/$n
   ANS[4]=${ANS[4]}/$n
   #echo ${ANS[@]}
+  echo ""
 done
