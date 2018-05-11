@@ -4,7 +4,7 @@
 
 Hace uso solamente de la CPU ejecutando una operación por ciclo de reloj. Depende su rendimiento solo de la complejidad del algoritmo.
 
-Existe la posibilidad de utilizar los nucleos del procesador para mejorar su rendimiento haciendolo de manera paralela, limitada por dicha cantidad de nucleos.
+Existe la posibilidad de utilizar los nucleos del procesador para mejorar su rendimiento haciendolo de manera paralela. Limitado por dicha cantidad de nucleos.
 
 ```
 void sec_matMult(int* A, int* B, int* C, int size){
@@ -22,6 +22,9 @@ void sec_matMult(int* A, int* B, int* C, int size){
 ![](images/secuential.png)
 
 **Usando memoria global (CUDA)**
+
+Esta implementación hace uso de la tecnología de las GPU, las cuales tienen la capacidad de hacer una cantidad enorme de calculos de forma paralela ya que posee millones de hilos, donde cada uno se ocupa de una tarea. 
+
 ```
 __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 	int k, sum = 0;
