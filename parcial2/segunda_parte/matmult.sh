@@ -29,7 +29,7 @@ do
     OUT=($(./matmult $i))
     for ((j = 1; j < 4; j++))
     do
-      aux=((OUT[$j]+1))
+      aux=((${OUT[$j]}+1))
       echo ${OUT[$j]}
     done
   done
