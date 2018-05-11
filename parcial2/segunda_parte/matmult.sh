@@ -29,7 +29,8 @@ do
     OUT=($(./matmult $i))
     for ((j = 1; j < 4; j++))
     do
-      ((ANS[$j]+=OUT[$j]))
+      aux=((OUT[$j]+1))
+      echo ${OUT[$j]}
     done
   done
   ANS[0]=${OUT[0]}
