@@ -60,5 +60,8 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
   ansS[row * n + col] = sum;
 }
 ```
-
 ![](images/shared.png)
+
+**Aceleración del algoritmo**
+
+![](images/speed-up.png)
