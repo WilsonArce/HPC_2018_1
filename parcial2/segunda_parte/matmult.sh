@@ -37,5 +37,5 @@ do
   ANS[2]=${ANS[2]}/$n
   ANS[3]=${ANS[3]}/$n
   ANS[4]=${ANS[4]}/$n
-  echo ${ANS[1]}
+  echo ${ANS[@]}
 done
