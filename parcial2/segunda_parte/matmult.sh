@@ -17,8 +17,8 @@ declare -a OUT
 declare -a ANS
 
 aux=0
-size=(128 256 512 1024)
-n=4
+size=(64 128 256 512 1024)
+n=10
 
 # data=($(./matmult 256))
 # echo "${data[0]}"
