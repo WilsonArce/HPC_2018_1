@@ -27,16 +27,6 @@ do
   for ((j = 0; j < n; j++));
   do
     OUT=($(./matmult $i))
-    for ((j = 1; j < 4; j++))
-    do
-      ANS[j]+=OUT[j]
-    done
+    echo ${OUT[@]}
   done
-  ANS[0]=${OUT[0]}
-  ANS[1]=${ANS[1]/$n}
-  ANS[2]=${ANS[2]/$n}
-  ANS[3]=${ANS[3]/$n}
-  ANS[4]=${ANS[4]/$n}
-  #echo ${ANS[@]}
-  echo ""
 done
