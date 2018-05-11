@@ -16,7 +16,7 @@ export CUDA_VISIBLE_DEVICES=0
 declare -a OUT
 declare -a ANS
 
-aux
+declare -a aux
 size=(128 256 512 1024)
 n=4
 
