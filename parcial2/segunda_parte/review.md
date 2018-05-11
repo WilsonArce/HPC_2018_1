@@ -16,7 +16,7 @@
 ```
 ![](images/secuential.png)
 
-**Usando memoria global**
+**Usando memoria global (CUDA)**
 ```
 __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 	int k, sum = 0;
@@ -32,9 +32,9 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 ```
 ![](images/global.png)
 
-**Utilizando memoria compartida y global**
+**Utilizando memoria compartida (CUDA)**
 
-El suso de memoria compartida permite un acceso rapido a datos previamente almacenados en esta. Aunque es de menor capacidad que la memoria global, facilia la tarea de acceder a datos que se utilizan en repetidas ocaciones y que sería mas costoso hacerlo desde la memoria global.
+El uso de memoria compartida permite un acceso rapido a datos previamente almacenados en esta. Aunque es de menor capacidad que la memoria global, facilita la tarea de acceder a datos que se utilizan en repetidas ocaciones y que sería mas costoso hacerlo desde la memoria global.
 
 ```
 __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
