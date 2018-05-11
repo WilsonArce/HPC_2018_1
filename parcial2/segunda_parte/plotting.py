@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+plt.title('Algoritmo secuencial')
 plt.plot([1,2,3,4])
 plt.ylabel('some numbers')
 fig1 = plt.gcf()
