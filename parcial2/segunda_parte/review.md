@@ -2,6 +2,10 @@
 
 **Algoritmo secuencial**
 
+Hace uso solamente de la CPU ejecutando una operación por ciclo de reloj. Depende su rendimiento solo de la complejidad del algoritmo.
+
+Existe la posibilidad de utilizar los nucleos del procesador para mejorar su rendimiento haciendolo de manera paralela, limitada por dicha cantidad de nucleos.
+
 ```void sec_matMult(int* A, int* B, int* C, int size){
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
@@ -36,7 +40,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 
 El uso de memoria compartida permite un acceso rapido a datos previamente almacenados en esta. Aunque es de menor capacidad que la memoria global, facilita la tarea de acceder a datos que se utilizan en repetidas ocaciones y que sería mas costoso hacerlo desde la memoria global.
 
-Adicional a esta ventaja, se puede aumentar el rendimiento sacando provecho de las caracteristicas de GPU, definiendo una cantidad de hilos específica para cada bloque que se ejecutarán de manera simultanea de acuerdo a la cantidad de hilos que la tarjeta puede ejecutar en un warp.
+Adicional a esta ventaja, se puede aumentar el rendimiento sacando provecho de las caracteristicas de GPU, definiendo una cantidad de hilos específica para cada bloque que se ejecutarán de manera simultanea de acuerdo a la cantidad de hilos que la tarjeta puede ejecutar en un warp, que en este caso es de 32.
 
 ```
 __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
