@@ -27,7 +27,7 @@ do
   do
     OUT=($(./matmult $i))
     ANS[0]=${OUT[0]}
-    ${$ANS[1]}+=${OUT[1]}
+    "${ANS[1]}+=${OUT[1]}"
     ANS[2]+=${OUT[2]}
     ANS[3]+=${OUT[3]}
     ANS[4]+=${OUT[4]}
