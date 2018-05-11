@@ -33,6 +33,7 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 ![](images/global.png)
 
 **Utilizando memoria compartida y global**
+El suso de memoria compartida permite un acceso rapido a datos previamente almacenados en esta. Aunque es de menor capacidad que la memoria global, facilia la tarea de acceder a datos que se utilizan en repetidas ocaciones y que sería mas costoso hacerlo desde la memoria global.
 
 ```
 __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
