@@ -26,7 +26,7 @@ for i in "${size[@]}"
 do
   for ((j = 0; j < n; j++));
   do
-    OUT=($(./matmult $i))
-    echo ${OUT[@]}
+    ./matmult $i
+    #echo ${OUT[@]}
   done
 done
