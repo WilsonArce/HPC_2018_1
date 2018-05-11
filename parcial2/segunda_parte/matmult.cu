@@ -107,37 +107,37 @@ int main(int argc, char** argv ){
     h_ans = (int *)malloc(dataSize);
 
     //Inicializacion de matrices
-    //printf("> Inicialización de matrices...");
+    printf("> Inicialización de matrices...");
     iniMat(h_m1, matSize);
     iniMat(h_m2, matSize);
     if(matSize <= 6){ printf("\n"); showMat(f1, matSize, h_m1); showMat(f1, matSize, h_m2);}
-    //printf("ok!!!\n");
+    printf("ok!!!\n");
 
     //Asignacion de memoria en el Device
-    //printf("> Asignacion de memoria en el Device...");
+    printf("> Asignacion de memoria en el Device...");
     err = cudaMalloc((void **) &d_m1, dataSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_m1: %s\n",cudaGetErrorString(err)); return 0;}
     err = cudaMalloc((void **) &d_m2, dataSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_m2: %s\n",cudaGetErrorString(err)); return 0;}
     err = cudaMalloc((void **) &d_ans, dataSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_ans: %s\n",cudaGetErrorString(err)); return 0;}
-    //printf("ok!!!\n");
+    printf("ok!!!\n");
 
     //Copia de datos del Host al Device
-    //printf("> Copia de datos H -> D...");
+    printf("> Copia de datos H -> D...");
     err = cudaMemcpy(d_m1, h_m1, dataSize, cudaMemcpyHostToDevice);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_m1 -> d_m1: %s\n",cudaGetErrorString(err)); return 0;}
     err = cudaMemcpy(d_m2, h_m2, dataSize, cudaMemcpyHostToDevice);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_m2 -> d_m2: %s\n",cudaGetErrorString(err)); return 0;}
-    //printf("ok!!!\n");
+    printf("ok!!!\n");
 
-    //printf("Tiempos de ejecucion:\n");
+    printf("Tiempos de ejecucion:\n");
 
     //Llamado a la multiplicacion secuencial
     clock_t startSecTime = clock();
     sec_matMult(h_m1, h_m2, h_ans, matSize);
     secTime = ((double)(clock()-startSecTime))/CLOCKS_PER_SEC;
-    //printf("> Secuencial = %.6fs\n",secTime);
+    printf("> Secuencial = %.6fs\n",secTime);
 
     //Imprime respuesta
     if(matSize <= 6) showMat(f1, matSize, h_ans);
@@ -160,7 +160,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess){ printf(" -(gMem) cudaMemcpy d_ans -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     globalTime = ((double)(clock()-startGlobalTime))/CLOCKS_PER_SEC;
     cudaDeviceSynchronize();
-    //printf("> Memoria global (cuda) = %.6fs => %dx\n",globalTime,int(secTime/globalTime));
+    printf("> Memoria global (cuda) = %.6fs => %dx\n",globalTime,int(secTime/globalTime));
     
     if(matSize <= 6) showMat(f1, matSize, h_ans);
 
@@ -176,7 +176,7 @@ int main(int argc, char** argv ){
     err = cudaMemcpy(h_ans, d_ans, dataSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -(sMem) cudaMemcpy d_ansS -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
-    //printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
+    printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
     fprintf(f2,"%d,%.6f,%.6f,%.6f",matSize, secTime, globalTime, sharedTime);
 
     if(matSize <= 6) showMat(f1, matSize, h_ans);
