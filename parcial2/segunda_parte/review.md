@@ -6,7 +6,8 @@ Hace uso solamente de la CPU ejecutando una operación por ciclo de reloj. Depen
 
 Existe la posibilidad de utilizar los nucleos del procesador para mejorar su rendimiento haciendolo de manera paralela, limitada por dicha cantidad de nucleos.
 
-```void sec_matMult(int* A, int* B, int* C, int size){
+```
+void sec_matMult(int* A, int* B, int* C, int size){
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
         int sum = 0;
