@@ -76,4 +76,4 @@ plt.plot(matSize, speedUpGlobal, matSize, speedUpShared)
 plt.legend(('Global-mem','Shared-mem'),
            loc='upper right')
 plt.show()
-fig3.savefig('images/speed-up.png', format="png")
+fig4.savefig('images/speed-up.png', format="png")
