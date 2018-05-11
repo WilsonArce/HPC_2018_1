@@ -13,12 +13,12 @@ export CUDA_VISIBLE_DEVICES=0
 
 #./matmult $1
 # file="ansTime.txt"
-size=512
-n=2
+size=(128,256,512,1024)
+n=10
 
 # data=($(./matmult 256))
 # echo "${data[0]}"
-for ((i = 128; i <= size; i++i));
+for i in "${size[@]}";
 do
   for ((j = 0; j < n; j++));
   do
