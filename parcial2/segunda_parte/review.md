@@ -6,4 +6,4 @@ dygraph(nhtemp, main = "New Haven Temperatures", ylab = "Temp (F)")
 ```
 **Aceleración básica**
 
-![](images/table%20plot1.png)
+![](images/plot1.png)
