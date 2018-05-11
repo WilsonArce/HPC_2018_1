@@ -16,7 +16,7 @@ export CUDA_VISIBLE_DEVICES=0
 declare -a OUT
 declare -a ANS
 
-declare -a aux
+aux=0
 size=(128 256 512 1024)
 n=4
 
@@ -29,8 +29,7 @@ do
     OUT=($(./matmult $i))
     for ((j = 1; j < 4; j++))
     do
-      (($aux+=1))
-      echo $aux
+      ANS[j]+=OUT[j]
     done
   done
   ANS[0]=${OUT[0]}
