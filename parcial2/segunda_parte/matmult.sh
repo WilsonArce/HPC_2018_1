@@ -22,7 +22,7 @@ for ((i = 128; i <= size; i*2));
 do
   for ((j = 0; j < n; j++));
   do
-    echo $i $n
+    echo $i $j $n
     ./matmult $i
   done
 done
