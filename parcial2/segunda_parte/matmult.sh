@@ -13,7 +13,9 @@ export CUDA_VISIBLE_DEVICES=0
 
 #./matmult $1
 # file="ansTime.txt"
+declare -a OUT
 declare -a ANS
+
 size=(128 256 512 1024)
 n=10
 
@@ -23,7 +25,17 @@ for i in "${size[@]}"
 do
   for ((j = 0; j < n; j++));
   do
-    ANS=($(./matmult $i))
-    echo ${ANS[0]}
+    OUT=($(./matmult $i))
+    ANS[1]+=${OUT[1]}
+    ANS[2]+=${OUT[2]}
+    ANS[3]+=${OUT[3]}
+    ANS[4]+=${OUT[4]}
+    #echo ${ANS[0]}
   done
+  ANS[0]=${OUT[0]}
+  ANS[1]=${ANS[1]}/$n
+  ANS[2]=${ANS[2]}/$n
+  ANS[3]=${ANS[3]}/$n
+  ANS[4]=${ANS[4]}/$n
+  echo ${ANS[1]}
 done
