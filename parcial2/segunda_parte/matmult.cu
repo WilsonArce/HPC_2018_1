@@ -177,7 +177,7 @@ int main(int argc, char** argv ){
     if(err != cudaSuccess){ printf(" -(sMem) cudaMemcpy d_ansS -> h_ans: %s\n",cudaGetErrorString(err)); return 0;}
     sharedTime = ((double)(clock()-startSharedTime))/CLOCKS_PER_SEC;
     //printf("> Memoria compartida (cuda) = %.6fs => %dx\n",sharedTime,int(secTime/sharedTime));
-    fprintf(f2,"[%d,%.6f,%.6f,%.6f]\n",matSize, secTime, globalTime, sharedTime);
+    fprintf(f2,"%d %.6f %.6f %.6f\n",matSize, secTime, globalTime, sharedTime);
 
     if(matSize <= 6) showMat(f1, matSize, h_ans);
 
