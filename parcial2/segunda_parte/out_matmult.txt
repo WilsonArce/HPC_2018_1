@@ -1,0 +1,350 @@
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000544s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000544s
+> Memoria global (cuda) = 0.000042s => 12x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000551s
+> Memoria global (cuda) = 0.000042s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000544s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000544s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000548s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000549s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000543s
+> Memoria global (cuda) = 0.000041s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000543s
+> Memoria global (cuda) = 0.000040s => 13x
+> Memoria compartida (cuda) = 0.000023s => 23x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.000544s
+> Memoria global (cuda) = 0.000042s => 12x
+> Memoria compartida (cuda) = 0.000022s => 24x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004711s
+> Memoria global (cuda) = 0.000082s => 57x
+> Memoria compartida (cuda) = 0.000040s => 117x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004748s
+> Memoria global (cuda) = 0.000084s => 56x
+> Memoria compartida (cuda) = 0.000040s => 118x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004641s
+> Memoria global (cuda) = 0.000082s => 56x
+> Memoria compartida (cuda) = 0.000039s => 119x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.005372s
+> Memoria global (cuda) = 0.000081s => 66x
+> Memoria compartida (cuda) = 0.000040s => 134x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004705s
+> Memoria global (cuda) = 0.000083s => 56x
+> Memoria compartida (cuda) = 0.000042s => 112x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004636s
+> Memoria global (cuda) = 0.000081s => 57x
+> Memoria compartida (cuda) = 0.000040s => 115x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004755s
+> Memoria global (cuda) = 0.000082s => 57x
+> Memoria compartida (cuda) = 0.000039s => 121x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004750s
+> Memoria global (cuda) = 0.000082s => 57x
+> Memoria compartida (cuda) = 0.000040s => 118x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004764s
+> Memoria global (cuda) = 0.000084s => 56x
+> Memoria compartida (cuda) = 0.000040s => 119x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.004639s
+> Memoria global (cuda) = 0.000081s => 57x
+> Memoria compartida (cuda) = 0.000040s => 115x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.050257s
+> Memoria global (cuda) = 0.000324s => 155x
+> Memoria compartida (cuda) = 0.000132s => 380x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.047014s
+> Memoria global (cuda) = 0.000327s => 143x
+> Memoria compartida (cuda) = 0.000135s => 348x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.048810s
+> Memoria global (cuda) = 0.000337s => 144x
+> Memoria compartida (cuda) = 0.000132s => 369x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.047920s
+> Memoria global (cuda) = 0.000325s => 147x
+> Memoria compartida (cuda) = 0.000135s => 354x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.048226s
+> Memoria global (cuda) = 0.000326s => 147x
+> Memoria compartida (cuda) = 0.000134s => 359x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.048855s
+> Memoria global (cuda) = 0.000340s => 143x
+> Memoria compartida (cuda) = 0.000135s => 361x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.048289s
+> Memoria global (cuda) = 0.000331s => 145x
+> Memoria compartida (cuda) = 0.000134s => 360x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.052949s
+> Memoria global (cuda) = 0.000350s => 151x
+> Memoria compartida (cuda) = 0.000135s => 392x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.048953s
+> Memoria global (cuda) = 0.000326s => 150x
+> Memoria compartida (cuda) = 0.000133s => 368x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.049430s
+> Memoria global (cuda) = 0.000332s => 148x
+> Memoria compartida (cuda) = 0.000135s => 366x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.472197s
+> Memoria global (cuda) = 0.001835s => 257x
+> Memoria compartida (cuda) = 0.000704s => 670x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.463228s
+> Memoria global (cuda) = 0.001865s => 248x
+> Memoria compartida (cuda) = 0.000700s => 661x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.475887s
+> Memoria global (cuda) = 0.001854s => 256x
+> Memoria compartida (cuda) = 0.000722s => 659x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.471114s
+> Memoria global (cuda) = 0.001850s => 254x
+> Memoria compartida (cuda) = 0.000722s => 652x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.470907s
+> Memoria global (cuda) = 0.001860s => 253x
+> Memoria compartida (cuda) = 0.000720s => 654x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.472499s
+> Memoria global (cuda) = 0.001866s => 253x
+> Memoria compartida (cuda) = 0.000704s => 671x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.470836s
+> Memoria global (cuda) = 0.001895s => 248x
+> Memoria compartida (cuda) = 0.000722s => 652x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.471551s
+> Memoria global (cuda) = 0.001854s => 254x
+> Memoria compartida (cuda) = 0.000700s => 673x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.463014s
+> Memoria global (cuda) = 0.001861s => 248x
+> Memoria compartida (cuda) = 0.000697s => 664x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 0.463867s
+> Memoria global (cuda) = 0.001846s => 251x
+> Memoria compartida (cuda) = 0.000719s => 645x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.815784s
+> Memoria global (cuda) = 0.012487s => 305x
+> Memoria compartida (cuda) = 0.004432s => 860x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 4.969316s
+> Memoria global (cuda) = 0.012541s => 396x
+> Memoria compartida (cuda) = 0.004319s => 1150x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.799623s
+> Memoria global (cuda) = 0.012531s => 303x
+> Memoria compartida (cuda) = 0.004334s => 876x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 4.547115s
+> Memoria global (cuda) = 0.012462s => 364x
+> Memoria compartida (cuda) = 0.004430s => 1026x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 4.431555s
+> Memoria global (cuda) = 0.012599s => 351x
+> Memoria compartida (cuda) = 0.004362s => 1015x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.856475s
+> Memoria global (cuda) = 0.012482s => 308x
+> Memoria compartida (cuda) = 0.004451s => 866x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 4.468594s
+> Memoria global (cuda) = 0.012512s => 357x
+> Memoria compartida (cuda) = 0.004329s => 1032x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.849483s
+> Memoria global (cuda) = 0.012533s => 307x
+> Memoria compartida (cuda) = 0.004331s => 888x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.771939s
+> Memoria global (cuda) = 0.012484s => 302x
+> Memoria compartida (cuda) = 0.004430s => 851x
+> Inicialización de matrices...ok!!!
+> Asignacion de memoria en el Device...ok!!!
+> Copia de datos H -> D...ok!!!
+Tiempos de ejecucion:
+> Secuencial = 3.793764s
+> Memoria global (cuda) = 0.012521s => 302x
+> Memoria compartida (cuda) = 0.004329s => 876x
