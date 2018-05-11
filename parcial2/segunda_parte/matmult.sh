@@ -26,6 +26,7 @@ do
   for ((j = 0; j < n; j++));
   do
     OUT=($(./matmult $i))
+    ANS[0]+=${OUT[0]}
     ANS[1]+=${OUT[1]}
     ANS[2]+=${OUT[2]}
     ANS[3]+=${OUT[3]}
