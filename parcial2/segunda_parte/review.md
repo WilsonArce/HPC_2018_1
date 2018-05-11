@@ -64,4 +64,4 @@ __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 
 **Aceleración del algoritmo**
 
-![](images/speed-up.png)
+![](images/speed_up.png)
