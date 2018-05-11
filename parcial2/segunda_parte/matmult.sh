@@ -22,7 +22,7 @@ for i in "${size[@]}"
 do
   for ((j = 0; j < n; j++));
   do
-    echo $i $j $n
-    ./matmult $i
+    ans=(./matmult $i)
+    echo -n $ans
   done
 done
