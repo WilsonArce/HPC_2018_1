@@ -22,7 +22,7 @@ n=4
 
 # data=($(./matmult 256))
 # echo "${data[0]}"
-rm {"ansTime.txt"}
+rm "ansTime.txt"
 for i in "${size[@]}"
 do
   for ((j = 0; j < n; j++));
