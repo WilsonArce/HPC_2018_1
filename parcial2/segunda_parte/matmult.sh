@@ -33,10 +33,10 @@ do
     echo ${ANS[@]}
   done
   ANS[0]=${OUT[0]}
-  ANS[1]=${ANS[1]}/$n
-  ANS[2]=${ANS[2]}/$n
-  ANS[3]=${ANS[3]}/$n
-  ANS[4]=${ANS[4]}/$n
+  ANS[1]=${ANS[1]/$n}
+  ANS[2]=${ANS[2]/$n}
+  ANS[3]=${ANS[3]/$n}
+  ANS[4]=${ANS[4]/$n}
   #echo ${ANS[@]}
   echo ""
 done
