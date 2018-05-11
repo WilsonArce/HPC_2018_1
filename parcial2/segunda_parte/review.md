@@ -1,13 +1,7 @@
 ## Aceleración del algoritmo para multiplicar dos matrices cuadradas
 
 **Algoritmo secuencial**
-<style>
-  .col2 {
-    columns: 2 200px;         /* number of columns and width in pixels*/
-    -webkit-columns: 2 200px; /* chrome, safari */
-    -moz-columns: 2 200px;    /* firefox */
-  }
-<div class="col2">
+
 ```void sec_matMult(int* A, int* B, int* C, int size){
     for (int i = 0; i < size; i++) {
       for (int j = 0; j < size; j++) {
@@ -20,9 +14,7 @@
     }
   }
 ```
-  ![](images/secuential.png)
-</div>
-</style>
+![](images/secuential.png)
 
 **Usando memoria global**
 ```
