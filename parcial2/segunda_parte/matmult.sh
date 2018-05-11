@@ -18,7 +18,7 @@ n=10
 
 # data=($(./matmult 256))
 # echo "${data[0]}"
-for i in $size
+for i in "${size[@}"
 do
   for ((j = 0; j < n; j++));
   do
