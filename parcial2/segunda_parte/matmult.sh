@@ -20,7 +20,7 @@ export CUDA_VISIBLE_DEVICES=0
 # size=(64 128 256 512 1024)
 # n=10
 
-# rm "ansTime.txt"
+rm "ansTime.txt"
 # for i in "${size[@]}"
 # do
 #   for ((j = 0; j < n; j++));
