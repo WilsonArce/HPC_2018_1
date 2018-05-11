@@ -36,6 +36,8 @@ __global__ void gbmem_matMult(int* m1, int* m2, int* ansG, int n){
 
 El uso de memoria compartida permite un acceso rapido a datos previamente almacenados en esta. Aunque es de menor capacidad que la memoria global, facilita la tarea de acceder a datos que se utilizan en repetidas ocaciones y que sería mas costoso hacerlo desde la memoria global.
 
+Adicional a esta ventaja, se puede aumentar el rendimiento sacando provecho de las caracteristicas de GPU, definiendo una cantidad de hilos específica para cada bloque que se ejecutarán de manera simultanea de acuerdo a la cantidad de hilos que la tarjeta puede ejecutar en un warp.
+
 ```
 __global__ void sdmem_matMult(int* m1, int* m2, int* ansS, int n){
 
