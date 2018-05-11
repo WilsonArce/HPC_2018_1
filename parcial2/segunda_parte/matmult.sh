@@ -30,12 +30,12 @@ do
     ANS[2]+=${OUT[2]}
     ANS[3]+=${OUT[3]}
     ANS[4]+=${OUT[4]}
-    #echo ${ANS[0]}
+    echo ${ANS[@]}
   done
   ANS[0]=${OUT[0]}
   ANS[1]=${ANS[1]}/$n
   ANS[2]=${ANS[2]}/$n
   ANS[3]=${ANS[3]}/$n
   ANS[4]=${ANS[4]}/$n
-  echo ${ANS[@]}
+  #echo ${ANS[@]}
 done
