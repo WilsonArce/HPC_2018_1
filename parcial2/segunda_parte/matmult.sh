@@ -12,7 +12,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRAR
 export CUDA_VISIBLE_DEVICES=0
 
 #./matmult $1
-# file="ansTime.txt"
+
 declare -a OUT
 declare -a ANS
 
@@ -20,14 +20,11 @@ aux=0
 size=(64 128 256 512 1024)
 n=10
 
-# data=($(./matmult 256))
-# echo "${data[0]}"
 rm "ansTime.txt"
 for i in "${size[@]}"
 do
   for ((j = 0; j < n; j++));
   do
     ./matmult $i
-    #echo ${OUT[@]}
   done
 done
