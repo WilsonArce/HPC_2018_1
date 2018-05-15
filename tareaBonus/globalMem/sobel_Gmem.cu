@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <opencv2/opencv.hpp>
+#include <cuda.h>
 
 using namespace cv;
 using namespace std;
