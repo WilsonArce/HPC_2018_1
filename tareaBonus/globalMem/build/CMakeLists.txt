@@ -14,6 +14,6 @@ find_package( OpenCV REQUIRED )
 find_package( CUDA REQUIRED )
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS}; -O3 -arch=sm_52 -std=c++11 )
 cuda_add_executable( sobel_Gmem ../src/sobel_Gmem.cu )
-target_link_libraries( ../src/sobel_Gmem ${OpenCV_LIBS} )
+target_link_libraries( sobel_Gmem ${OpenCV_LIBS} )
 
 
