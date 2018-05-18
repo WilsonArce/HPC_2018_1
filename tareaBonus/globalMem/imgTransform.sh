@@ -11,22 +11,22 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRARY_PA
 
 export CUDA_VISIBLE_DEVICES=0
 
-#./sobel_GCSmem images/512x512.jpg
+./sobel_GCSmem images/7680x5022.jpg
 
-FILES=../images/*
-n=20
+# FILES=../images/*
+# n=20
 
-for f in $FILES
-do
-  file=${f##*/}
-  echo -n ${file%.*}","
-  for ((i = 1; i <= n; i++));
-  do
-    ./sobel_Gmem $f
-    if [ $i -lt $n ]
-    then
-      echo -n ","
-    fi
-  done
-  echo " "
-done
+# for f in $FILES
+# do
+#   file=${f##*/}
+#   echo -n ${file%.*}","
+#   for ((i = 1; i <= n; i++));
+#   do
+#     ./sobel_Gmem $f
+#     if [ $i -lt $n ]
+#     then
+#       echo -n ","
+#     fi
+#   done
+#   echo " "
+# done
