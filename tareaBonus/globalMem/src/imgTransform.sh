@@ -11,7 +11,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRARY_PA
 
 export CUDA_VISIBLE_DEVICES=0
 
-./sobel_Gmem images/512x512.jpg
+./sobel_Gmem ../images/512x512.jpg
 
 # FILES=../images/*
 # n=20
