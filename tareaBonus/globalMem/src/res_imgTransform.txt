@@ -1,4 +1,4 @@
 terminate called after throwing an instance of 'cv::Exception'
   what():  OpenCV(4.0.0-pre) /home/cluster/Downloads/opencv/modules/imgproc/src/color.hpp:253: error: (-215:Assertion failed) VScn::contains(scn) && VDcn::contains(dcn) && VDepth::contains(depth) in function 'CvtHelper'
 
-/var/lib/slurm-llnl/slurmd/job03471/slurm_script: line 14: 31038 Aborted                 (core dumped) ./sobel_Gmem images/512x512.jpg
+/var/lib/slurm-llnl/slurmd/job03474/slurm_script: line 14: 32443 Aborted                 (core dumped) ./sobel_Gmem ../images/512x512.jpg
