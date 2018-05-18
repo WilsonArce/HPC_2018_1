@@ -192,7 +192,7 @@ int main(int argc, char** argv )
   //cout<<"Image size = "<< image.size() << endl;
   //printf("Global memory\nGrayscale time\n");
   printf("%f",timeGPU_SB);
-  //printf("Sobel filter time\n");
+  printf("Sobel filter time\n");
   //printf("sf{%f-%f}",timeCPU_SB,timeGPU_SB);
   //printf("  CPU = %f s\n",timeCPU_SB);
   //printf("  GPU = %f s\n",timeGPU_SB);
