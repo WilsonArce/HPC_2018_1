@@ -102,7 +102,7 @@ int main(int argc, char** argv )
 
   clock_t startCPU_GS = clock();
   /// Convert it to gray
-  cvtColor( image, src_gray, CV_BGR2GRAY );
+  cvtColor( image, src_gray, COLOR_BGR2GRAY );
   timeCPU_GS = ((double)(clock() - startCPU_GS))/CLOCKS_PER_SEC;
 
   /// Generate grad_x and grad_y
