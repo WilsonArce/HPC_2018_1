@@ -1,0 +1,3 @@
+/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/rebuild_cache.dir
+/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/DisplayImage.dir
+/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/edit_cache.dir
