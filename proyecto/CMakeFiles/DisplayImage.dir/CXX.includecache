@@ -9,6 +9,12 @@
 /home/widuar/Escritorio/HPC/proyecto/DisplayImage.cpp
 stdio.h
 -
+iostream
+-
+string
+-
+math.h
+-
 opencv2/opencv.hpp
 -
 
