@@ -66,6 +66,8 @@ int main(int argc, char** argv )
     unsigned char *secretImgDec, *secretImgBin, *secretImgOut;
     unsigned char *coverImgDec, *coverImgBin; 
     unsigned char *stegoImgDec, *stegoImgBin;
+
+    double timeCPU, timeGPU;
     
     if ( argc != 3 )
     {
@@ -107,6 +109,8 @@ int main(int argc, char** argv )
     secretImgDec = secretImg.data;
     coverImgDec = coverImg.data;
 
+    clock_t startCPU = clock();
+
     imgToBin(secretImgDec, secretImgBin, colsRGB, rows);
     imgToBin(coverImgDec, coverImgBin, colsRGB, rows);
     hideImage(secretImgBin, coverImgBin, stegoImgBin, colsRGB, rows);
@@ -114,7 +118,10 @@ int main(int argc, char** argv )
     getSecImg(stegoImgBin, secretImgBin, colsRGB, rows);
     imgToDec(secretImgBin, secretImgDec, colsRGB, rows);
 
-    
+    timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
+
+    printf("%f",timeGPU);
+
     stegoImg.create(rows, cols, CV_8UC3);
     stegoImg.data = stegoImgDec;
 
