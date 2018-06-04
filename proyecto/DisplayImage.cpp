@@ -122,41 +122,6 @@ int main(int argc, char** argv )
     getSecImg(stegoImgBin, secretImgBin, colsRGB, rows);
     imgToDec(secretImgBin, secretImgDec, colsRGB, rows);
 
-    // imgToBin(matTest, matBin, 3, 2);
-    // imgToDec(matBin, matOut, 3, 2);
-
-    // printf("Size >> %d x %d\nTotal >> %d x %d\n",rows,cols,rows,colsRGB);
-
-    // for(int row = 0; row < 2; row++)
-    // {
-    //     for(int col = 0; col < 24; col++)
-    //     {
-    //         int bin = matBin[row * 24 + col];
-    //         printf("%d",bin);
-    //     }
-    //     printf("\n");
-    // }
-
-    // for(int row = 0; row < 2; row++)
-    // {
-    //     for(int col = 0; col < 3; col++)
-    //     {
-    //         int bin = matOut[row * 3 + col];
-    //         printf("%d,",bin);
-    //     }
-    //     printf("\n");
-    // }
-    
-    
-    // for(int row = 0; row < rows; row++)
-    // {
-    //     for(int col = 0; col < colsRGB_bin; col++)
-    //     {
-    //         int bin = secretImgBin[row * colsRGB_bin + col];
-    //         printf("%d",bin);
-
-    //     }   
-    // }
     
     stegoImg.create(rows, cols, CV_8UC3);
     stegoImg.data = stegoImgDec;
@@ -166,10 +131,6 @@ int main(int argc, char** argv )
 
     imwrite("stegoImgOut.jpg", stegoImg);
     imwrite("secretImgOut.jpg", secretImg);
-
-
-    // namedWindow("Display secretImg", WINDOW_AUTOSIZE );
-    // imshow("Display secretImg", secretImg);
 
     return 0;
 }
