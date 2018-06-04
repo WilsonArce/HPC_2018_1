@@ -4,14 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/users/warce/HPC_2018_1/proyecto/DisplayImage.cpp" "/home/users/warce/HPC_2018_1/proyecto/CMakeFiles/DisplayImage.dir/DisplayImage.cpp.o"
+  "/home/widuar/Escritorio/HPC/proyecto/DisplayImage.cpp" "/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/DisplayImage.dir/DisplayImage.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "OPENCV_TRAITS_ENABLE_DEPRECATED"
-  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

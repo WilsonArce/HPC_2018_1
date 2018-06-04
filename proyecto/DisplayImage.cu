@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <iostream>
-#include <string>
 #include <math.h>
 #include <opencv2/opencv.hpp>
+#include <cuda.h>
 
 using namespace cv;
 using namespace std;
@@ -61,11 +61,30 @@ void getSecImg(unsigned char *steImg, unsigned char *secImg, int cols, int rows)
     }
 }
 
+__global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int cols, int rows){//Cols must be cols x 3
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int pixelByChannel = 0;
+    if((row < rows) && (col < cols)){
+        pixelByChannel = imgDec[row * cols + col];
+        for(int i = 7; i >= 0; i--){
+            imgBin[(row * cols + col) * 8 + i] = pixelByChannel%2;
+            pixelByChannel = (pixelByChannel/2);
+        } 
+    }
+}
+
 int main(int argc, char** argv )
 {
-    unsigned char *secretImgDec, *secretImgBin, *secretImgOut;
-    unsigned char *coverImgDec, *coverImgBin; 
-    unsigned char *stegoImgDec, *stegoImgBin;
+    unsigned char *h_secImgRGB, *h_secImgBin, *h_secImgRec;
+    unsigned char *h_covImgRGB, *h_covImgBin; 
+    unsigned char *h_steImgRGB, *h_steImgBin;
+
+    unsigned char *d_secImgRGB, *d_secImgBin, *d_secImgRec;
+    unsigned char *d_covImgRGB, *d_covImgBin; 
+    unsigned char *d_steImgRGB, *d_steImgBin;
+
+
 
     double timeCPU, timeGPU;
     
@@ -80,6 +99,12 @@ int main(int argc, char** argv )
     secretImg = imread(argv[1], 1);
     coverImg = imread(argv[2], 1);
 
+    if ( !secretImg.data )
+    {
+        printf("No secretImg data \n");
+        return -1;
+    }
+
     printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
 
     int rows = secretImg.rows;
@@ -90,46 +115,64 @@ int main(int argc, char** argv )
     int imgSize = sizeof(unsigned char) * cols * rows * secretImg.channels();
     int imgSizeBin = sizeof(unsigned char) * cols * rows * secretImg.channels() * 8;
 
-    secretImgDec = (unsigned char*)malloc(imgSize);
-    secretImgOut = (unsigned char*)malloc(imgSize);
-    secretImgBin = (unsigned char*)malloc(imgSizeBin);
+    h_secImgRGB = (unsigned char*)malloc(imgSize);
+    h_secImgBin = (unsigned char*)malloc(imgSizeBin);
+    h_secImgRec = (unsigned char*)malloc(imgSize);
 
-    coverImgDec = (unsigned char*)malloc(imgSize);
-    coverImgBin = (unsigned char*)malloc(imgSizeBin);
+    h_covImgRGB = (unsigned char*)malloc(imgSize);
+    h_covImgBin = (unsigned char*)malloc(imgSizeBin);
 
-    stegoImgDec = (unsigned char*)malloc(imgSize);
-    stegoImgBin = (unsigned char*)malloc(imgSizeBin);
+    h_steImgRGB = (unsigned char*)malloc(imgSize);
+    h_steImgBin = (unsigned char*)malloc(imgSizeBin);
 
-    if ( !secretImg.data )
-    {
-        printf("No secretImg data \n");
-        return -1;
-    }
+    cudaMalloc((void**)&d_secImgRGB, imgSize);
+    cudaMalloc((void**)&d_secImgBin, imgSizeBin);
+    cudaMalloc((void**)&d_secImgRec, imgSize);
 
-    secretImgDec = secretImg.data;
-    coverImgDec = coverImg.data;
+    cudaMalloc((void**)&d_covImgRGB, imgSize);
+    cudaMalloc((void**)&d_covImgBin, imgSizeBin);
 
+    cudaMalloc((void**)&d_steImgRGB, imgSize);
+    cudaMalloc((void**)&d_steImgBin, imgSizeBin);
+
+    h_secImgRGB = secretImg.data;
+    h_covImgRGB = coverImg.data;
+
+    cudaMemcpy(d_secImgRGB, h_secImgRGB, imgSize, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_covImgRGB, h_covImgRGB, imgSize, cudaMemcpyHostToDevice);
+
+    int threads = 32;
+    dim3 blockDim(threads,threads);
+	dim3 gridDim(ceil((float)matSize/blockDim.x), ceil((float)matSize/blockDim.y));
+
+    imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
+    cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    cudaDeviceSynchronize();
+    imgToBinGPU<<<gridDim, blockDim>>>(d_covImgRGB, d_covImgBin, colsRGB, rows);
+    cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    cudaDeviceSynchronize();
+    
     clock_t startCPU = clock();
 
-    imgToBin(secretImgDec, secretImgBin, colsRGB, rows);
-    imgToBin(coverImgDec, coverImgBin, colsRGB, rows);
-    hideImage(secretImgBin, coverImgBin, stegoImgBin, colsRGB, rows);
-    imgToDec(stegoImgBin, stegoImgDec, colsRGB, rows);
-    getSecImg(stegoImgBin, secretImgBin, colsRGB, rows);
-    imgToDec(secretImgBin, secretImgDec, colsRGB, rows);
+    // imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
+    // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
+    hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
+    imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
+    getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
+    imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
 
     printf("%f\n",timeCPU);
 
     stegoImg.create(rows, cols, CV_8UC3);
-    stegoImg.data = stegoImgDec;
+    stegoImg.data = h_steImgRGB;
 
     recovImg.create(rows, cols, CV_8UC3);
-    recovImg.data = secretImgDec;
+    recovImg.data = h_secImgRGB;
 
     imwrite("stegoImgOut.jpg", stegoImg);
-    imwrite("secretImgOut.jpg", secretImg);
+    imwrite("h_secImgRec.jpg", recovImg);
 
     return 0;
 }
