@@ -28,7 +28,6 @@ void imgToBin(unsigned char *imgDec, unsigned char *imgBin, int cols, int rows){
             pixelByChannel = imgDec[row * cols + col];
             for(int i = 7; i >= 0; i--){
                 imgBin[(row * cols + col) * 8 + i] = pixelByChannel%2;
-                // printf("%d => %d at %d\n",pixelByChannel, imgBin[(row * cols + col) * 8 + i],((row * cols + col) * 8 + i));
                 pixelByChannel = (pixelByChannel/2);
             }
         }   
@@ -67,13 +66,6 @@ int main(int argc, char** argv )
     unsigned char *secretImgDec, *secretImgBin, *secretImgOut;
     unsigned char *coverImgDec, *coverImgBin; 
     unsigned char *stegoImgDec, *stegoImgBin;
-
-    // unsigned char matTest[6] = {213,167,130,145,125,118};
-    // unsigned char matBin[48];
-    // unsigned char matOut[6];
-
-    // matTest = (unsigned char*)malloc(sizeof(unsigned char) * 2 * 2);
-    // matBin = (unsigned char*)malloc(sizeof(unsigned char) * 2 * 2 * 3 * 8);
     
     if ( argc != 3 )
     {
