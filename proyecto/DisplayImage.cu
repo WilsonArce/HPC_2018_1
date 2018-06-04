@@ -160,7 +160,7 @@ int main(int argc, char** argv )
     dim3 blockDim(threads,threads);
 	dim3 gridDim(ceil((float)rows/blockDim.x), ceil((float)rows/blockDim.y));
 
-    imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB_bin, rows);
+    imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     
