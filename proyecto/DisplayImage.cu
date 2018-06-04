@@ -66,7 +66,7 @@ __global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int co
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int pixelByChannel = 0;
-    if(row < rows && col < cols){
+    if(row < rows && col < cols * 3){
         pixelByChannel = imgDec[row * cols + col];
         for(int i = 7; i >= 0; i--){
             imgBin[(row * cols + col) * 8 + i] = pixelByChannel % 2;
