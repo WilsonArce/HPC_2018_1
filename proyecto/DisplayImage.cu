@@ -68,8 +68,8 @@ __global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int co
     if((row < rows) && (col < cols)){
         pixelByChannel = imgDec[row * cols + col];
         for(int i = 7; i >= 0; i--){
-            imgBin[(row * cols + col) * 8 + i] = pixelByChannel % 2;
-            printf("%d",pixelByChannel % 2);
+            imgBin[(row * cols + col) * 8 + i] = 1; //pixelByChannel % 2;
+            // printf("%d",pixelByChannel % 2);
             pixelByChannel = (pixelByChannel / 2);
         } 
     }
