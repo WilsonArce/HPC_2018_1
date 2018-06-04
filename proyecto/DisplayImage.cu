@@ -100,6 +100,20 @@ void imgToDec(unsigned char *imgBin, unsigned char *imgDec, int cols, int rows){
     }
 }
 
+__global__ void imgToDecGPU(unsigned char *imgBin, unsigned char *imgDec, int cols, int rows){//Cols must be cols x 3
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int pixelByChannel = 0;
+    if(row < rows && col < cols){
+        pixelByChannel = 0;
+        for(int i = 7; i >= 0; i--){
+            if(imgBin[(row * cols + col) * 8 + i] == 1) pixelByChannel += pow(2,7-i);
+            // printf("%d\n",pixelByChannel);
+        }
+        imgDec[row * cols + col] = pixelByChannel; 
+    }
+}
+
 
 int main(int argc, char** argv )
 {
@@ -205,12 +219,28 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -Kernel call hideImageGPU: %s\n",cudaGetErrorString(err)); return 0;}
     //<<
 
-    //>> 
+    //>> Get secret image from stego image
     getSecImgGPU<<<gridDim, blockDim>>>(d_steImgBin, d_secImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call hideImageGPU: %s\n",cudaGetErrorString(err)); return 0;}
+    //<<
+
+    //>> Get RGB decimal values from binary ones
+    imgToDecGPU<<<gridDim, blockDim>>>(d_steImgBin, d_steImgRGB, colsRGB, rows);
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
+    //<<
+
+    //>> Get RGB decimal values from binary ones
+    imgToDecGPU<<<gridDim, blockDim>>>(d_secImgBin, d_secImgRec, colsRGB, rows);
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
+    //<<
+
+    err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
-    err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    err = cudaMemcpy(h_secImgRGB, d_secImgRec, imgSizeBin, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
@@ -221,9 +251,9 @@ int main(int argc, char** argv )
     // imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
     // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
     // hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
-    imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
+    // imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
     // getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
-    imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
+    // imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
     printf("CPU time: %fs\n",timeCPU);
