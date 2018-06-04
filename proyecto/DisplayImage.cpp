@@ -42,7 +42,7 @@ void hideImage(unsigned char *secImg, unsigned char *covImg, unsigned char *steI
         for(int col = 0; col < cols; col++){
             for(int i = 7; i >= 4; i--){
                 secBit = secImg[(row * cols + col) * 8 + (i-4)];
-                covBit = covImg[(row * cols + col) * 8 + i];
+                covBit = covImg[(row * cols + col) * 8 + (i-4)];
                 steImg[(row * cols + col) * 8 + (i-4)] = covBit;
                 steImg[(row * cols + col) * 8 + i] = secBit;
             }
