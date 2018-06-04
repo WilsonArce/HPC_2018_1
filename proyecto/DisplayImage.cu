@@ -66,7 +66,7 @@ __global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int co
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int pixelByChannel = 0;
-    if(row < rows && col < cols * 3){
+    if(row < rows && col < cols){
         pixelByChannel = imgDec[row * cols + col];
         for(int i = 7; i >= 0; i--){
             imgBin[(row * cols + col) * 8 + i] = pixelByChannel % 2;
@@ -159,7 +159,7 @@ int main(int argc, char** argv )
 
     int threads = 32;
     dim3 blockDim(threads,threads);
-	dim3 gridDim(ceil((float)rows/blockDim.x), ceil((float)rows/blockDim.y));
+	dim3 gridDim(ceil((float)colsRGB_bin/blockDim.x), ceil((float)colsRGB_bin/blockDim.y));
 
     imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
