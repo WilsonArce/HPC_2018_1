@@ -244,16 +244,16 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-    printf("GPU time: %fs\n",timeCPU);
+    printf("GPU time: %fs\n",timeGPU);
     
     clock_t startCPU = clock();
 
-    // imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
-    // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
-    // hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
-    // imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
-    // getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
-    // imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
+    imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
+    imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
+    hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
+    imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
+    getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
+    imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
     printf("CPU time: %fs\n",timeCPU);
@@ -262,7 +262,7 @@ int main(int argc, char** argv )
     stegoImg.data = h_steImgRGB;
 
     recovImg.create(rows, cols, CV_8UC3);
-    recovImg.data = h_secImgRGB;
+    recovImg.data = h_secImgRec;
 
     imwrite("stegoImgOut.jpg", stegoImg);
     imwrite("secretImgRec.jpg", recovImg);
