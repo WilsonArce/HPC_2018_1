@@ -13,4 +13,4 @@ export CUDA_VISIBLE_DEVICES=0
 
 # cmake .
 # make
-./DisplayImage images/secret3.jpg images/cover3.jpg
+./DisplayImage images/secret2.jpg images/cover2.jpg
