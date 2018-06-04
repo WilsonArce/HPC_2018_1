@@ -51,7 +51,7 @@ __global__ void hideImageGPU(unsigned char *secImg, unsigned char *covImg, unsig
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int secBit, covBit;
-   if(row < rows && col < cols){
+    if(row < rows && col < cols){
         for(int i = 7; i >= 4; i--){
             secBit = secImg[(row * cols + col) * 8 + (i-4)];
             covBit = covImg[(row * cols + col) * 8 + (i-4)];
@@ -71,6 +71,18 @@ void getSecImg(unsigned char *steImg, unsigned char *secImg, int cols, int rows)
                 secImg[(row * cols + col) * 8 + (i-4)] = secBit;
             }
         }   
+    }
+}
+
+__global__ void getSecImgGPU(unsigned char *steImg, unsigned char *secImg, int cols, int rows){
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int secBit;
+    if(row < rows && col < cols){
+        for(int i = 7; i >= 4; i--){
+            secBit = steImg[(row * cols + col) * 8 + i];
+            secImg[(row * cols + col) * 8 + (i-4)] = secBit;
+        }
     }
 }
 
@@ -179,24 +191,26 @@ int main(int argc, char** argv )
     imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
-    
-    // err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgBin < d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     //<<
+
     //>> Get 8bit RGB value from cover image
     imgToBinGPU<<<gridDim, blockDim>>>(d_covImgRGB, d_covImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(covImg): %s\n",cudaGetErrorString(err)); return 0;}
-    
-    // err = cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_covImgBin < d_covImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     //<<
+
     //>> Hide secret image into cover image as result stego image 
     hideImageGPU<<<gridDim, blockDim>>>(d_secImgBin, d_covImgBin, d_steImgBin, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call hideImageGPU: %s\n",cudaGetErrorString(err)); return 0;}
+    //<<
+
+    //>> 
+    getSecImgGPU<<<gridDim, blockDim>>>(d_steImgBin, d_secImgBin, colsRGB, rows);
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call hideImageGPU: %s\n",cudaGetErrorString(err)); return 0;}
     
-    err = cudaMemcpy(h_steImgBin, d_steImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
@@ -208,7 +222,7 @@ int main(int argc, char** argv )
     // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
     // hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
     imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
-    getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
+    // getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
     imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
