@@ -172,7 +172,7 @@ int main(int argc, char** argv )
     recovImg.data = h_secImgRGB;
 
     imwrite("stegoImgOut.jpg", stegoImg);
-    imwrite("h_secImgRec.jpg", recovImg);
+    imwrite("secretImgRec.jpg", recovImg);
 
     return 0;
 }
