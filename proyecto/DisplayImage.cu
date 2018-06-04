@@ -237,8 +237,8 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     //<<
 
-    err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
-    if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+    // err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
+    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
     err = cudaMemcpy(h_secImgRec, d_secImgRec, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
