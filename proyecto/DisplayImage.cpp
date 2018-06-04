@@ -7,24 +7,34 @@
 using namespace cv;
 using namespace std;
 
-void int_8bin(int k, int *bin){
-    int num = k;
-    for(int i = 7; i >= 0; i--)
-    {
-        bin[i] = num%2;
-        num = (num/2);
-        //printf("%d - %d\n",num,num%2);
+void imgToDec(unsigned char *imgBin, unsigned char *imgDec, int cols, int rows){//Cols must be cols x 3
+    int pixelByChannel = 0;
+    for(int row = 0; row < rows; row++){
+        for(int col = 0; col < cols; col++){
+            pixelByChannel = 0;
+            for(int i = 7; i >= 0; i--){
+                if(imgBin[(row * cols + col) * 8 + i] == 1) pixelByChannel += pow(2,7-i);
+                // printf("%d\n",pixelByChannel);
+            }
+            imgDec[row * cols + col] = pixelByChannel;
+        }   
     }
 }
 
-int bin_int(int *bin){
-    int ans = 0;
-    for(int i = 7; i >= 0; i--)
-    {
-        if(bin[i] == 1) ans += pow(2,7-i);
+void imgToBin(unsigned char *imgDec, unsigned char *imgBin, int cols, int rows){//Cols must be cols x 3
+    int pixelByChannel = 0;
+    for(int row = 0; row < rows; row++){
+        for(int col = 0; col < cols; col++){
+            pixelByChannel = imgDec[row * cols + col];
+            for(int i = 7; i >= 0; i--){
+                imgBin[(row * cols + col) * 8 + i] = pixelByChannel%2;
+                // printf("%d => %d at %d\n",pixelByChannel, imgBin[(row * cols + col) * 8 + i],((row * cols + col) * 8 + i));
+                pixelByChannel = (pixelByChannel/2);
+            }
+        }   
     }
-    return ans;
 }
+
 
 void changeBit(int *bin){
     bin[1] = 1;
@@ -32,72 +42,90 @@ void changeBit(int *bin){
 
 int main(int argc, char** argv )
 {
-    unsigned char *imageIn, *imageOut;
-    int bin[8] = {0,0,0,0,0,0,0,0};
-    int pixel;
+    unsigned char *secretImgDec, *secretImgBin, *coverImgBin, *secretImgOut;
+    unsigned char matTest[6] = {213,167,130,145,125,118};
+    unsigned char matBin[48];
+    unsigned char matOut[6];
 
+    // matTest = (unsigned char*)malloc(sizeof(unsigned char) * 2 * 2);
+    // matBin = (unsigned char*)malloc(sizeof(unsigned char) * 2 * 2 * 3 * 8);
+    
     if ( argc != 2 )
     {
-        printf("usage: DisplayImage.out <Image_Path>\n");
+        printf("usage: DisplaysecretImg.out <secretImg_Path>\n");
         return -1;
     }
 
-    Mat image;
-    image = imread( argv[1], 1 );
-    int rows = image.rows;
-    int cols = image.cols;
-    int rowEnd = rows * image.channels();
-    int colEnd = cols * image.channels();
+    Mat secretImg, coverImg, stegoImg;
+    secretImg = imread( argv[1], 1 );
+    int rows = secretImg.rows;
+    int cols = secretImg.cols;
+    int colsRGB = cols * secretImg.channels();
+    int colsRGB_bin = cols * secretImg.channels() * 8;
 
-    int imgSize = sizeof(unsigned char) * cols * rows * image.channels();
+    int imgSize = sizeof(unsigned char) * cols * rows * secretImg.channels();
+    int imgSizeBin = sizeof(unsigned char) * cols * rows * secretImg.channels() * 8;
 
-    imageIn = (unsigned char*)malloc(imgSize);
-    imageOut = (unsigned char*)malloc(imgSize);
+    secretImgDec = (unsigned char*)malloc(imgSize);
+    secretImgOut = (unsigned char*)malloc(imgSize);
+    secretImgBin = (unsigned char*)malloc(imgSizeBin);
 
-    if ( !image.data )
+    if ( !secretImg.data )
     {
-        printf("No image data \n");
+        printf("No secretImg data \n");
         return -1;
     }
 
-    imageIn = image.data;
+    secretImgDec = secretImg.data;
 
-    // pixel = imageIn[4];
-    // int_8bin(pixel, bin);
-    //printf("%d => ",pixel);
-    
-    // for(int i = 0; i < 8; i++)
+    imgToBin(secretImgDec, secretImgBin, colsRGB, rows);
+    imgToDec(secretImgBin, secretImgOut, colsRGB, rows);
+    // imgToBin(matTest, matBin, 3, 2);
+    // imgToDec(matBin, matOut, 3, 2);
+
+    // printf("Size >> %d x %d\nTotal >> %d x %d\n",rows,cols,rows,colsRGB);
+
+    // for(int row = 0; row < 2; row++)
     // {
-    //     printf("%d",bin[i]);
+    //     for(int col = 0; col < 24; col++)
+    //     {
+    //         int bin = matBin[row * 24 + col];
+    //         printf("%d",bin);
+    //     }
+    //     printf("\n");
     // }
-    // printf(" => %d\n",bin_int(bin));
 
-    printf("Size >> %d x %d\nTotal >> %d x %d\n",rows,cols,rows,colEnd);
-
-    int val;
+    // for(int row = 0; row < 2; row++)
+    // {
+    //     for(int col = 0; col < 3; col++)
+    //     {
+    //         int bin = matOut[row * 3 + col];
+    //         printf("%d,",bin);
+    //     }
+    //     printf("\n");
+    // }
     
-    for(int row = 0; row < rows; row++)
-    {
-        for(int col = 0; col < colEnd; col++)
-        {
-            val = imageIn[row * colEnd + col];
-            int_8bin(val,bin);
-            changeBit(bin);
-            imageOut[row * colEnd + col] = bin_int(bin);
-
-        }   
-    }
     
-    Mat imageAns;
-    imageAns.create(rows, cols, CV_8UC3);
-    imageAns.data = imageOut;
+    // for(int row = 0; row < rows; row++)
+    // {
+    //     for(int col = 0; col < colsRGB_bin; col++)
+    //     {
+    //         int bin = secretImgBin[row * colsRGB_bin + col];
+    //         printf("%d",bin);
 
-    imwrite("imageOut.jpg", imageAns);
-    imwrite("imageIn.jpg", image);
+    //     }   
+    // }
+    
+    Mat secretImgAns;
+    secretImgAns.create(rows, cols, CV_8UC3);
+    secretImgAns.data = secretImgOut;
+
+    imwrite("secretImgOut.jpg", secretImgAns);
+    imwrite("secretImgDec.jpg", secretImg);
 
 
-    namedWindow("Display Image", WINDOW_AUTOSIZE );
-    imshow("Display Image", image);
+    // namedWindow("Display secretImg", WINDOW_AUTOSIZE );
+    // imshow("Display secretImg", secretImg);
 
     return 0;
 }
