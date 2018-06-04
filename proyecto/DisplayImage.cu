@@ -85,7 +85,7 @@ int main(int argc, char** argv )
     unsigned char *d_covImgRGB, *d_covImgBin; 
     unsigned char *d_steImgRGB, *d_steImgBin;
 
-
+    cudaError_t err = cudaSuccess;
 
     double timeCPU, timeGPU;
     
@@ -126,32 +126,53 @@ int main(int argc, char** argv )
     h_steImgRGB = (unsigned char*)malloc(imgSize);
     h_steImgBin = (unsigned char*)malloc(imgSizeBin);
 
-    cudaMalloc((void**)&d_secImgRGB, imgSize);
-    cudaMalloc((void**)&d_secImgBin, imgSizeBin);
-    cudaMalloc((void**)&d_secImgRec, imgSize);
+    err = cudaMalloc((void**)&d_secImgRGB, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
 
-    cudaMalloc((void**)&d_covImgRGB, imgSize);
-    cudaMalloc((void**)&d_covImgBin, imgSizeBin);
+    err = cudaMalloc((void**)&d_secImgBin, imgSizeBin);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
-    cudaMalloc((void**)&d_steImgRGB, imgSize);
-    cudaMalloc((void**)&d_steImgBin, imgSizeBin);
+    err = cudaMalloc((void**)&d_secImgRec, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
+
+    err = cudaMalloc((void**)&d_covImgRGB, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
+
+    err = cudaMalloc((void**)&d_covImgBin, imgSizeBin);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_covImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+
+    err = cudaMalloc((void**)&d_steImgRGB, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_steImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
+
+    err = cudaMalloc((void**)&d_steImgBin, imgSizeBin);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
     h_secImgRGB = secretImg.data;
     h_covImgRGB = coverImg.data;
 
-    cudaMemcpy(d_secImgRGB, h_secImgRGB, imgSize, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_covImgRGB, h_covImgRGB, imgSize, cudaMemcpyHostToDevice);
+    err = cudaMemcpy(d_secImgRGB, h_secImgRGB, imgSize, cudaMemcpyHostToDevice);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy d_secImgRGB < h_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
+
+    err = cudaMemcpy(d_covImgRGB, h_covImgRGB, imgSize, cudaMemcpyHostToDevice);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy d_covImgRGB < h_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
 
     int threads = 32;
     dim3 blockDim(threads,threads);
 	dim3 gridDim(ceil((float)rows/blockDim.x), ceil((float)rows/blockDim.y));
 
     imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
-    cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    cudaDeviceSynchronize();
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
+    
+    err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgBin < d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+
     imgToBinGPU<<<gridDim, blockDim>>>(d_covImgRGB, d_covImgBin, colsRGB, rows);
-    cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    cudaDeviceSynchronize();
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(covImg): %s\n",cudaGetErrorString(err)); return 0;}
+    
+    err = cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_covImgBin < d_covImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
     clock_t startCPU = clock();
 
