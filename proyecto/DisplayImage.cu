@@ -44,6 +44,7 @@ void hideImage(unsigned char *secImg, unsigned char *covImg, unsigned char *steI
                 covBit = covImg[(row * cols + col) * 8 + (i-4)];
                 steImg[(row * cols + col) * 8 + (i-4)] = covBit;
                 steImg[(row * cols + col) * 8 + i] = secBit;
+                printf("%d",secBit);
             }
         }   
     }
@@ -65,7 +66,7 @@ __global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int co
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     int pixelByChannel = 0;
-    if(col < cols && row < rows){
+    if(row < rows && col < cols){
         pixelByChannel = imgDec[row * cols + col];
         for(int i = 7; i >= 0; i--){
             imgBin[(row * cols + col) * 8 + i] = pixelByChannel % 2;
