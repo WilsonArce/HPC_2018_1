@@ -1,3 +1,3 @@
-/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/rebuild_cache.dir
-/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/DisplayImage.dir
-/home/widuar/Escritorio/HPC/proyecto/CMakeFiles/edit_cache.dir
+/home/users/warce/HPC_2018_1/proyecto/CMakeFiles/edit_cache.dir
+/home/users/warce/HPC_2018_1/proyecto/CMakeFiles/rebuild_cache.dir
+/home/users/warce/HPC_2018_1/proyecto/CMakeFiles/DisplayImage.dir
