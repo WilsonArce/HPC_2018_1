@@ -120,7 +120,7 @@ int main(int argc, char** argv )
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
 
-    printf("%f",timeCPU);
+    printf("%f\n",timeCPU);
 
     stegoImg.create(rows, cols, CV_8UC3);
     stegoImg.data = stegoImgDec;
