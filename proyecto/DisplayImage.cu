@@ -160,24 +160,24 @@ int main(int argc, char** argv )
     dim3 blockDim(threads,threads);
 	dim3 gridDim(ceil((float)rows/blockDim.x), ceil((float)rows/blockDim.y));
 
-    // imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
-    // err = cudaDeviceSynchronize();
-    // if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
+    imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     
-    // err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgBin < d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgBin < d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
-    // imgToBinGPU<<<gridDim, blockDim>>>(d_covImgRGB, d_covImgBin, colsRGB, rows);
-    // err = cudaDeviceSynchronize();
-    // if(err != cudaSuccess){ printf(" -Kernel call imgToBin(covImg): %s\n",cudaGetErrorString(err)); return 0;}
+    imgToBinGPU<<<gridDim, blockDim>>>(d_covImgRGB, d_covImgBin, colsRGB, rows);
+    err = cudaDeviceSynchronize();
+    if(err != cudaSuccess){ printf(" -Kernel call imgToBin(covImg): %s\n",cudaGetErrorString(err)); return 0;}
     
-    // err = cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
-    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_covImgBin < d_covImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMemcpy(h_covImgBin, d_covImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_covImgBin < d_covImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
     clock_t startCPU = clock();
 
-    imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
-    imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
+    // imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
+    // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
     hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
     imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
     getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
