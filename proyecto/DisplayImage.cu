@@ -143,7 +143,7 @@ int main(int argc, char** argv )
 
     int threads = 32;
     dim3 blockDim(threads,threads);
-	dim3 gridDim(ceil((float)matSize/blockDim.x), ceil((float)matSize/blockDim.y));
+	dim3 gridDim(ceil((float)rows/blockDim.x), ceil((float)rows/blockDim.y));
 
     imgToBinGPU<<<gridDim, blockDim>>>(d_secImgRGB, d_secImgBin, colsRGB, rows);
     cudaMemcpy(h_secImgBin, d_secImgBin, imgSizeBin, cudaMemcpyDeviceToHost);
