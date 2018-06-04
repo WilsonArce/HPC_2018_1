@@ -237,8 +237,8 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     //<<
 
-    // err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
-    // if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
     err = cudaMemcpy(h_secImgRec, d_secImgRec, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
@@ -251,7 +251,7 @@ int main(int argc, char** argv )
     imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
     imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
     hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
-    imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
+    // imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
     getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
     imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
