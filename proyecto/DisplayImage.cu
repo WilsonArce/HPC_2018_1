@@ -240,7 +240,7 @@ int main(int argc, char** argv )
     err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
-    err = cudaMemcpy(h_secImgRGB, d_secImgRec, imgSize, cudaMemcpyDeviceToHost);
+    err = cudaMemcpy(h_secImgRec, d_secImgRec, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
