@@ -62,8 +62,8 @@ void getSecImg(unsigned char *steImg, unsigned char *secImg, int cols, int rows)
 }
 
 __global__ void imgToBinGPU(unsigned char *imgDec, unsigned char *imgBin, int cols, int rows){//Cols must be cols x 3
-    int row = blockIdx.y * blockDim.y + threadIdx.y;
-    int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int col = blockIdx.y * blockDim.y + threadIdx.y;
+    int row = blockIdx.x * blockDim.x + threadIdx.x;
     int pixelByChannel = 0;
     if((row < rows) && (col < cols)){
         pixelByChannel = imgDec[row * cols + col];
