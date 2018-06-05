@@ -14,3 +14,23 @@ export CUDA_VISIBLE_DEVICES=0
 # cmake .
 # make
 ./DisplayImage images/secret2.jpg images/cover2.jpg
+
+#NOTA: implementar el siguiente codigo para pruebas y obtener tendencias-graficas
+
+#FILES=../images/*
+#n=20
+
+#for f in $FILES
+#do
+#  file=${f##*/}
+#  echo -n ${file%.*}","
+#  for ((i = 1; i <= n; i++));
+#  do
+#    ./sobel_Gmem $f
+#    if [ $i -lt $n ]
+#    then
+#      echo -n ","
+#    fi
+#  done
+#  echo " "
+#done

@@ -1,4 +1,4 @@
 cov > 1024 x 1024
 sec > 1024 x 1024
-GPU time: 0.092123s
-CPU time: 0.093236s
+CPU time: 0.047664s
+GPU time: 0.091558s
