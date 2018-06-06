@@ -268,13 +268,13 @@ int main(int argc, char** argv )
     imwrite("stegoImgOut.jpg", stegoImg);
     imwrite("secretImgRec.jpg", recovImg);
 
-    cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFree(d_secImgRec);
-    cudaFree(d_covImgRGB); cudaFree(d_covImgBin); cudaFree(d_steImgRGB);
-    cudaFree(d_steImgBin);
+    // cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFree(d_secImgRec);
+    // cudaFree(d_covImgRGB); cudaFree(d_covImgBin); cudaFree(d_steImgRGB);
+    // cudaFree(d_steImgBin);
   
-    free(h_secImgRGB); free(h_secImgBin); free(h_secImgRec);
-    free(h_covImgRGB); free(h_covImgBin); free(h_steImgRGB);
-    free(h_steImgBin);
+    // free(h_secImgRGB); free(h_secImgBin); free(h_secImgRec);
+    // free(h_covImgRGB); free(h_covImgBin); free(h_steImgRGB);
+    // free(h_steImgBin);
 
     return 0;
 }
