@@ -1,11 +1,16 @@
-*,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
-,No secretImg data 
+1200x800,0.043079,0.043077,0.043119,0.043069,0.043012,0.043054,0.043114,0.043063,0.043037,0.043074 
+14080x7920,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8329 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8331 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8333 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8335 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8337 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8339 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8341 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8343 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8345 Segmentation fault      (core dumped) ./DisplayImage $f $f
+,/var/lib/slurm-llnl/slurmd/job03601/slurm_script: line 21:  8347 Segmentation fault      (core dumped) ./DisplayImage $f $f
  
+1600x784,0.056271,0.056199,0.056245,0.056191,0.056372,0.056208,0.056201,0.056275,0.056210,0.056257 
+512x512,0.017812,0.017821,0.017810,0.017812,0.018066,0.017964,0.017799,0.017784,0.017794,0.017795 
+7680x5022,1.726017,1.725013,1.728734,1.726806,1.727063,1.725992,1.723398,1.727705,1.739052,1.724040 
+8000x4500,1.611541,1.610380,1.610884,1.612108,1.609339,1.614209,1.614116,1.610414,1.611886,1.610305 

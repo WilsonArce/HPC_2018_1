@@ -146,7 +146,7 @@ int main(int argc, char** argv )
         return -1;
     }
 
-    printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
+    // printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
 
     int rows = secretImg.rows;
     int cols = secretImg.cols;
@@ -176,7 +176,7 @@ int main(int argc, char** argv )
     imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
-    printf("CPU time: %fs\n",timeCPU);
+    printf("%f",timeCPU);
 
     // err = cudaMalloc((void**)&d_secImgRGB, imgSize);
     // if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
@@ -267,6 +267,10 @@ int main(int argc, char** argv )
 
     //imwrite("stegoImgOut.jpg", stegoImg);
     //imwrite("secretImgRec.jpg", recovImg);
+  
+    free(h_secImgRGB); free(h_secImgBin); free(h_secImgRec);
+    free(h_covImgRGB); free(h_covImgBin); free(h_steImgRGB);
+    free(h_steImgBin);
 
     return 0;
 }

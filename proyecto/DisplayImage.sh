@@ -15,7 +15,7 @@ export CUDA_VISIBLE_DEVICES=0
 
 #NOTA: implementar el siguiente codigo para pruebas y obtener tendencias-graficas
 
-FILES=../images/*
+FILES=testImages/*
 n=10
 
 for f in $FILES
