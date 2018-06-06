@@ -11,6 +11,15 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64/${LD_LIBRARY_PATH:+:${LD_LIBRARY_PA
 
 export CUDA_VISIBLE_DEVICES=0
 
-#./DisplayImage images/secret2.jpg images/cover2.jpg
+n=10
 
-./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
+#./DisplayImage images/secret2.jpg images/cover2.jpg
+for ((i = 1; i <= n; i++));
+do
+  ./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
+  if [ $i -lt $n ]
+  then
+    echo -n ","
+  fi
+done
+
