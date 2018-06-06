@@ -176,7 +176,7 @@ int main(int argc, char** argv )
     imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
-    printf("CPU: %f",timeCPU);
+    printf("CPU: %f ",timeCPU);
 
     err = cudaMalloc((void**)&d_secImgRGB, imgSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
