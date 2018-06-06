@@ -117,11 +117,11 @@ __global__ void imgToDecGPU(unsigned char *imgBin, unsigned char *imgDec, int co
 
 int main(int argc, char** argv )
 {
-    unsigned char *h_secImgRGB, *h_secImgBin, *h_secImgRec;
+    unsigned char *h_secImgRGB, *h_secImgBin;
     unsigned char *h_covImgRGB, *h_covImgBin; 
     unsigned char *h_steImgRGB, *h_steImgBin;
 
-    unsigned char *d_secImgRGB, *d_secImgBin, *d_secImgRec;
+    unsigned char *d_secImgRGB, *d_secImgBin;
     unsigned char *d_covImgRGB, *d_covImgBin; 
     unsigned char *d_steImgRGB, *d_steImgBin;
 
@@ -158,7 +158,7 @@ int main(int argc, char** argv )
 
     h_secImgRGB = (unsigned char*)malloc(imgSize);
     h_secImgBin = (unsigned char*)malloc(imgSizeBin);
-    h_secImgRec = (unsigned char*)malloc(imgSize);
+    //h_secImgRGB = (unsigned char*)malloc(imgSize);
 
     h_covImgRGB = (unsigned char*)malloc(imgSize);
     h_covImgBin = (unsigned char*)malloc(imgSizeBin);
@@ -184,8 +184,8 @@ int main(int argc, char** argv )
     err = cudaMalloc((void**)&d_secImgBin, imgSizeBin);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
-    err = cudaMalloc((void**)&d_secImgRec, imgSize);
-    if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMalloc((void*, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMall: %s\n",cudaGetErrorString(err)); return 0;}
 
     err = cudaMalloc((void**)&d_covImgRGB, imgSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
@@ -244,7 +244,7 @@ int main(int argc, char** argv )
     //<<
 
     //>> Get RGB decimal values from binary ones
-    imgToDecGPU<<<gridDim, blockDim>>>(d_secImgBin, d_secImgRec, colsRGB, rows);
+    imgToDecGPU<<<gridDim, blockDim>>>(d_secImgBi, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     //<<
@@ -252,27 +252,27 @@ int main(int argc, char** argv )
     err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
-    err = cudaMemcpy(h_secImgRec, d_secImgRec, imgSize, cudaMemcpyDeviceToHost);
-    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMemcpy(h_secImgRG, imgSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
     printf("%f",timeGPU);
     
 
-    stegoImg.create(rows, cols, CV_8UC3);
-    stegoImg.data = h_steImgRGB;
+    // stegoImg.create(rows, cols, CV_8UC3);
+    // stegoImg.data = h_steImgRGB;
 
-    recovImg.create(rows, cols, CV_8UC3);
-    recovImg.data = h_secImgRec;
+    // recovImg.create(rows, cols, CV_8UC3);
+    // recovImg.data = h_secImgRGB;
 
-    imwrite("stegoImgOut.jpg", stegoImg);
-    imwrite("secretImgRec.jpg", recovImg);
+    // imwrite("stegoImgOut.jpg", stegoImg);
+    // imwrite("secretImgRec.jpg", recovImg);
 
-    // cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFree(d_secImgRec);
+    // cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFr);
     // cudaFree(d_covImgRGB); cudaFree(d_covImgBin); cudaFree(d_steImgRGB);
     // cudaFree(d_steImgBin);
   
-    // free(h_secImgRGB); free(h_secImgBin); free(h_secImgRec);
+    // free(h_secImgRGB); free(h_secImgBin); free(h_secImgRGB);
     // free(h_covImgRGB); free(h_covImgBin); free(h_steImgRGB);
     // free(h_steImgBin);
 
