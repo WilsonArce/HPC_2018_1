@@ -184,8 +184,8 @@ int main(int argc, char** argv )
     err = cudaMalloc((void**)&d_secImgBin, imgSizeBin);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgBin: %s\n",cudaGetErrorString(err)); return 0;}
 
-    err = cudaMalloc((void*, imgSize);
-    if(err != cudaSuccess){ printf(" -cudaMall: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMalloc((void**)&d_covImgRGB, imgSize);
+    if(err != cudaSuccess){ printf(" -cudaMalloc d_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
 
     err = cudaMalloc((void**)&d_covImgRGB, imgSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
@@ -244,7 +244,7 @@ int main(int argc, char** argv )
     //<<
 
     //>> Get RGB decimal values from binary ones
-    imgToDecGPU<<<gridDim, blockDim>>>(d_secImgBi, colsRGB, rows);
+    imgToDecGPU<<<gridDim, blockDim>>>(d_secImgBin, d_covImgRGB, colsRGB, rows);
     err = cudaDeviceSynchronize();
     if(err != cudaSuccess){ printf(" -Kernel call imgToBin(secImg): %s\n",cudaGetErrorString(err)); return 0;}
     //<<
@@ -252,8 +252,8 @@ int main(int argc, char** argv )
     err = cudaMemcpy(h_steImgRGB, d_steImgRGB, imgSize, cudaMemcpyDeviceToHost);
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_steImgBin < d_steImgBin: %s\n",cudaGetErrorString(err)); return 0;}
     
-    err = cudaMemcpy(h_secImgRG, imgSize, cudaMemcpyDeviceToHost);
-    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
+    err = cudaMemcpy(h_secImgRGB, d_covImgRGB, imgSize, cudaMemcpyDeviceToHost);
+    if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_covImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
     printf("%f",timeGPU);
@@ -268,7 +268,7 @@ int main(int argc, char** argv )
     // imwrite("stegoImgOut.jpg", stegoImg);
     // imwrite("secretImgRec.jpg", recovImg);
 
-    // cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFr);
+    // cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFree(d_covImgRGB);
     // cudaFree(d_covImgRGB); cudaFree(d_covImgBin); cudaFree(d_steImgRGB);
     // cudaFree(d_steImgBin);
   
