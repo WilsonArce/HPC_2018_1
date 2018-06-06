@@ -14,16 +14,3 @@ export CUDA_VISIBLE_DEVICES=0
 ./DisplayImage images/secret2.jpg images/cover2.jpg
 
 #./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
-
-#NOTA: implementar el siguiente codigo para pruebas y obtener tendencias-graficas
-# n=10
-
-# for ((i = 1; i <= n; i++));
-# do
-#   ./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
-#   if [ $i -lt $n ]
-#   then
-#     echo -n ","
-#   fi
-# done
-
