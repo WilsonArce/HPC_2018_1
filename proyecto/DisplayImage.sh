@@ -19,7 +19,7 @@ do
   ./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
   if [ $i -lt $n ]
   then
-    echo -n ","
+    echo " "
   fi
 done
 
