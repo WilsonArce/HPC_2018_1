@@ -176,7 +176,7 @@ int main(int argc, char** argv )
     imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
     timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
-    printf("CPU: %f ",timeCPU);
+    printf("c%f",timeCPU);
 
     err = cudaMalloc((void**)&d_secImgRGB, imgSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
@@ -256,7 +256,7 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-    printf("GPU: %f\n",timeGPU);
+    printf("g%f",timeGPU);
     
 
     stegoImg.create(rows, cols, CV_8UC3);
