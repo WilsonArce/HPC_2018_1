@@ -165,6 +165,9 @@ int main(int argc, char** argv )
 
     h_steImgRGB = (unsigned char*)malloc(imgSize);
     h_steImgBin = (unsigned char*)malloc(imgSizeBin);
+
+    h_secImgRGB = secretImg.data;
+    h_covImgRGB = coverImg.data;
   
     clock_t startCPU = clock();
 
