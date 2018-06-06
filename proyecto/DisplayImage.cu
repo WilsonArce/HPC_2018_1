@@ -256,7 +256,7 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-    printf("GPU: %f",timeGPU);
+    printf("GPU: %f\n",timeGPU);
     
 
     stegoImg.create(rows, cols, CV_8UC3);
