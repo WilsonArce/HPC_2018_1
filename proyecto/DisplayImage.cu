@@ -259,14 +259,14 @@ int main(int argc, char** argv )
     printf("GPU time: %fs\n",timeGPU);
     
 
-    stegoImg.create(rows, cols, CV_8UC3);
-    stegoImg.data = h_steImgRGB;
+    //stegoImg.create(rows, cols, CV_8UC3);
+    //stegoImg.data = h_steImgRGB;
 
-    recovImg.create(rows, cols, CV_8UC3);
-    recovImg.data = h_secImgRec;
+    //recovImg.create(rows, cols, CV_8UC3);
+    //recovImg.data = h_secImgRec;
 
-    imwrite("stegoImgOut.jpg", stegoImg);
-    imwrite("secretImgRec.jpg", recovImg);
+    //imwrite("stegoImgOut.jpg", stegoImg);
+    //imwrite("secretImgRec.jpg", recovImg);
 
     return 0;
 }
