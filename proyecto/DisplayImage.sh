@@ -18,7 +18,7 @@ n=10
 
 for ((i = 1; i <= n; i++));
 do
-  ./DisplayImage testImages/16000x784.jpg testImages/16000x784.jpg
+  ./DisplayImage testImages/512x512.1.jpg testImages/512x512.jpg
   if [ $i -lt $n ]
   then
     echo -n ","

@@ -166,17 +166,17 @@ int main(int argc, char** argv )
     h_steImgRGB = (unsigned char*)malloc(imgSize);
     h_steImgBin = (unsigned char*)malloc(imgSizeBin);
   
-    // clock_t startCPU = clock();
+    clock_t startCPU = clock();
 
-    // imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
-    // imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
-    // hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
-    // imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
-    // getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
-    // imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
+    imgToBin(h_secImgRGB, h_secImgBin, colsRGB, rows);
+    imgToBin(h_covImgRGB, h_covImgBin, colsRGB, rows);
+    hideImage(h_secImgBin, h_covImgBin, h_steImgBin, colsRGB, rows);
+    imgToDec(h_steImgBin, h_steImgRGB, colsRGB, rows);
+    getSecImg(h_steImgBin, h_secImgBin, colsRGB, rows);
+    imgToDec(h_secImgBin, h_secImgRGB, colsRGB, rows);
 
-    // timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
-    // printf("%f",timeCPU);
+    timeCPU = ((double)(clock() - startCPU))/CLOCKS_PER_SEC;
+    printf("CPU: %f",timeCPU);
 
     err = cudaMalloc((void**)&d_secImgRGB, imgSize);
     if(err != cudaSuccess){ printf(" -cudaMalloc d_secImgRGB: %s\n",cudaGetErrorString(err)); return 0;}
@@ -256,7 +256,7 @@ int main(int argc, char** argv )
     if(err != cudaSuccess){ printf(" -cudaMemcpy h_secImgRGB < d_secImgRec: %s\n",cudaGetErrorString(err)); return 0;}
 
     timeGPU = ((double)(clock() - startGPU))/CLOCKS_PER_SEC;
-    printf("%f",timeGPU);
+    printf("GPU: %f",timeGPU);
     
 
     //stegoImg.create(rows, cols, CV_8UC3);
