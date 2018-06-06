@@ -14,21 +14,14 @@ export CUDA_VISIBLE_DEVICES=0
 #./DisplayImage images/secret2.jpg images/cover2.jpg
 
 #NOTA: implementar el siguiente codigo para pruebas y obtener tendencias-graficas
-
-FILES=testImages/*
 n=10
 
-for f in $FILES
+for ((i = 1; i <= n; i++));
 do
-  file=${f##*/}
-  echo -n ${file%.*}","
-  for ((i = 1; i <= n; i++));
-  do
-    ./DisplayImage $f $f
-    if [ $i -lt $n ]
-    then
-      echo -n ","
-    fi
-  done
-  echo " "
+  ./DisplayImage testImages/16000x784.jpg testImages/16000x784.jpg
+  if [ $i -lt $n ]
+  then
+    echo -n ","
+  fi
 done
+
