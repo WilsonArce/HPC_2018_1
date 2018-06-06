@@ -146,7 +146,7 @@ int main(int argc, char** argv )
         return -1;
     }
 
-    printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
+    //printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
 
     int rows = secretImg.rows;
     int cols = secretImg.cols;
