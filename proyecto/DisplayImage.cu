@@ -146,7 +146,7 @@ int main(int argc, char** argv )
         return -1;
     }
 
-    // printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
+    printf("cov > %d x %d\nsec > %d x %d\n",coverImg.rows, coverImg.cols, secretImg.rows, secretImg.cols);
 
     int rows = secretImg.rows;
     int cols = secretImg.cols;
@@ -265,8 +265,8 @@ int main(int argc, char** argv )
     recovImg.create(rows, cols, CV_8UC3);
     recovImg.data = h_secImgRec;
 
-    //imwrite("stegoImgOut.jpg", stegoImg);
-    //imwrite("secretImgRec.jpg", recovImg);
+    imwrite("stegoImgOut.jpg", stegoImg);
+    imwrite("secretImgRec.jpg", recovImg);
 
     cudaFree(d_secImgRGB); cudaFree(d_secImgBin); cudaFree(d_secImgRec);
     cudaFree(d_covImgRGB); cudaFree(d_covImgBin); cudaFree(d_steImgRGB);
