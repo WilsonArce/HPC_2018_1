@@ -23,7 +23,7 @@ n=10
 #./DisplayImage images/secret2.jpg images/cover2.jpg
 for ((i = 1; i <= n; i++));
 do
-  ./DisplayImage testImages/8000x4500.1.jpg testImages/8000x4500.jpg
+  ./DisplayImage testImages/14080x7920.1.jpg testImages/14080x7920.jpg
   if [ $i -lt $n ]
   then
     echo " "
